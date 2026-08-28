@@ -8,6 +8,7 @@ const requiredFiles = [
   "version.properties",
   "apps/mobile/app.json",
   "apps/mobile/android/app/src/main/AndroidManifest.xml",
+  "apps/mobile/android/app/src/main/res/values/strings.xml",
   "apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/LinternaEngine.kt",
   "apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/PremiumSequenceRunner.kt",
   "apps/mobile/android/app/src/main/java/com/linternapremium/app/ui/LinternaPremiumScreen.kt",
@@ -27,6 +28,8 @@ if (errors.length === 0) {
   const premiumSequence = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/PremiumSequenceRunner.kt");
   const mainActivity = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/MainActivity.kt");
   const screen = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/ui/LinternaPremiumScreen.kt");
+  const appConfig = JSON.parse(read("apps/mobile/app.json"));
+  const strings = read("apps/mobile/android/app/src/main/res/values/strings.xml");
   const premiumMethod = engine.slice(engine.indexOf("fun pressPremium"), engine.indexOf("fun confirmPremiumPurchase"));
   const confirmationMethod = engine.slice(engine.indexOf("fun confirmPremiumPurchase"), engine.indexOf("fun dismissPurchase"));
   if (!premiumMethod.includes("torch.turnOff()")) errors.push("El apagado Premium debe cortar la linterna antes de ofrecer la compra");
@@ -40,6 +43,9 @@ if (errors.length === 0) {
   }
   if (!mainActivity.includes("if (!BuildConfig.DEMO_BILLING) return") || !screen.includes("isDemo && state.isPremiumOwned")) {
     errors.push("El restablecimiento de Premium debe quedar limitado a la variante demo");
+  }
+  if (appConfig.app.name !== "Linterna PREMIUM" || !strings.includes(">Linterna PREMIUM<") || !screen.includes('text = "PREMIUM"')) {
+    errors.push("El nombre visible debe ser Linterna PREMIUM en metadatos, launcher e interfaz");
   }
 
   const playManifest = read("apps/mobile/android/app/src/play/AndroidManifest.xml");

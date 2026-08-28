@@ -1,4 +1,4 @@
-# Linterna Premium
+# Linterna PREMIUM
 
 Una linterna Android con un chiste transparente: el apagado normal siempre es gratis y el **Apagado Premium** ofrece una compra unica que elimina anuncios y desbloquea fuegos artificiales junto con una secuencia gradual del flash que termina siempre apagada.
 

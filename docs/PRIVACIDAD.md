@@ -1,6 +1,6 @@
 # Borrador de politica de privacidad
 
-Linterna Premium utiliza el permiso de cámara únicamente para encender y apagar el flash del dispositivo. La aplicación no toma fotos, no graba video y no accede al contenido de la cámara.
+Linterna PREMIUM utiliza el permiso de cámara únicamente para encender y apagar el flash del dispositivo. La aplicación no toma fotos, no graba video y no accede al contenido de la cámara.
 
 Las compras se procesan mediante Google Play. El desarrollador no recibe ni almacena numeros de tarjeta. Google puede procesar informacion de pago y de la cuenta segun sus propias politicas.
 

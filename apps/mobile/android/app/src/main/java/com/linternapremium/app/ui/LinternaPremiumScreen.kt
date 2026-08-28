@@ -219,7 +219,7 @@ private fun AppHeader(isPremiumOwned: Boolean) {
                 letterSpacing = 2.4.sp,
             )
             Text(
-                text = "Premium",
+                text = "PREMIUM",
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Black,

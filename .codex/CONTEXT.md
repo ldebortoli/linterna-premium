@@ -1,4 +1,4 @@
-# Linterna Premium - Contexto del proyecto
+# Linterna PREMIUM - Contexto del proyecto
 
 ## Descripcion general
 
@@ -7,11 +7,12 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 ## Estado detectado
 
 - Stack: Android nativo, Kotlin, Jetpack Compose, Material 3, Gradle.
+- Nombre visible: `Linterna PREMIUM`; el package id y el slug tecnico permanecen `com.linternapremium.app` y `linterna-premium`.
 - Git: repositorio público `https://github.com/ldebortoli/linterna-premium` en rama principal `main`, con Secret Scanning y Push Protection habilitados.
 - Android: `minSdk 24`, `compileSdk 36`, Java 17 como bytecode objetivo.
 - Integraciones: Google Play Billing para el producto no consumible `premium_blackout_pack`; Google Mobile Ads con identificadores de prueba solo en builds de desarrollo.
 - Privacidad: no hay cuentas, backend propio ni captura directa de tarjetas. Google Play procesa el pago.
-- Dashboard: perfil Android nativo `Linterna Premium` registrado en Apps Dashboard; genera la variante `demoDebug` para pruebas y `playRelease` para publicación.
+- Dashboard: perfil Android nativo `Linterna PREMIUM` registrado en Apps Dashboard; genera la variante `demoDebug` para pruebas y `playRelease` para publicación.
 - Telegram: los mensajes de artefactos generados por Apps Dashboard mencionan sólo al propietario `@galerazo34` y nunca a Nico.
 
 ## Estructura

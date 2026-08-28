@@ -99,3 +99,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decision: conservar el CI publico de pruebas, cobertura y lint sin build de APK; versionar `apps/mobile/android/gradlew` con modo `100755` para Linux.
 - Motivo: los cinco fallos iniciales fueron `spawnSync ./gradlew EACCES`, no agotamiento de minutos. Corregir el permiso elimina la causa sin desactivar una verificacion util ni agregar trabajo costoso.
+
+## D-015 - PREMIUM en mayusculas en el nombre visible
+
+- Estado: vigente.
+- Fecha: 2026-08-28.
+- Decision: usar `Linterna PREMIUM` como nombre visible en launcher, interfaz, metadatos y documentacion publica; conservar `com.linternapremium.app`, `linterna-premium` y la URL del repositorio.
+- Motivo: reforzar visualmente el chiste sin romper la identidad tecnica, las instalaciones ni las integraciones existentes.
