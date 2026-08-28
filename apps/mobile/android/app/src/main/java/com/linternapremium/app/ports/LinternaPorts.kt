@@ -6,6 +6,7 @@ interface TorchPort {
     fun turnOnAtMaximum(): TorchResult
     fun setRelativeStrength(relativeStrength: Float): TorchResult
     fun turnOff(): TorchResult
+    fun observeState(listener: ((Boolean) -> Unit)?) = Unit
 }
 
 interface PremiumStore {

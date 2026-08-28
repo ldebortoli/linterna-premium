@@ -6,7 +6,9 @@ Una linterna Android con un chiste transparente: el apagado normal siempre es gr
 
 - Linterna fisica con intensidad maxima cuando Android y el hardware lo permiten.
 - Apagado automatico al enviar la app a segundo plano.
+- Si el flash ya estaba encendido desde Android al abrir la app, la pantalla se sincroniza y muestra directamente ambos apagados.
 - Boton Premium grande y boton normal gratuito claramente visible.
+- Abrir o cancelar la confirmacion Premium no apaga el flash; la compra exitosa inicia el efecto Premium y lo apaga al terminar.
 - Apagado Premium con fuegos artificiales, pulso visual y una curva lenta de potencia real en telefonos compatibles; en el resto se conserva el efecto visual y el apagado final seguro.
 - La variante demo permite restablecer la edicion plebeya para repetir las pruebas de compra y anuncios; esta accion no existe en Play.
 - Selector persistente en la pantalla principal con los 18 idiomas de Galerazo

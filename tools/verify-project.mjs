@@ -28,6 +28,7 @@ if (errors.length === 0) {
   const engine = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/LinternaEngine.kt");
   const premiumSequence = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/PremiumSequenceRunner.kt");
   const mainActivity = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/MainActivity.kt");
+  const androidTorch = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/platform/AndroidTorchPort.kt");
   const screen = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/ui/LinternaPremiumScreen.kt");
   const localization = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/localization/LinternaLocalization.kt");
   const gradle = read("apps/mobile/android/app/build.gradle.kts");
@@ -36,12 +37,21 @@ if (errors.length === 0) {
   const strings = read("apps/mobile/android/app/src/main/res/values/strings.xml");
   const premiumMethod = engine.slice(engine.indexOf("fun pressPremium"), engine.indexOf("fun confirmPremiumPurchase"));
   const confirmationMethod = engine.slice(engine.indexOf("fun confirmPremiumPurchase"), engine.indexOf("fun dismissPurchase"));
-  if (!premiumMethod.includes("torch.turnOff()")) errors.push("El apagado Premium debe cortar la linterna antes de ofrecer la compra");
+  if (premiumMethod.includes("torch.turnOff()")) errors.push("Abrir la confirmacion Premium no debe apagar la linterna");
   if (premiumMethod.includes("PremiumEffect.LaunchGooglePlay")) errors.push("Google Play debe abrirse recien despues de confirmar la compra");
   if (!confirmationMethod.includes("showPurchaseDialog") || !confirmationMethod.includes("PremiumEffect.LaunchGooglePlay")) {
     errors.push("La compra debe exigir la confirmacion previa antes de abrir Google Play");
   }
   if (!engine.includes("fun turnOffNormally")) errors.push("Falta el apagado normal gratuito");
+  if (!engine.includes("fun syncTorchState") || !mainActivity.includes("torchPort.observeState")) {
+    errors.push("La app debe sincronizarse con una linterna encendida desde fuera");
+  }
+  if (!androidTorch.includes("registerTorchCallback") || !androidTorch.includes("unregisterTorchCallback")) {
+    errors.push("La observacion del flash real debe registrarse y liberarse con CameraManager");
+  }
+  if (!mainActivity.includes("uiState = engine.backgrounded()")) {
+    errors.push("Salir o cerrar la app debe conservar el apagado de seguridad");
+  }
   if (!premiumSequence.includes("finally") || !premiumSequence.includes("torch.turnOff()")) {
     errors.push("La secuencia Premium debe apagar el flash incluso si se interrumpe o falla");
   }

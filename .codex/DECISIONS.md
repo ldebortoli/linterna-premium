@@ -134,3 +134,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decision: ofrecer las 18 opciones reales del catálogo de Galerazo Bot más mandarín, cantonés y coreano, distinguiendo español argentino/español de España, portugués brasileño/portugués de Portugal y chino simplificado/tradicional. Euskera/vasco y Runa Simi/quechua son una sola opción cada uno. Mantener todos los textos visibles, errores, Billing, anuncios de prueba y accesibilidad dentro del mismo catálogo. Anclar el dropdown al botón de idiomas dentro del extremo derecho, limitarlo a 360 dp de alto y habilitar scroll interno.
 - Motivo: igualar el catálogo fuente y sumar las variantes pedidas sin duplicar nombres de una misma lengua ni permitir que un menú largo se desplace a la izquierda o sobrepase la pantalla.
+
+## D-020 - Confirmacion Premium sin apagado y sincronizacion del flash externo
+
+- Estado: vigente; reemplaza D-003 y la parte del recorrido sin licencia de D-012. D-007 conserva vigencia para salida y segundo plano.
+- Fecha: 2026-08-28.
+- Decision: mantener el flash encendido al abrir la confirmacion Premium y al cancelarla con `Ahora no`; apagarlo con la opcion plebeya, al completar una compra mediante la secuencia Premium o al pasar la app a segundo plano/cerrarla. Observar `CameraManager.TorchCallback` durante la vida de la actividad para reflejar inmediatamente un flash encendido desde Android y liberar el callback al destruirla. Una compra exitosa con el flash ya apagado no debe volver a encenderlo.
+- Motivo: preservar el remate del flujo Premium hasta que exista una decisión efectiva, reflejar el estado físico aunque la app no haya encendido el LED y mantener un cierre seguro.

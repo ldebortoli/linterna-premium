@@ -75,6 +75,9 @@ class MainActivity : ComponentActivity(), BillingEvents {
             text = { currentText },
         )
         uiState = engine.state
+        torchPort.observeState { isTorchOn ->
+            runOnUiThread { uiState = engine.syncTorchState(isTorchOn) }
+        }
 
         if (!BuildConfig.DEMO_BILLING) {
             billingGateway = GooglePlayBillingGateway(
@@ -122,6 +125,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
 
     override fun onDestroy() {
         premiumSequenceJob?.cancel()
+        if (::torchPort.isInitialized) torchPort.observeState(null)
         billingGateway?.close()
         super.onDestroy()
     }
@@ -132,7 +136,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
 
     override fun onPremiumPurchased() {
         runOnUiThread {
-            uiState = engine.billingPurchased()
+            applyPremiumResult(engine.billingPurchased())
             adsReady = false
         }
     }

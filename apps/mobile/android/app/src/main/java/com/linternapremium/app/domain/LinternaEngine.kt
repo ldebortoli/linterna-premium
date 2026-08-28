@@ -84,20 +84,12 @@ class LinternaEngine(
             return EngineResult(state, PremiumEffect.RunPremiumSequence)
         }
 
-        val offResult = torch.turnOff()
-        if (offResult is TorchResult.Failure) {
-            state = state.copy(error = offResult.message, errorTarget = ErrorTarget.PREMIUM)
-            return EngineResult(state)
-        }
-
         state = state.copy(
-            isTorchOn = false,
             showPremiumOffer = true,
+            showPurchaseDialog = true,
             error = null,
             errorTarget = null,
         )
-
-        state = state.copy(showPurchaseDialog = true)
         return EngineResult(state)
     }
 
@@ -131,17 +123,21 @@ class LinternaEngine(
         if (!isDemo) return EngineResult(state, PremiumEffect.LaunchGooglePlay)
 
         premiumStore.setPremiumOwned(true)
+        val shouldTurnOffWithPremium = state.isTorchOn
         state = state.copy(
             isPremiumOwned = true,
             showPremiumOffer = false,
             showPurchaseDialog = false,
-            isPremiumCelebrating = false,
+            isPremiumCelebrating = shouldTurnOffWithPremium,
             notice = text()[TextKey.DEMO_PREMIUM_ACTIVATED],
             error = null,
             errorTarget = null,
             celebrationSequence = state.celebrationSequence + 1,
         )
-        return EngineResult(state)
+        return EngineResult(
+            state = state,
+            effect = if (shouldTurnOffWithPremium) PremiumEffect.RunPremiumSequence else PremiumEffect.None,
+        )
     }
 
     fun resetPremiumForTesting(): LinternaState {
@@ -176,19 +172,23 @@ class LinternaEngine(
         return state
     }
 
-    fun billingPurchased(): LinternaState {
+    fun billingPurchased(): EngineResult {
         premiumStore.setPremiumOwned(true)
+        val shouldTurnOffWithPremium = state.isTorchOn
         state = state.copy(
             isPremiumOwned = true,
             showPremiumOffer = false,
             showPurchaseDialog = false,
-            isPremiumCelebrating = false,
+            isPremiumCelebrating = shouldTurnOffWithPremium,
             notice = text()[TextKey.PREMIUM_ACTIVATED],
             error = null,
             errorTarget = null,
             celebrationSequence = state.celebrationSequence + 1,
         )
-        return state
+        return EngineResult(
+            state = state,
+            effect = if (shouldTurnOffWithPremium) PremiumEffect.RunPremiumSequence else PremiumEffect.None,
+        )
     }
 
     fun billingFailed(message: String): LinternaState {
@@ -214,6 +214,11 @@ class LinternaEngine(
             isPremiumCelebrating = false,
             dismissedCelebrationSequence = state.celebrationSequence,
         )
+        return state
+    }
+
+    fun syncTorchState(isTorchOn: Boolean): LinternaState {
+        state = state.copy(isTorchOn = isTorchOn)
         return state
     }
 

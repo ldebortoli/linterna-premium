@@ -12,6 +12,7 @@
 
 # DONE
 
+- [2026-08-28] Entregar Linterna PREMIUM 0.4.1 (versionCode 9): conservar el flash al abrir/cancelar la confirmación Premium, iniciar el apagado especial después de una compra exitosa, mantener el corte al salir/cerrar y sincronizar la UI con una linterna encendida externamente mediante `TorchCallback`; verificar 23/23 tests, cobertura 100% y lint sin generar APK.
 - [2026-08-28] Entregar Linterna PREMIUM 0.4.0 (versionCode 8): anclar el dropdown debajo del botón de idiomas, limitarlo a 360 dp con scroll y ampliar la traducción integral a las 18 opciones reales de Galerazo Bot más mandarín, cantonés y coreano; verificar 21/21 tests, cobertura 100% y lint sin generar APK.
 - [2026-08-28] Entregar Linterna PREMIUM 0.3.0 (versionCode 7) con selector persistente y traducción completa a los nueve idiomas de Tivio/Galerazo Bot; cambiar la distribución interna a `demoRelease` no depurable con el certificado QA estable compartido, verificar 20/20 tests, cobertura 100%, lint y firma sin generar APK.
 - [2026-08-28] Diagnosticar la advertencia de Play Protect al instalar la APK 0.2.3 desde Telegram: firma V2 valida, `targetSdk 36`, paquete demo nuevo y certificado `Android Debug`; causa exacta pendiente solo si se necesita clasificar el texto concreto del aviso.

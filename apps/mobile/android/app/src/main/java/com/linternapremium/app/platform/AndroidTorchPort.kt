@@ -5,6 +5,8 @@ import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import com.linternapremium.app.model.TorchResult
 import com.linternapremium.app.localization.AppLanguage
 import com.linternapremium.app.localization.LinternaText
@@ -21,7 +23,20 @@ class AndroidTorchPort(
     },
 ) : TorchPort {
     private val cameraManager = context.getSystemService(CameraManager::class.java)
+    private val callbackHandler = Handler(Looper.getMainLooper())
     private var activeCameraId: String? = null
+    private var observedCameraId: String? = null
+    private var stateListener: ((Boolean) -> Unit)? = null
+    private var callbackRegistered = false
+    private val torchCallback = object : CameraManager.TorchCallback() {
+        override fun onTorchModeChanged(cameraId: String, enabled: Boolean) {
+            if (cameraId == observedCameraId) stateListener?.invoke(enabled)
+        }
+
+        override fun onTorchModeUnavailable(cameraId: String) {
+            if (cameraId == observedCameraId) stateListener?.invoke(false)
+        }
+    }
 
     override fun turnOnAtMaximum(): TorchResult = setRelativeStrength(1f)
 
@@ -56,6 +71,38 @@ class AndroidTorchPort(
         cameraManager.setTorchMode(cameraId, false)
         activeCameraId = null
         TorchResult.Success
+    }
+
+    override fun observeState(listener: ((Boolean) -> Unit)?) {
+        stateListener = listener
+        if (listener == null) {
+            if (callbackRegistered) cameraManager.unregisterTorchCallback(torchCallback)
+            callbackRegistered = false
+            observedCameraId = null
+            return
+        }
+        if (callbackRegistered) return
+
+        observedCameraId = try {
+            findTorchCameraId()
+        } catch (_: SecurityException) {
+            null
+        } catch (_: CameraAccessException) {
+            null
+        }
+        if (observedCameraId == null) {
+            if (simulateWhenUnavailable) listener(false)
+            return
+        }
+
+        try {
+            cameraManager.registerTorchCallback(torchCallback, callbackHandler)
+            callbackRegistered = true
+        } catch (_: SecurityException) {
+            observedCameraId = null
+        } catch (_: IllegalArgumentException) {
+            observedCameraId = null
+        }
     }
 
     private fun findTorchCameraId(): String? {

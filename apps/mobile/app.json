@@ -2,11 +2,11 @@
   "app": {
     "name": "Linterna PREMIUM",
     "slug": "linterna-premium",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "orientation": "default",
     "android": {
       "package": "com.linternapremium.app",
-      "versionCode": 8,
+      "versionCode": 9,
       "nativeProject": "android"
     }
   }
