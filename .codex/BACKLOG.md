@@ -12,6 +12,7 @@ No hay tareas en curso.
 
 # DONE
 
+- [2026-08-28] Diagnosticar la advertencia de Play Protect al instalar la APK 0.2.3 desde Telegram: firma V2 valida, `targetSdk 36`, paquete demo nuevo y certificado `Android Debug`; causa exacta pendiente solo si se necesita clasificar el texto concreto del aviso.
 - [2026-08-28] Reemplazar `mortal/mortales` por `EDICIÓN PLEBEYA`, `Restablecer edición plebeya` y `Apagar linterna como un plebeyo`; validar pruebas, cobertura y lint sin generar APK.
 - [2026-08-28] Cambiar el nombre visible, launcher, encabezado y metadatos publicos a `Linterna PREMIUM`, preservando package id y slug; validar pruebas, cobertura y lint sin generar APK.
 - [2026-08-28] Diagnosticar cinco fallos de CI como `gradlew EACCES`, no cuota; corregir el modo Git a `100755`, conservar CI sin APK y verificar que `ldebortoli/linterna-premium` siga publico sobre `main`.
