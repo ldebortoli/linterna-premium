@@ -5,12 +5,18 @@ import com.linternapremium.app.model.ErrorTarget
 import com.linternapremium.app.model.LinternaState
 import com.linternapremium.app.model.PremiumEffect
 import com.linternapremium.app.model.TorchResult
+import com.linternapremium.app.localization.AppLanguage
+import com.linternapremium.app.localization.LinternaTextCatalog
+import com.linternapremium.app.localization.TextKey
 import com.linternapremium.app.ports.PremiumStore
 import com.linternapremium.app.ports.TorchPort
 
 class LinternaEngine(
     private val torch: TorchPort,
     private val premiumStore: PremiumStore,
+    private val text: () -> com.linternapremium.app.localization.LinternaText = {
+        LinternaTextCatalog.forLanguage(AppLanguage.SPANISH)
+    },
 ) {
     var state = LinternaState(isPremiumOwned = premiumStore.isPremiumOwned())
         private set
@@ -38,7 +44,7 @@ class LinternaEngine(
 
     fun permissionDenied(): LinternaState {
         state = state.copy(
-            error = "Necesitamos permiso de cámara solo para controlar el flash.",
+            error = text()[TextKey.CAMERA_PERMISSION],
             errorTarget = ErrorTarget.TURN_ON,
         )
         return state
@@ -51,7 +57,7 @@ class LinternaEngine(
                 showPremiumOffer = false,
                 isPremiumCelebrating = false,
                 dismissedCelebrationSequence = state.celebrationSequence,
-                notice = "Apagado normal completado. Dignidad intacta.",
+                notice = text()[TextKey.NORMAL_OFF_NOTICE],
                 error = null,
                 errorTarget = null,
             )
@@ -100,7 +106,7 @@ class LinternaEngine(
             isTorchOn = false,
             isPremiumCelebrating = false,
             showPremiumOffer = false,
-            notice = "Apagado Premium: oscuridad cinco estrellas.",
+            notice = text()[TextKey.PREMIUM_OFF_NOTICE],
             error = null,
             errorTarget = null,
         )
@@ -130,7 +136,7 @@ class LinternaEngine(
             showPremiumOffer = false,
             showPurchaseDialog = false,
             isPremiumCelebrating = false,
-            notice = "Premium de prueba activado. No se realizó ningún cobro.",
+            notice = text()[TextKey.DEMO_PREMIUM_ACTIVATED],
             error = null,
             errorTarget = null,
             celebrationSequence = state.celebrationSequence + 1,
@@ -148,7 +154,7 @@ class LinternaEngine(
             showPurchaseDialog = false,
             isPremiumCelebrating = false,
             dismissedCelebrationSequence = state.celebrationSequence,
-            notice = "Premium de prueba eliminado. Volviste a la edición plebeya.",
+            notice = text()[TextKey.DEMO_PREMIUM_RESET],
             error = null,
             errorTarget = null,
         )
@@ -177,7 +183,7 @@ class LinternaEngine(
             showPremiumOffer = false,
             showPurchaseDialog = false,
             isPremiumCelebrating = false,
-            notice = "Premium activado. Gracias por financiar la oscuridad.",
+            notice = text()[TextKey.PREMIUM_ACTIVATED],
             error = null,
             errorTarget = null,
             celebrationSequence = state.celebrationSequence + 1,
@@ -213,6 +219,11 @@ class LinternaEngine(
 
     fun clearNotice(): LinternaState {
         state = state.copy(notice = null)
+        return state
+    }
+
+    fun languageChanged(): LinternaState {
+        state = state.copy(notice = null, error = null, errorTarget = null)
         return state
     }
 }

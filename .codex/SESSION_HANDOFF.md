@@ -10,7 +10,7 @@ Configurar las cuentas e identificadores reales de Google cuando el usuario deci
 
 ## Estado actual
 
-- Android nativo Kotlin/Compose implementado en version 0.2.3 (versionCode 6).
+- Android nativo Kotlin/Compose implementado en version 0.3.0 (versionCode 7).
 - El nombre visible es `Linterna PREMIUM` en el launcher, la interfaz y `app.json`; package id, slug y URL del repositorio no cambiaron.
 - Repositorio público en `https://github.com/ldebortoli/linterna-premium`, rama principal `main`, con Secret Scanning y Push Protection habilitados.
 - Visibilidad publica y rama `main` verificadas directamente con GitHub el 2026-08-28.
@@ -18,21 +18,22 @@ Configurar las cuentas e identificadores reales de Google cuando el usuario deci
 - Con Premium activo, el boton ejecuta fuegos artificiales y un pulso visual de tres segundos sincronizado con una curva del flash: baja, sube, baja, sube y desciende hasta apagarse. Android 13+ usa potencia real si el hardware expone varios niveles; el fallback conserva el LED estable, anima la pantalla y apaga al final.
 - La secuencia se cancela al perder foco y el ejecutor apaga el flash en `finally` ante exito, error o cancelacion.
 - La experiencia gratuita usa `EDICIÓN PLEBEYA`, `Restablecer edición plebeya` y `Apagar linterna como un plebeyo`; no quedan usos activos de mortal/mortales.
+- La pantalla principal incluye un selector persistente para Español, English, Português, Français, Italiano, Deutsch, Русский, 日本語 y 简体中文. El catálogo completo cubre interfaz, avisos, errores físicos, compra, anuncios de prueba y etiquetas de accesibilidad; la primera apertura toma un idioma compatible del dispositivo y cae a español.
 - Cuando Premium simulado esta activo y la linterna apagada, demo muestra `Restablecer edición plebeya`; borra la licencia local, reactiva anuncios de prueba y permite repetir el recorrido. La UI y el controlador bloquean esta accion en Play.
-- Apps Dashboard genero y archivo la APK de prueba 0.2.3 el 2026-08-28; las copias de build, artefacto actual y version archivada tienen el mismo SHA-256. Es `demoDebug`, paquete `com.linternapremium.app.demo.debug`, firma V2 valida con certificado `Android Debug`, `targetSdk 36`.
+- Apps Dashboard generó y archivó la APK anterior 0.2.3 el 2026-08-28; sigue siendo el último artefacto existente y usa la identidad debug anterior. La próxima ejecución pedida por el usuario generará `demoRelease`, paquete `com.linternapremium.app.demo`, no depurable y con el certificado QA estable compartido de Tivio/A la Altura. No se generó una APK 0.3.0 en esta entrega.
 - Al instalar esa APK desde Telegram, Play Protect muestra una advertencia sorteable con `Instalar de todas formas`. La evidencia local descarta una firma invalida o compatibilidad Android antigua; la explicacion mas probable es paquete/certificado debug nuevos y sin reputacion, pero hace falta el texto exacto o una captura para distinguir un analisis de app desconocida de un bloqueo por verificacion de desarrollador.
 - Google Play Billing y Google Mobile Ads quedan separados por variantes hasta que existan cuentas e identificadores reales.
 - Apps Dashboard reconoce el perfil Android nativo `Linterna PREMIUM` y puede generar/archivar el APK.
-- Apps Dashboard 0.2.8 genera para Linterna PREMIUM una leyenda Telegram que menciona sólo a `@galerazo34` y nunca a Nico.
-- Validacion mas reciente: `npm test`, `npm run coverage` y `npm run lint`; 17/17 pruebas, 100% de instrucciones/ramas/lineas/metodos del dominio y Android Lint correcto. No se genero un APK para la version 0.2.3.
+- Apps Dashboard 0.2.9 genera para Linterna PREMIUM una leyenda Telegram que menciona sólo a `@galerazo34` y nunca a Nico.
+- Validacion mas reciente: `npm test`, `npm run test:android`, `npm run coverage`, `npm run lint` y `signingReport`; 20/20 pruebas, 100% de instrucciones/ramas/líneas/métodos del alcance, Android Lint correcto y `demoRelease` resuelve el mismo SHA-256 de certificado `FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C` que A la Altura. No se generó ninguna APK.
 - Los cinco primeros runs de CI fallaron por `spawnSync ./gradlew EACCES`, no por cuota. `apps/mobile/android/gradlew` quedo corregido de `100644` a `100755`.
 - CI público sobre `main` y pull requests conserva pruebas, cobertura y lint, con cancelación de corridas reemplazadas y sin build de APK. El run disparado por la correccion no se monitorea por politica.
-- QA visual previo sobre 0.1.0: encendido demo, apagado normal, dialogo de compra sin cobro, Premium persistente sin anuncios, apagado al perder foco y pantalla compacta con texto al 130%. El nombre, la terminologia plebeya, la confirmacion, la celebracion y el restablecimiento de 0.2.3 quedan pendientes de revision visual cuando se solicite una nueva APK.
+- QA visual previo sobre 0.1.0: encendido demo, apagado normal, dialogo de compra sin cobro, Premium persistente sin anuncios, apagado al perder foco y pantalla compacta con texto al 130%. El selector/traducciones 0.3.0 y los cambios visuales posteriores quedan pendientes de revisión cuando el usuario solicite una nueva APK.
 - No hay elementos procesados en `USER_QUEUE.md`.
 
 ## Proximos pasos
 
-1. Revisar visualmente en un telefono la APK 0.2.3 ya generada: nombre, terminologia plebeya, confirmacion, fuegos artificiales y restablecimiento demo.
+1. Cuando el usuario lo pida desde Apps Dashboard, generar y revisar la APK 0.3.0: selector en los nueve idiomas, nombre, terminología plebeya, confirmación, fuegos artificiales, restablecimiento demo e instalación sobre versiones futuras con identidad estable.
 2. Validar el flash real y, si se quiere clasificar la advertencia de Play Protect, capturar su texto exacto.
 3. Crear la app y el producto no consumible `premium_blackout_pack` en Play Console.
 4. Crear la app/unidad banner en AdMob, configurar consentimiento y publicar la politica de privacidad.

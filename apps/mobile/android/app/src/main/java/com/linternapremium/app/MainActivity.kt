@@ -19,6 +19,11 @@ import com.linternapremium.app.billing.BillingGateway
 import com.linternapremium.app.billing.GooglePlayBillingGateway
 import com.linternapremium.app.domain.LinternaEngine
 import com.linternapremium.app.domain.PremiumSequenceRunner
+import com.linternapremium.app.localization.AppLanguage
+import com.linternapremium.app.localization.LinternaText
+import com.linternapremium.app.localization.LinternaTextCatalog
+import com.linternapremium.app.localization.PreferencesLanguageStore
+import com.linternapremium.app.localization.TextKey
 import com.linternapremium.app.model.EngineResult
 import com.linternapremium.app.model.LinternaState
 import com.linternapremium.app.model.PremiumEffect
@@ -36,10 +41,14 @@ class MainActivity : ComponentActivity(), BillingEvents {
     private lateinit var engine: LinternaEngine
     private lateinit var torchPort: TorchPort
     private lateinit var premiumSequenceRunner: PremiumSequenceRunner
+    private lateinit var languageStore: PreferencesLanguageStore
     private var billingGateway: BillingGateway? = null
     private var premiumSequenceJob: Job? = null
     private var uiState by mutableStateOf(LinternaState())
     private var adsReady by mutableStateOf(false)
+    private var selectedLanguage by mutableStateOf(AppLanguage.SPANISH)
+    private val currentText: LinternaText
+        get() = LinternaTextCatalog.forLanguage(selectedLanguage)
 
     private val cameraPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission(),
@@ -52,14 +61,18 @@ class MainActivity : ComponentActivity(), BillingEvents {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        languageStore = PreferencesLanguageStore(this)
+        selectedLanguage = languageStore.current()
         torchPort = AndroidTorchPort(
             context = this,
             simulateWhenUnavailable = BuildConfig.DEMO_BILLING,
+            text = { currentText },
         )
         premiumSequenceRunner = PremiumSequenceRunner(torchPort, pause = { delay(it) })
         engine = LinternaEngine(
             torch = torchPort,
             premiumStore = PreferencesPremiumStore(this),
+            text = { currentText },
         )
         uiState = engine.state
 
@@ -68,6 +81,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
                 context = this,
                 productId = BuildConfig.PREMIUM_PRODUCT_ID,
                 events = this,
+                text = { currentText },
             ).also(BillingGateway::start)
         }
 
@@ -75,6 +89,8 @@ class MainActivity : ComponentActivity(), BillingEvents {
             LinternaPremiumTheme {
                 LinternaPremiumScreen(
                     state = uiState,
+                    text = currentText,
+                    selectedLanguage = selectedLanguage,
                     adsReady = adsReady,
                     adUnitId = BuildConfig.ADMOB_BANNER_ID,
                     isDemo = BuildConfig.DEMO_BILLING,
@@ -85,6 +101,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
                     onDismissPurchase = { uiState = engine.dismissPurchase() },
                     onDismissOffer = { uiState = engine.dismissPremiumOffer() },
                     onResetDemoPremium = ::resetDemoPremium,
+                    onLanguageSelected = ::selectLanguage,
                 )
             }
         }
@@ -161,7 +178,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
             PremiumEffect.None -> Unit
             PremiumEffect.LaunchGooglePlay -> {
                 billingGateway?.launchPurchase(this)
-                    ?: onBillingMessage("Google Play Billing no está configurado en esta compilación.")
+                    ?: onBillingMessage(currentText[TextKey.BILLING_NOT_CONFIGURED])
             }
 
             PremiumEffect.RunPremiumSequence -> runPremiumSequence()
@@ -176,5 +193,12 @@ class MainActivity : ComponentActivity(), BillingEvents {
                 is TorchResult.Failure -> engine.premiumCelebrationFailed(result.message)
             }
         }
+    }
+
+    private fun selectLanguage(language: AppLanguage) {
+        if (language == selectedLanguage) return
+        languageStore.save(language)
+        selectedLanguage = language
+        uiState = engine.languageChanged()
     }
 }

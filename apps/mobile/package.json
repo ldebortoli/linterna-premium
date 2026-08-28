@@ -1,6 +1,6 @@
 {
   "name": "linterna-premium-mobile",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "private": true,
   "description": "Comandos portables para la aplicacion Android nativa.",
   "scripts": {
@@ -13,8 +13,8 @@
     "test:coverage": "npm run coverage",
     "coverage": "node ../../tools/run-gradle.mjs jacocoTestReport jacocoTestCoverageVerification",
     "lint": "node ../../tools/run-gradle.mjs lintDemoDebug",
-    "build:apk": "node ../../tools/run-gradle.mjs assembleDemoDebug",
-    "install:android": "node ../../tools/run-gradle.mjs installDemoDebug"
+    "build:apk": "node ../../tools/run-gradle.mjs assembleDemoRelease",
+    "install:android": "node ../../tools/run-gradle.mjs installDemoRelease"
   },
   "engines": {
     "node": ">=20"

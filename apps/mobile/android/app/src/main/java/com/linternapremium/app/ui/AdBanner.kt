@@ -26,6 +26,7 @@ import com.google.android.gms.ads.AdView
 fun LinternaAdBanner(
     adUnitId: String,
     isDemo: Boolean,
+    testAdLabel: String,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -50,7 +51,7 @@ fun LinternaAdBanner(
     ) {
         if (isDemo) {
             Text(
-                text = "PUBLICIDAD DE PRUEBA",
+                text = testAdLabel,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 9.sp,
                 letterSpacing = 1.2.sp,
@@ -62,4 +63,3 @@ fun LinternaAdBanner(
         )
     }
 }
-

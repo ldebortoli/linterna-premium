@@ -12,7 +12,8 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Android: `minSdk 24`, `compileSdk 36`, Java 17 como bytecode objetivo.
 - Integraciones: Google Play Billing para el producto no consumible `premium_blackout_pack`; Google Mobile Ads con identificadores de prueba solo en builds de desarrollo.
 - Privacidad: no hay cuentas, backend propio ni captura directa de tarjetas. Google Play procesa el pago.
-- Dashboard: perfil Android nativo `Linterna PREMIUM` registrado en Apps Dashboard; genera la variante `demoDebug` para pruebas y `playRelease` para publicación.
+- Idiomas: selector persistente en la pantalla principal con `es`, `en`, `pt`, `fr`, `it`, `de`, `ru`, `ja` y `zh`; el catálogo cubre interfaz, errores, Billing, anuncios de prueba y accesibilidad.
+- Dashboard: perfil Android nativo `Linterna PREMIUM` registrado en Apps Dashboard; distribuye `demoRelease` no depurable con la identidad QA estable compartida con Tivio/A la Altura y reserva `playRelease` para publicación.
 - Telegram: los mensajes de artefactos generados por Apps Dashboard mencionan sólo al propietario `@galerazo34` y nunca a Nico.
 
 ## Estructura
@@ -32,7 +33,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - APK de prueba: se genera desde Apps Dashboard o, cuando el usuario lo pide expresamente, con `npm run build:apk`.
 - CI público: pruebas, cobertura y lint sobre `main` y pull requests; no genera APKs.
 - El wrapper Linux `apps/mobile/android/gradlew` se versiona como ejecutable (`100755`) para que GitHub Actions pueda iniciar Gradle.
-- Baseline verificado: 17 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el dominio y Android Lint sin observaciones.
+- Baseline verificado: 20 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el alcance de cobertura y Android Lint sin observaciones.
 
 ## Convenciones
 
@@ -44,3 +45,5 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - El apagado normal y el recorrido Premium sin licencia cortan la linterna inmediatamente. Con Premium activo, una secuencia lenta de menos de tres segundos regula la potencia cuando el hardware lo permite y garantiza el apagado final incluso ante fallo, cancelacion o salida de la app.
 - La variante `demo` simula la linterna únicamente cuando el dispositivo no tiene flash, para poder probar el recorrido en emulador; la variante `play` nunca simula hardware.
 - La variante `demo` permite borrar la licencia simulada y volver a la edicion plebeya; la variante `play` no expone ni ejecuta este restablecimiento.
+- La elección de idioma se guarda localmente; la primera apertura usa el idioma compatible del dispositivo y cae a español cuando no coincide con el catálogo.
+- `demoRelease` usa por variable de entorno el keystore QA local de Tivio, ignorado por Git; `playRelease` no reutiliza esa identidad y debe configurarse con la firma de producción de Google Play.

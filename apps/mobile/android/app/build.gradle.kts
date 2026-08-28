@@ -18,6 +18,10 @@ val canonicalVersionName = versionProperties.getProperty("versionName")
 val canonicalVersionCode = versionProperties.getProperty("versionCode").toInt()
 val playAdMobAppId = providers.gradleProperty("LINTERNAPREMIUM_ADMOB_APP_ID").orNull.orEmpty()
 val playBannerId = providers.gradleProperty("LINTERNAPREMIUM_ADMOB_BANNER_ID").orNull.orEmpty()
+val internalTestKeystorePath = providers
+    .environmentVariable("APPS_DASHBOARD_ANDROID_TEST_KEYSTORE_PATH")
+    .orNull
+    .orEmpty()
 
 android {
     namespace = "com.linternapremium.app"
@@ -35,12 +39,24 @@ android {
         buildConfigField("String", "PREMIUM_PRODUCT_ID", "\"premium_blackout_pack\"")
     }
 
+    signingConfigs {
+        create("internalTest") {
+            if (internalTestKeystorePath.isNotBlank()) {
+                storeFile = file(internalTestKeystorePath)
+            }
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     flavorDimensions += "distribution"
     productFlavors {
         create("demo") {
             dimension = "distribution"
             applicationIdSuffix = ".demo"
             versionNameSuffix = "-demo"
+            signingConfig = signingConfigs.getByName("internalTest")
             buildConfigField("boolean", "DEMO_BILLING", "true")
             buildConfigField(
                 "String",
@@ -180,6 +196,19 @@ tasks.withType<Test>().configureEach {
 
 val playTaskRequested = gradle.startParameter.taskNames.any { taskName ->
     taskName.contains("play", ignoreCase = true)
+}
+val demoReleaseTaskRequested = gradle.startParameter.taskNames.any { taskName ->
+    taskName.contains("demo", ignoreCase = true) && taskName.contains("release", ignoreCase = true)
+}
+if (demoReleaseTaskRequested && internalTestKeystorePath.isBlank()) {
+    throw GradleException(
+        "La APK demoRelease exige APPS_DASHBOARD_ANDROID_TEST_KEYSTORE_PATH para conservar la firma QA estable.",
+    )
+}
+if (demoReleaseTaskRequested && !file(internalTestKeystorePath).isFile) {
+    throw GradleException(
+        "APPS_DASHBOARD_ANDROID_TEST_KEYSTORE_PATH no apunta al keystore QA compartido.",
+    )
 }
 if (playTaskRequested && (playAdMobAppId.isBlank() || playBannerId.isBlank())) {
     throw GradleException(

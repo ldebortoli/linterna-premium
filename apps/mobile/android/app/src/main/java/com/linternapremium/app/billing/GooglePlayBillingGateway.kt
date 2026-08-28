@@ -13,11 +13,18 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
+import com.linternapremium.app.localization.AppLanguage
+import com.linternapremium.app.localization.LinternaText
+import com.linternapremium.app.localization.LinternaTextCatalog
+import com.linternapremium.app.localization.TextKey
 
 class GooglePlayBillingGateway(
     context: Context,
     private val productId: String,
     private val events: BillingEvents,
+    private val text: () -> LinternaText = {
+        LinternaTextCatalog.forLanguage(AppLanguage.SPANISH)
+    },
 ) : BillingGateway, PurchasesUpdatedListener {
     private var productDetails: ProductDetails? = null
     private var offerToken: String? = null
@@ -39,7 +46,7 @@ class GooglePlayBillingGateway(
                 if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                     queryCatalogAndPurchases()
                 } else {
-                    events.onBillingMessage("Google Play no esta listo para cobrar en este momento.")
+                    events.onBillingMessage(text()[TextKey.BILLING_NOT_READY])
                 }
             }
 
@@ -49,12 +56,12 @@ class GooglePlayBillingGateway(
 
     override fun launchPurchase(activity: Activity): Boolean {
         val details = productDetails ?: run {
-            events.onBillingMessage("El producto Premium todavia no esta disponible en Google Play.")
+            events.onBillingMessage(text()[TextKey.PRODUCT_UNAVAILABLE])
             start()
             return false
         }
         val token = offerToken ?: run {
-            events.onBillingMessage("Google Play no devolvio una oferta valida para esta compra.")
+            events.onBillingMessage(text()[TextKey.INVALID_OFFER])
             return false
         }
         val productParams = BillingFlowParams.ProductDetailsParams.newBuilder()
@@ -68,7 +75,7 @@ class GooglePlayBillingGateway(
                 .build(),
         )
         if (result.responseCode != BillingClient.BillingResponseCode.OK) {
-            events.onBillingMessage("No pudimos abrir el pago de Google Play.")
+            events.onBillingMessage(text()[TextKey.OPEN_PAYMENT_ERROR])
             return false
         }
         return true
@@ -78,9 +85,9 @@ class GooglePlayBillingGateway(
         when (billingResult.responseCode) {
             BillingClient.BillingResponseCode.OK -> processPurchases(purchases.orEmpty())
             BillingClient.BillingResponseCode.USER_CANCELED ->
-                events.onBillingMessage("Compra cancelada. La linterna ya esta apagada.")
+                events.onBillingMessage(text()[TextKey.PURCHASE_CANCELLED])
             BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> queryOwnedPurchases()
-            else -> events.onBillingMessage("La compra no se completo. Puedes intentar nuevamente.")
+            else -> events.onBillingMessage(text()[TextKey.PURCHASE_FAILED])
         }
     }
 
@@ -127,7 +134,7 @@ class GooglePlayBillingGateway(
                 when (purchase.purchaseState) {
                     Purchase.PurchaseState.PURCHASED -> acknowledgeAndGrant(purchase)
                     Purchase.PurchaseState.PENDING ->
-                        events.onBillingMessage("El pago esta pendiente. Premium se activa al acreditarse.")
+                        events.onBillingMessage(text()[TextKey.PAYMENT_PENDING])
                     else -> Unit
                 }
             }
@@ -145,9 +152,8 @@ class GooglePlayBillingGateway(
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                 events.onPremiumPurchased()
             } else {
-                events.onBillingMessage("El pago llego, pero falta confirmarlo. Abre la app nuevamente.")
+                events.onBillingMessage(text()[TextKey.PAYMENT_ACK_FAILED])
             }
         }
     }
 }
-

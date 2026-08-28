@@ -11,7 +11,7 @@ data class LinternaState(
     val isPremiumOwned: Boolean = false,
     val showPremiumOffer: Boolean = false,
     val showPurchaseDialog: Boolean = false,
-    val priceLabel: String = "Precio en Google Play",
+    val priceLabel: String? = null,
     val notice: String? = null,
     val error: String? = null,
     val errorTarget: ErrorTarget? = null,

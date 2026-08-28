@@ -8,10 +8,11 @@
 
 # IN PROGRESS
 
-No hay tareas en curso.
+No hay tareas locales en curso.
 
 # DONE
 
+- [2026-08-28] Entregar Linterna PREMIUM 0.3.0 (versionCode 7) con selector persistente y traducción completa a los nueve idiomas de Tivio/Galerazo Bot; cambiar la distribución interna a `demoRelease` no depurable con el certificado QA estable compartido, verificar 20/20 tests, cobertura 100%, lint y firma sin generar APK.
 - [2026-08-28] Diagnosticar la advertencia de Play Protect al instalar la APK 0.2.3 desde Telegram: firma V2 valida, `targetSdk 36`, paquete demo nuevo y certificado `Android Debug`; causa exacta pendiente solo si se necesita clasificar el texto concreto del aviso.
 - [2026-08-28] Reemplazar `mortal/mortales` por `EDICIÓN PLEBEYA`, `Restablecer edición plebeya` y `Apagar linterna como un plebeyo`; validar pruebas, cobertura y lint sin generar APK.
 - [2026-08-28] Cambiar el nombre visible, launcher, encabezado y metadatos publicos a `Linterna PREMIUM`, preservando package id y slug; validar pruebas, cobertura y lint sin generar APK.

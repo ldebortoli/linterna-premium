@@ -30,6 +30,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -63,6 +65,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.linternapremium.app.model.ErrorTarget
 import com.linternapremium.app.model.LinternaState
+import com.linternapremium.app.localization.AppLanguage
+import com.linternapremium.app.localization.LinternaText
+import com.linternapremium.app.localization.LinternaTextCatalog
+import com.linternapremium.app.localization.TextKey
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -85,6 +91,8 @@ private val FireworkColors = listOf(
 @Composable
 fun LinternaPremiumScreen(
     state: LinternaState,
+    text: LinternaText,
+    selectedLanguage: AppLanguage,
     adsReady: Boolean,
     adUnitId: String,
     isDemo: Boolean,
@@ -95,6 +103,7 @@ fun LinternaPremiumScreen(
     onDismissPurchase: () -> Unit,
     onDismissOffer: () -> Unit,
     onResetDemoPremium: () -> Unit,
+    onLanguageSelected: (AppLanguage) -> Unit,
 ) {
     val celebration = remember { Animatable(0f) }
     var celebrationVisible by remember { mutableStateOf(false) }
@@ -142,6 +151,7 @@ fun LinternaPremiumScreen(
                     LinternaAdBanner(
                         adUnitId = adUnitId,
                         isDemo = isDemo,
+                        testAdLabel = text[TextKey.TEST_AD],
                         modifier = Modifier.navigationBarsPadding(),
                     )
                 }
@@ -155,9 +165,14 @@ fun LinternaPremiumScreen(
                     .padding(horizontal = 24.dp, vertical = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                AppHeader(isPremiumOwned = state.isPremiumOwned)
-                Spacer(Modifier.height(28.dp))
-                FlashlightHero(isOn = state.isTorchOn, premiumGlow = premiumGlow)
+                AppHeader(isPremiumOwned = state.isPremiumOwned, text = text)
+                LanguageSelector(
+                    text = text,
+                    selectedLanguage = selectedLanguage,
+                    onLanguageSelected = onLanguageSelected,
+                )
+                Spacer(Modifier.height(18.dp))
+                FlashlightHero(isOn = state.isTorchOn, premiumGlow = premiumGlow, text = text)
                 Spacer(Modifier.height(24.dp))
 
                 AnimatedContent(
@@ -167,6 +182,7 @@ fun LinternaPremiumScreen(
                     if (showOffOptions) {
                         OffOptions(
                             state = state,
+                            text = text,
                             onPremium = onPremium,
                             onNormalOff = onNormalOff,
                             onDismissOffer = onDismissOffer,
@@ -174,6 +190,7 @@ fun LinternaPremiumScreen(
                     } else {
                         TurnOnPanel(
                             state = state,
+                            text = text,
                             isDemo = isDemo,
                             onTurnOn = onTurnOn,
                             onResetDemoPremium = onResetDemoPremium,
@@ -187,6 +204,7 @@ fun LinternaPremiumScreen(
         if (celebrationVisible) {
             PremiumFireworks(
                 progress = celebration.value,
+                text = text,
                 modifier = Modifier.matchParentSize(),
             )
         }
@@ -195,6 +213,7 @@ fun LinternaPremiumScreen(
     if (state.showPurchaseDialog) {
         PremiumPurchaseDialog(
             priceLabel = state.priceLabel,
+            text = text,
             isDemo = isDemo,
             errorMessage = state.error.takeIf { state.errorTarget == ErrorTarget.PREMIUM },
             onConfirm = onConfirmPurchase,
@@ -204,7 +223,7 @@ fun LinternaPremiumScreen(
 }
 
 @Composable
-private fun AppHeader(isPremiumOwned: Boolean) {
+private fun AppHeader(isPremiumOwned: Boolean, text: LinternaText) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -230,7 +249,7 @@ private fun AppHeader(isPremiumOwned: Boolean) {
             shape = RoundedCornerShape(999.dp),
         ) {
             Text(
-                text = if (isPremiumOwned) "PREMIUM ACTIVO" else "EDICIÓN PLEBEYA",
+                text = if (isPremiumOwned) text[TextKey.PREMIUM_ACTIVE] else text[TextKey.PLEBEIAN_EDITION],
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 7.dp),
                 color = if (isPremiumOwned) Color(0xFFF3D27A) else MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 10.sp,
@@ -242,7 +261,55 @@ private fun AppHeader(isPremiumOwned: Boolean) {
 }
 
 @Composable
-private fun FlashlightHero(isOn: Boolean, premiumGlow: Float?) {
+private fun LanguageSelector(
+    text: LinternaText,
+    selectedLanguage: AppLanguage,
+    onLanguageSelected: (AppLanguage) -> Unit,
+) {
+    var expanded by remember { mutableStateOf(false) }
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.CenterEnd,
+    ) {
+        TextButton(
+            onClick = { expanded = true },
+            modifier = Modifier.semantics {
+                contentDescription = text[TextKey.APP_LANGUAGE]
+            },
+        ) {
+            Text(
+                text = "🌐 ${text[TextKey.LANGUAGES]} · ${selectedLanguage.nativeLabel}",
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontSize = 12.sp,
+            )
+        }
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
+            LinternaTextCatalog.supportedLanguages.forEach { language ->
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = if (language == selectedLanguage) {
+                                "✓ ${language.nativeLabel}"
+                            } else {
+                                language.nativeLabel
+                            },
+                        )
+                    },
+                    onClick = {
+                        expanded = false
+                        onLanguageSelected(language)
+                    },
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun FlashlightHero(isOn: Boolean, premiumGlow: Float?, text: LinternaText) {
     val infiniteTransition = rememberInfiniteTransition(label = "pulso-linterna")
     val pulse by infiniteTransition.animateFloat(
         initialValue = 0.88f,
@@ -284,6 +351,7 @@ private fun FlashlightHero(isOn: Boolean, premiumGlow: Float?) {
                     .fillMaxSize()
                     .padding(27.dp),
                 color = blendColor(Color(0xFF9BA6B1), Color(0xFF302913), visualIntensity),
+                text = text,
             )
         }
     }
@@ -292,19 +360,20 @@ private fun FlashlightHero(isOn: Boolean, premiumGlow: Float?) {
 @Composable
 private fun TurnOnPanel(
     state: LinternaState,
+    text: LinternaText,
     isDemo: Boolean,
     onTurnOn: () -> Unit,
     onResetDemoPremium: () -> Unit,
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            text = "Lista para iluminar",
+            text = text[TextKey.READY_TO_LIGHT],
             color = MaterialTheme.colorScheme.onBackground,
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
         )
         Text(
-            text = "Usaremos la mayor intensidad que permita tu teléfono.",
+            text = text[TextKey.MAX_INTENSITY_HELP],
             modifier = Modifier.padding(top = 6.dp, bottom = 20.dp),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
@@ -323,7 +392,7 @@ private fun TurnOnPanel(
                 contentColor = MaterialTheme.colorScheme.onPrimary,
             ),
         ) {
-            Text("Encender linterna", fontSize = 17.sp, fontWeight = FontWeight.Bold)
+            Text(text[TextKey.TURN_ON], fontSize = 17.sp, fontWeight = FontWeight.Bold)
         }
         if (isDemo && state.isPremiumOwned) {
             TextButton(
@@ -331,13 +400,13 @@ private fun TurnOnPanel(
                 modifier = Modifier.padding(top = 8.dp),
             ) {
                 Text(
-                    text = "Restablecer edición plebeya",
+                    text = text[TextKey.RESET_PLEBEIAN],
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 13.sp,
                 )
             }
             Text(
-                text = "Sólo borra el Premium simulado de este dispositivo.",
+                text = text[TextKey.RESET_HELP],
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 11.sp,
                 textAlign = TextAlign.Center,
@@ -349,6 +418,7 @@ private fun TurnOnPanel(
 @Composable
 private fun OffOptions(
     state: LinternaState,
+    text: LinternaText,
     onPremium: () -> Unit,
     onNormalOff: () -> Unit,
     onDismissOffer: () -> Unit,
@@ -356,9 +426,9 @@ private fun OffOptions(
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = when {
-                state.isPremiumCelebrating -> "Apagado Premium en curso"
-                state.isTorchOn -> "Linterna encendida al máximo"
-                else -> "La linterna ya está apagada"
+                state.isPremiumCelebrating -> text[TextKey.PREMIUM_OFF_PROGRESS]
+                state.isTorchOn -> text[TextKey.TORCH_ON_MAX]
+                else -> text[TextKey.TORCH_ALREADY_OFF]
             },
             color = if (state.isTorchOn) Color(0xFFF3D27A) else MaterialTheme.colorScheme.onBackground,
             fontSize = 17.sp,
@@ -367,9 +437,9 @@ private fun OffOptions(
         )
         Text(
             text = when {
-                state.isPremiumCelebrating -> "Fuegos artificiales, brillo ceremonial y oscuridad garantizada."
-                state.isTorchOn -> "Elegí con qué nivel de elegancia querés apagarla."
-                else -> "Podés completar Premium o volver sin pagar."
+                state.isPremiumCelebrating -> text[TextKey.CELEBRATION_HELP]
+                state.isTorchOn -> text[TextKey.CHOOSE_ELEGANCE]
+                else -> text[TextKey.COMPLETE_OR_RETURN]
             },
             modifier = Modifier.padding(top = 6.dp, bottom = 20.dp),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -379,6 +449,7 @@ private fun OffOptions(
         if (state.errorTarget == ErrorTarget.PREMIUM) state.error?.let { ActionError(it) }
         PremiumButton(
             owned = state.isPremiumOwned,
+            text = text,
             enabled = !state.isPremiumCelebrating,
             onClick = onPremium,
         )
@@ -390,21 +461,21 @@ private fun OffOptions(
                 modifier = Modifier.padding(top = 6.dp),
             ) {
                 Text(
-                    text = "Apagar linterna como un plebeyo",
+                    text = text[TextKey.NORMAL_PLEBEIAN_OFF],
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 13.sp,
                 )
             }
         } else {
             TextButton(onClick = onDismissOffer, modifier = Modifier.padding(top = 6.dp)) {
-                Text("Volver", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(text[TextKey.BACK], color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     }
 }
 
 @Composable
-private fun PremiumButton(owned: Boolean, enabled: Boolean, onClick: () -> Unit) {
+private fun PremiumButton(owned: Boolean, enabled: Boolean, text: LinternaText, onClick: () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -413,7 +484,7 @@ private fun PremiumButton(owned: Boolean, enabled: Boolean, onClick: () -> Unit)
             .clickable(enabled = enabled, onClick = onClick)
             .semantics {
                 role = Role.Button
-                contentDescription = "Apagado Premium"
+                contentDescription = text[TextKey.PREMIUM_OFF]
                 if (!enabled) disabled()
             },
         color = Color.Transparent,
@@ -435,14 +506,14 @@ private fun PremiumButton(owned: Boolean, enabled: Boolean, onClick: () -> Unit)
         ) {
             Column {
                 Text(
-                    text = "APAGADO PREMIUM",
+                    text = text[TextKey.PREMIUM_OFF],
                     color = Color(0xFF211524),
                     fontWeight = FontWeight.Black,
                     fontSize = 18.sp,
                     letterSpacing = 0.6.sp,
                 )
                 Text(
-                    text = if (owned) "Ya es tuyo" else "Oscuridad cinco estrellas",
+                    text = if (owned) text[TextKey.ALREADY_YOURS] else text[TextKey.FIVE_STAR_DARKNESS],
                     color = Color(0xCC211524),
                     fontSize = 12.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -454,9 +525,9 @@ private fun PremiumButton(owned: Boolean, enabled: Boolean, onClick: () -> Unit)
 }
 
 @Composable
-private fun PremiumFireworks(progress: Float, modifier: Modifier = Modifier) {
+private fun PremiumFireworks(progress: Float, text: LinternaText, modifier: Modifier = Modifier) {
     Canvas(
-        modifier = modifier.semantics { contentDescription = "Fuegos artificiales Premium" },
+        modifier = modifier.semantics { contentDescription = text[TextKey.FIREWORKS_A11Y] },
     ) {
         drawFirework(progress, 0.00f, 0.20f, 0.24f, FireworkColors[0])
         drawFirework(progress, 0.16f, 0.78f, 0.20f, FireworkColors[1])
@@ -565,7 +636,8 @@ private fun ActionError(message: String) {
 
 @Composable
 private fun PremiumPurchaseDialog(
-    priceLabel: String,
+    priceLabel: String?,
+    text: LinternaText,
     isDemo: Boolean,
     errorMessage: String?,
     onConfirm: () -> Unit,
@@ -573,23 +645,23 @@ private fun PremiumPurchaseDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Apagado Premium") },
+        title = { Text(text[TextKey.PREMIUM_OFF]) },
         text = {
             Column {
                 Text(
-                    text = if (isDemo) "Prueba local" else priceLabel,
+                    text = if (isDemo) text[TextKey.LOCAL_TEST] else priceLabel ?: text[TextKey.PRICE_GOOGLE_PLAY],
                     fontWeight = FontWeight.Bold,
                 )
                 Text(
-                    text = "Compra única · Sin suscripción",
+                    text = text[TextKey.ONE_TIME_NO_SUBSCRIPTION],
                     modifier = Modifier.padding(top = 4.dp),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Text(
                     text = if (isDemo) {
-                        "Esta es una compra simulada: no se cobrará dinero ni se pedirá una tarjeta."
+                        text[TextKey.DEMO_PURCHASE_HELP]
                     } else {
-                        "Al continuar, Google Play abrirá el pago oficial para que revises y confirmes la compra."
+                        text[TextKey.PLAY_PURCHASE_HELP]
                     },
                     modifier = Modifier.padding(top = 16.dp),
                 )
@@ -601,21 +673,21 @@ private fun PremiumPurchaseDialog(
         },
         confirmButton = {
             Button(onClick = onConfirm) {
-                Text(if (isDemo) "Simular compra Premium" else "Continuar con Google Play")
+                Text(if (isDemo) text[TextKey.SIMULATE_PURCHASE] else text[TextKey.CONTINUE_PLAY])
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Ahora no")
+                Text(text[TextKey.NOT_NOW])
             }
         },
     )
 }
 
 @Composable
-private fun FlashlightGlyph(modifier: Modifier = Modifier, color: Color) {
+private fun FlashlightGlyph(modifier: Modifier = Modifier, color: Color, text: LinternaText) {
     Canvas(
-        modifier = modifier.semantics { contentDescription = "Icono de linterna" },
+        modifier = modifier.semantics { contentDescription = text[TextKey.FLASHLIGHT_ICON] },
     ) {
         rotate(-28f) {
             val width = size.width

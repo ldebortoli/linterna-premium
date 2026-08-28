@@ -3,6 +3,8 @@ package com.linternapremium.app.domain
 import com.linternapremium.app.model.ErrorTarget
 import com.linternapremium.app.model.PremiumEffect
 import com.linternapremium.app.model.TorchResult
+import com.linternapremium.app.localization.AppLanguage
+import com.linternapremium.app.localization.LinternaTextCatalog
 import com.linternapremium.app.ports.PremiumStore
 import com.linternapremium.app.ports.TorchPort
 import org.junit.Assert.assertEquals
@@ -210,6 +212,26 @@ class LinternaEngineTest {
         engine.turnOffNormally()
 
         assertNull(engine.clearNotice().notice)
+    }
+
+    @Test
+    fun `language change clears stale feedback and localizes future messages`() {
+        var language = AppLanguage.SPANISH
+        val engine = LinternaEngine(
+            FakeTorch(),
+            FakePremiumStore(),
+            text = { LinternaTextCatalog.forLanguage(language) },
+        )
+        engine.turnOffNormally()
+        engine.billingFailed("error anterior")
+
+        language = AppLanguage.ENGLISH
+        val changed = engine.languageChanged()
+
+        assertNull(changed.notice)
+        assertNull(changed.error)
+        assertNull(changed.errorTarget)
+        assertTrue(engine.permissionDenied().error!!.startsWith("We need"))
     }
 
     private class FakeTorch(

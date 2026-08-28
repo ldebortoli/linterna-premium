@@ -113,3 +113,17 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decision: usar `EDICIÓN PLEBEYA`, `Restablecer edición plebeya` y `Apagar linterna como un plebeyo` en la experiencia activa; eliminar `mortal/mortales` de interfaz, mensajes y documentacion vigente.
 - Motivo: adoptar el tono humoristico elegido por el usuario con concordancia natural en español.
+
+## D-017 - Catálogo de nueve idiomas en la pantalla principal
+
+- Estado: vigente.
+- Fecha: 2026-08-28.
+- Decision: ofrecer en la pantalla principal un selector persistente con Español, English, Português, Français, Italiano, Deutsch, Русский, 日本語 y 简体中文; resolver desde el mismo catálogo todo texto visible, mensajes de plataforma, Billing, anuncios de prueba y accesibilidad.
+- Motivo: igualar el alcance lingüístico vigente de Tivio y Galerazo Bot sin agregar otra pantalla ni dejar recorridos parcialmente traducidos.
+
+## D-018 - APK interna release con identidad QA compartida
+
+- Estado: vigente; reemplaza la identidad de distribución interna descrita en D-006/D-009, pero no cambia la variante de desarrollo ni la firma futura de Play.
+- Fecha: 2026-08-28.
+- Decision: Apps Dashboard debe generar Linterna como `demoRelease`, no depurable y firmada con el keystore QA local estable de Tivio/A la Altura suministrado por variable de entorno. El archivo permanece ignorado y `playRelease` usa una firma de producción independiente.
+- Motivo: conservar una identidad de instalación estable entre versiones internas y reducir advertencias repetidas asociadas a paquetes/certificados nuevos, sin publicar una clave ni confundir QA con producción.

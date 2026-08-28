@@ -12,6 +12,7 @@ const requiredFiles = [
   "apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/LinternaEngine.kt",
   "apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/PremiumSequenceRunner.kt",
   "apps/mobile/android/app/src/main/java/com/linternapremium/app/ui/LinternaPremiumScreen.kt",
+  "apps/mobile/android/app/src/main/java/com/linternapremium/app/localization/LinternaLocalization.kt",
   "apps/mobile/android/app/src/demo/AndroidManifest.xml",
   "apps/mobile/android/app/src/play/AndroidManifest.xml",
   "docs/CONFIGURACION_GOOGLE.md",
@@ -28,6 +29,9 @@ if (errors.length === 0) {
   const premiumSequence = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/PremiumSequenceRunner.kt");
   const mainActivity = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/MainActivity.kt");
   const screen = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/ui/LinternaPremiumScreen.kt");
+  const localization = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/localization/LinternaLocalization.kt");
+  const gradle = read("apps/mobile/android/app/build.gradle.kts");
+  const mobilePackage = JSON.parse(read("apps/mobile/package.json"));
   const appConfig = JSON.parse(read("apps/mobile/app.json"));
   const strings = read("apps/mobile/android/app/src/main/res/values/strings.xml");
   const premiumMethod = engine.slice(engine.indexOf("fun pressPremium"), engine.indexOf("fun confirmPremiumPurchase"));
@@ -47,11 +51,23 @@ if (errors.length === 0) {
   if (appConfig.app.name !== "Linterna PREMIUM" || !strings.includes(">Linterna PREMIUM<") || !screen.includes('text = "PREMIUM"')) {
     errors.push("El nombre visible debe ser Linterna PREMIUM en metadatos, launcher e interfaz");
   }
-  if (screen.toLowerCase().includes("mortal") || engine.toLowerCase().includes("mortal")) {
+  if (screen.toLowerCase().includes("mortal") || engine.toLowerCase().includes("mortal") || localization.toLowerCase().includes("mortal")) {
     errors.push("La experiencia activa debe usar plebeyo en lugar de mortal");
   }
-  if (!screen.includes("EDICIÓN PLEBEYA") || !screen.includes("Apagar linterna como un plebeyo")) {
+  if (!localization.includes("EDICIÓN PLEBEYA") || !localization.includes("Apagar linterna como un plebeyo")) {
     errors.push("Faltan la insignia o el apagado normal con terminologia plebeya");
+  }
+  for (const code of ["es", "en", "pt", "fr", "it", "de", "ru", "ja", "zh"]) {
+    if (!localization.includes(`(\"${code}\",`)) errors.push(`Falta el idioma ${code}`);
+  }
+  if (!screen.includes("LanguageSelector(") || !mainActivity.includes("PreferencesLanguageStore")) {
+    errors.push("Falta el selector persistente de idiomas en la pantalla principal");
+  }
+  if (
+    !gradle.includes("APPS_DASHBOARD_ANDROID_TEST_KEYSTORE_PATH") ||
+    mobilePackage.scripts["build:apk"] !== "node ../../tools/run-gradle.mjs assembleDemoRelease"
+  ) {
+    errors.push("La APK de prueba debe ser demoRelease con la firma QA estable");
   }
 
   const playManifest = read("apps/mobile/android/app/src/play/AndroidManifest.xml");
