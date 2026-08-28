@@ -1,12 +1,13 @@
 # Linterna Premium
 
-Una linterna Android con un chiste transparente: el apagado normal siempre es gratis y el **Apagado Premium** corta primero la luz, luego ofrece una compra unica que elimina anuncios y desbloquea una celebracion visual.
+Una linterna Android con un chiste transparente: el apagado normal siempre es gratis y el **Apagado Premium** ofrece una compra unica que elimina anuncios y desbloquea fuegos artificiales junto con una secuencia gradual del flash que termina siempre apagada.
 
 ## Estado de esta entrega
 
 - Linterna fisica con intensidad maxima cuando Android y el hardware lo permiten.
 - Apagado automatico al enviar la app a segundo plano.
 - Boton Premium grande y boton normal gratuito claramente visible.
+- Apagado Premium con fuegos artificiales, pulso visual y una curva lenta de potencia real en telefonos compatibles; en el resto se conserva el efecto visual y el apagado final seguro.
 - Compra simulada, sin dinero ni tarjeta, en la variante `demoDebug`. Si un
   emulador no ofrece flash, esa misma variante simula el encendido para permitir
   revisar toda la interfaz; un teléfono con flash siempre usa el LED real.
@@ -50,6 +51,7 @@ No ejecutes ni publiques una variante `play` hasta completar [la configuracion d
 ## Arquitectura breve
 
 - `domain/LinternaEngine`: reglas testeables y orden seguro de apagado/pago.
+- `domain/PremiumSequenceRunner`: curva de intensidad cancelable con apagado garantizado en `finally`.
 - `platform/AndroidTorchPort`: acceso aislado a `CameraManager`.
 - `billing/`: pasarela oficial de Google Play; la app nunca recibe datos de tarjeta.
 - `ads/`: consentimiento e inicializacion de Google Mobile Ads.

@@ -3,6 +3,7 @@ package com.linternapremium.app.ui
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -37,7 +38,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,6 +54,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -59,6 +63,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.linternapremium.app.model.ErrorTarget
 import com.linternapremium.app.model.LinternaState
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 private val PremiumGradient = Brush.horizontalGradient(
     listOf(
@@ -66,6 +73,13 @@ private val PremiumGradient = Brush.horizontalGradient(
         Color(0xFFE26D9E),
         Color(0xFFF3B65F),
     ),
+)
+
+private val FireworkColors = listOf(
+    Color(0xFFFFD166),
+    Color(0xFFE26D9E),
+    Color(0xFF9D6CFF),
+    Color(0xFF6DD6C2),
 )
 
 @Composable
@@ -82,13 +96,20 @@ fun LinternaPremiumScreen(
     onDismissOffer: () -> Unit,
 ) {
     val celebration = remember { Animatable(0f) }
-    LaunchedEffect(state.celebrationSequence) {
-        if (state.celebrationSequence > 0) {
-            celebration.snapTo(0f)
-            celebration.animateTo(1f, tween(500, easing = FastOutSlowInEasing))
-            celebration.animateTo(0f, tween(900))
+    var celebrationVisible by remember { mutableStateOf(false) }
+    LaunchedEffect(state.celebrationSequence, state.dismissedCelebrationSequence) {
+        celebrationVisible = false
+        if (state.celebrationSequence > state.dismissedCelebrationSequence) {
+            try {
+                celebrationVisible = true
+                celebration.snapTo(0f)
+                celebration.animateTo(1f, tween(3_000, easing = LinearEasing))
+            } finally {
+                celebrationVisible = false
+            }
         }
     }
+    val premiumGlow = if (celebrationVisible) premiumGlowAt(celebration.value) else null
 
     Box(
         modifier = Modifier
@@ -99,12 +120,16 @@ fun LinternaPremiumScreen(
                 ),
             )
             .drawBehind {
-                if (celebration.value > 0f) {
+                if (celebrationVisible) {
+                    drawRect(
+                        color = Color(0xFFFFE8A3),
+                        alpha = 0.025f + premiumGlowAt(celebration.value) * 0.055f,
+                    )
                     drawCircle(
                         brush = PremiumGradient,
-                        radius = size.minDimension * celebration.value,
+                        radius = size.minDimension * (0.28f + celebration.value * 0.72f),
                         center = Offset(size.width / 2f, size.height * 0.4f),
-                        alpha = 0.16f * (1f - celebration.value / 2f),
+                        alpha = 0.12f * (1f - celebration.value),
                     )
                 }
             },
@@ -131,7 +156,7 @@ fun LinternaPremiumScreen(
             ) {
                 AppHeader(isPremiumOwned = state.isPremiumOwned)
                 Spacer(Modifier.height(28.dp))
-                FlashlightHero(isOn = state.isTorchOn)
+                FlashlightHero(isOn = state.isTorchOn, premiumGlow = premiumGlow)
                 Spacer(Modifier.height(24.dp))
 
                 AnimatedContent(
@@ -151,6 +176,13 @@ fun LinternaPremiumScreen(
                 }
                 Spacer(Modifier.height(20.dp))
             }
+        }
+
+        if (celebrationVisible) {
+            PremiumFireworks(
+                progress = celebration.value,
+                modifier = Modifier.matchParentSize(),
+            )
         }
     }
 
@@ -204,7 +236,7 @@ private fun AppHeader(isPremiumOwned: Boolean) {
 }
 
 @Composable
-private fun FlashlightHero(isOn: Boolean) {
+private fun FlashlightHero(isOn: Boolean, premiumGlow: Float?) {
     val infiniteTransition = rememberInfiniteTransition(label = "pulso-linterna")
     val pulse by infiniteTransition.animateFloat(
         initialValue = 0.88f,
@@ -215,20 +247,21 @@ private fun FlashlightHero(isOn: Boolean) {
         ),
         label = "intensidad-luz",
     )
+    val visualIntensity = premiumGlow ?: if (isOn) pulse else 0f
     Box(
         modifier = Modifier
             .size(204.dp)
             .drawBehind {
-                if (isOn) {
+                if (visualIntensity > 0.01f) {
                     drawCircle(
                         color = Color(0xFFF4D478),
-                        radius = size.minDimension * 0.48f * pulse,
-                        alpha = 0.10f,
+                        radius = size.minDimension * (0.32f + 0.16f * visualIntensity),
+                        alpha = 0.10f * visualIntensity,
                     )
                     drawCircle(
                         color = Color(0xFFF4D478),
-                        radius = size.minDimension * 0.34f * pulse,
-                        alpha = 0.18f,
+                        radius = size.minDimension * (0.24f + 0.10f * visualIntensity),
+                        alpha = 0.18f * visualIntensity,
                     )
                 }
             },
@@ -236,15 +269,15 @@ private fun FlashlightHero(isOn: Boolean) {
     ) {
         Surface(
             modifier = Modifier.size(126.dp),
-            color = if (isOn) Color(0xFFF1D170) else Color(0xFF1D232A),
+            color = blendColor(Color(0xFF1D232A), Color(0xFFF1D170), visualIntensity),
             shape = CircleShape,
-            shadowElevation = if (isOn) 14.dp else 0.dp,
+            shadowElevation = if (visualIntensity > 0.05f) 14.dp else 0.dp,
         ) {
             FlashlightGlyph(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(27.dp),
-                color = if (isOn) Color(0xFF302913) else Color(0xFF9BA6B1),
+                color = blendColor(Color(0xFF9BA6B1), Color(0xFF302913), visualIntensity),
             )
         }
     }
@@ -293,14 +326,22 @@ private fun OffOptions(
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            text = if (state.isTorchOn) "Linterna encendida al máximo" else "La linterna ya está apagada",
+            text = when {
+                state.isPremiumCelebrating -> "Apagado Premium en curso"
+                state.isTorchOn -> "Linterna encendida al máximo"
+                else -> "La linterna ya está apagada"
+            },
             color = if (state.isTorchOn) Color(0xFFF3D27A) else MaterialTheme.colorScheme.onBackground,
             fontSize = 17.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
         )
         Text(
-            text = if (state.isTorchOn) "Elegí con qué nivel de elegancia querés apagarla." else "Podés completar Premium o volver sin pagar.",
+            text = when {
+                state.isPremiumCelebrating -> "Fuegos artificiales, brillo ceremonial y oscuridad garantizada."
+                state.isTorchOn -> "Elegí con qué nivel de elegancia querés apagarla."
+                else -> "Podés completar Premium o volver sin pagar."
+            },
             modifier = Modifier.padding(top = 6.dp, bottom = 20.dp),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontSize = 14.sp,
@@ -309,11 +350,16 @@ private fun OffOptions(
         if (state.errorTarget == ErrorTarget.PREMIUM) state.error?.let { ActionError(it) }
         PremiumButton(
             owned = state.isPremiumOwned,
+            enabled = !state.isPremiumCelebrating,
             onClick = onPremium,
         )
         if (state.isTorchOn) {
             if (state.errorTarget == ErrorTarget.NORMAL) state.error?.let { ActionError(it) }
-            TextButton(onClick = onNormalOff, modifier = Modifier.padding(top = 6.dp)) {
+            TextButton(
+                onClick = onNormalOff,
+                enabled = !state.isPremiumCelebrating,
+                modifier = Modifier.padding(top = 6.dp),
+            ) {
                 Text(
                     text = "Apagado normal, de mortales",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -329,16 +375,17 @@ private fun OffOptions(
 }
 
 @Composable
-private fun PremiumButton(owned: Boolean, onClick: () -> Unit) {
+private fun PremiumButton(owned: Boolean, enabled: Boolean, onClick: () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .height(82.dp)
             .clip(RoundedCornerShape(22.dp))
-            .clickable(onClick = onClick)
+            .clickable(enabled = enabled, onClick = onClick)
             .semantics {
                 role = Role.Button
                 contentDescription = "Apagado Premium"
+                if (!enabled) disabled()
             },
         color = Color.Transparent,
         shape = RoundedCornerShape(22.dp),
@@ -346,7 +393,13 @@ private fun PremiumButton(owned: Boolean, onClick: () -> Unit) {
     ) {
         Row(
             modifier = Modifier
-                .background(PremiumGradient)
+                .background(
+                    if (enabled) {
+                        PremiumGradient
+                    } else {
+                        Brush.horizontalGradient(listOf(Color(0xFF665B6D), Color(0xFF76636C)))
+                    },
+                )
                 .padding(horizontal = 20.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -369,6 +422,86 @@ private fun PremiumButton(owned: Boolean, onClick: () -> Unit) {
             Text(text = "✦", color = Color(0xFF211524), fontSize = 30.sp, fontWeight = FontWeight.Black)
         }
     }
+}
+
+@Composable
+private fun PremiumFireworks(progress: Float, modifier: Modifier = Modifier) {
+    Canvas(
+        modifier = modifier.semantics { contentDescription = "Fuegos artificiales Premium" },
+    ) {
+        drawFirework(progress, 0.00f, 0.20f, 0.24f, FireworkColors[0])
+        drawFirework(progress, 0.16f, 0.78f, 0.20f, FireworkColors[1])
+        drawFirework(progress, 0.32f, 0.46f, 0.38f, FireworkColors[2])
+        drawFirework(progress, 0.50f, 0.82f, 0.48f, FireworkColors[3])
+        drawFirework(progress, 0.66f, 0.24f, 0.53f, FireworkColors[1])
+    }
+}
+
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawFirework(
+    progress: Float,
+    delay: Float,
+    centerX: Float,
+    centerY: Float,
+    color: Color,
+) {
+    val phase = ((progress - delay) / 0.30f).coerceIn(0f, 1f)
+    if (phase <= 0f || phase >= 1f) return
+
+    val center = Offset(size.width * centerX, size.height * centerY)
+    val radius = size.minDimension * (0.04f + 0.18f * FastOutSlowInEasing.transform(phase))
+    val alpha = (1f - phase) * 0.95f
+    repeat(16) { index ->
+        val angle = (2.0 * PI * index / 16.0).toFloat()
+        val directionX = cos(angle)
+        val directionY = sin(angle)
+        val start = Offset(
+            center.x + directionX * radius * 0.32f,
+            center.y + directionY * radius * 0.32f,
+        )
+        val end = Offset(
+            center.x + directionX * radius,
+            center.y + directionY * radius,
+        )
+        drawLine(
+            color = color.copy(alpha = alpha),
+            start = start,
+            end = end,
+            strokeWidth = 2.6.dp.toPx(),
+            cap = StrokeCap.Round,
+        )
+        drawCircle(
+            color = Color.White.copy(alpha = alpha * 0.8f),
+            radius = 1.7.dp.toPx(),
+            center = end,
+        )
+    }
+}
+
+private fun premiumGlowAt(progress: Float): Float {
+    val clamped = progress.coerceIn(0f, 1f)
+    return when {
+        clamped < 0.14f -> interpolate(1f, 0.35f, clamped / 0.14f)
+        clamped < 0.31f -> interpolate(0.35f, 1f, (clamped - 0.14f) / 0.17f)
+        clamped < 0.45f -> interpolate(1f, 0.22f, (clamped - 0.31f) / 0.14f)
+        clamped < 0.62f -> interpolate(0.22f, 1f, (clamped - 0.45f) / 0.17f)
+        clamped < 0.72f -> interpolate(1f, 0.68f, (clamped - 0.62f) / 0.10f)
+        clamped < 0.82f -> interpolate(0.68f, 0.38f, (clamped - 0.72f) / 0.10f)
+        clamped < 0.92f -> interpolate(0.38f, 0.16f, (clamped - 0.82f) / 0.10f)
+        else -> interpolate(0.16f, 0f, (clamped - 0.92f) / 0.08f)
+    }
+}
+
+private fun interpolate(start: Float, end: Float, fraction: Float): Float =
+    start + (end - start) * fraction.coerceIn(0f, 1f)
+
+private fun blendColor(start: Color, end: Color, fraction: Float): Color {
+    val amount = fraction.coerceIn(0f, 1f)
+    return Color(
+        red = interpolate(start.red, end.red, amount),
+        green = interpolate(start.green, end.green, amount),
+        blue = interpolate(start.blue, end.blue, amount),
+        alpha = interpolate(start.alpha, end.alpha, amount),
+    )
 }
 
 @Composable

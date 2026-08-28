@@ -7,6 +7,7 @@ import android.hardware.camera2.CameraManager
 import android.os.Build
 import com.linternapremium.app.model.TorchResult
 import com.linternapremium.app.ports.TorchPort
+import kotlin.math.roundToInt
 
 class AndroidTorchPort(
     context: Context,
@@ -15,7 +16,9 @@ class AndroidTorchPort(
     private val cameraManager = context.getSystemService(CameraManager::class.java)
     private var activeCameraId: String? = null
 
-    override fun turnOnAtMaximum(): TorchResult = runTorchAction {
+    override fun turnOnAtMaximum(): TorchResult = setRelativeStrength(1f)
+
+    override fun setRelativeStrength(relativeStrength: Float): TorchResult = runTorchAction {
         val cameraId = findTorchCameraId()
             ?: return if (simulateWhenUnavailable) {
                 TorchResult.Success
@@ -30,7 +33,10 @@ class AndroidTorchPort(
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && maximumLevel > 1) {
-            cameraManager.turnOnTorchWithStrengthLevel(cameraId, maximumLevel)
+            val strengthLevel = (1 + (maximumLevel - 1) * relativeStrength.coerceIn(0.01f, 1f))
+                .roundToInt()
+                .coerceIn(1, maximumLevel)
+            cameraManager.turnOnTorchWithStrengthLevel(cameraId, strengthLevel)
         } else {
             cameraManager.setTorchMode(cameraId, true)
         }

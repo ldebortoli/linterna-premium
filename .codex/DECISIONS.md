@@ -78,3 +78,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decision: mantener el boton principal de Apagado Premium centrado en el chiste y mostrar precio, compra unica y ausencia de suscripcion en un dialogo inmediatamente anterior a la simulacion local o a Google Play.
 - Motivo: simplificar la pantalla principal sin ocultar las condiciones comerciales en el momento de decidir la compra.
+
+## D-012 - Celebracion Premium con apagado garantizado
+
+- Estado: vigente; reemplaza parcialmente D-003 para usuarios que ya poseen Premium.
+- Fecha: 2026-08-28.
+- Decision: el apagado normal y el Premium sin licencia siguen apagando de inmediato; con Premium activo, ejecutar una curva lenta de potencia de menos de tres segundos junto con fuegos artificiales en pantalla y apagar el flash en un bloque `finally`. Usar niveles reales solo cuando Android y el hardware los exponen; en el resto conservar el LED estable y simular el pulso en la interfaz hasta el apagado final.
+- Motivo: convertir Premium en una experiencia visible y graciosa sin introducir destellos rapidos ni permitir que el flash quede encendido al fallar, cancelar o salir de la app.

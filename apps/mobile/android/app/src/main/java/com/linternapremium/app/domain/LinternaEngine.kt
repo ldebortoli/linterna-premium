@@ -20,6 +20,8 @@ class LinternaEngine(
             TorchResult.Success -> state.copy(
                 isTorchOn = true,
                 showPremiumOffer = false,
+                isPremiumCelebrating = false,
+                dismissedCelebrationSequence = state.celebrationSequence,
                 notice = null,
                 error = null,
                 errorTarget = null,
@@ -47,6 +49,8 @@ class LinternaEngine(
             TorchResult.Success -> state.copy(
                 isTorchOn = false,
                 showPremiumOffer = false,
+                isPremiumCelebrating = false,
+                dismissedCelebrationSequence = state.celebrationSequence,
                 notice = "Apagado normal completado. Dignidad intacta.",
                 error = null,
                 errorTarget = null,
@@ -61,6 +65,19 @@ class LinternaEngine(
     }
 
     fun pressPremium(): EngineResult {
+        if (state.isPremiumOwned) {
+            state = state.copy(
+                showPremiumOffer = false,
+                showPurchaseDialog = false,
+                isPremiumCelebrating = true,
+                notice = null,
+                error = null,
+                errorTarget = null,
+                celebrationSequence = state.celebrationSequence + 1,
+            )
+            return EngineResult(state, PremiumEffect.RunPremiumSequence)
+        }
+
         val offResult = torch.turnOff()
         if (offResult is TorchResult.Failure) {
             state = state.copy(error = offResult.message, errorTarget = ErrorTarget.PREMIUM)
@@ -74,17 +91,32 @@ class LinternaEngine(
             errorTarget = null,
         )
 
-        if (state.isPremiumOwned) {
-            state = state.copy(
-                showPremiumOffer = false,
-                notice = "Apagado Premium: oscuridad cinco estrellas.",
-                celebrationSequence = state.celebrationSequence + 1,
-            )
-            return EngineResult(state)
-        }
-
         state = state.copy(showPurchaseDialog = true)
         return EngineResult(state)
+    }
+
+    fun premiumCelebrationCompleted(): LinternaState {
+        state = state.copy(
+            isTorchOn = false,
+            isPremiumCelebrating = false,
+            showPremiumOffer = false,
+            notice = "Apagado Premium: oscuridad cinco estrellas.",
+            error = null,
+            errorTarget = null,
+        )
+        return state
+    }
+
+    fun premiumCelebrationFailed(message: String): LinternaState {
+        state = state.copy(
+            isTorchOn = false,
+            isPremiumCelebrating = false,
+            showPremiumOffer = true,
+            dismissedCelebrationSequence = state.celebrationSequence,
+            error = message,
+            errorTarget = ErrorTarget.PREMIUM,
+        )
+        return state
     }
 
     fun confirmPremiumPurchase(isDemo: Boolean): EngineResult {
@@ -97,6 +129,7 @@ class LinternaEngine(
             isPremiumOwned = true,
             showPremiumOffer = false,
             showPurchaseDialog = false,
+            isPremiumCelebrating = false,
             notice = "Premium de prueba activado. No se realizó ningún cobro.",
             error = null,
             errorTarget = null,
@@ -126,6 +159,7 @@ class LinternaEngine(
             isPremiumOwned = true,
             showPremiumOffer = false,
             showPurchaseDialog = false,
+            isPremiumCelebrating = false,
             notice = "Premium activado. Gracias por financiar la oscuridad.",
             error = null,
             errorTarget = null,
@@ -150,7 +184,13 @@ class LinternaEngine(
 
     fun backgrounded(): LinternaState {
         torch.turnOff()
-        state = state.copy(isTorchOn = false, showPremiumOffer = false, showPurchaseDialog = false)
+        state = state.copy(
+            isTorchOn = false,
+            showPremiumOffer = false,
+            showPurchaseDialog = false,
+            isPremiumCelebrating = false,
+            dismissedCelebrationSequence = state.celebrationSequence,
+        )
         return state
     }
 

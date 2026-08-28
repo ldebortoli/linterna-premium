@@ -15,7 +15,9 @@ data class LinternaState(
     val notice: String? = null,
     val error: String? = null,
     val errorTarget: ErrorTarget? = null,
+    val isPremiumCelebrating: Boolean = false,
     val celebrationSequence: Int = 0,
+    val dismissedCelebrationSequence: Int = 0,
 )
 
 sealed interface TorchResult {
@@ -26,6 +28,7 @@ sealed interface TorchResult {
 sealed interface PremiumEffect {
     data object None : PremiumEffect
     data object LaunchGooglePlay : PremiumEffect
+    data object RunPremiumSequence : PremiumEffect
 }
 
 data class EngineResult(

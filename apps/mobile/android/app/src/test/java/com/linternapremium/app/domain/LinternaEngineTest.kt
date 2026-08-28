@@ -74,15 +74,32 @@ class LinternaEngineTest {
     }
 
     @Test
-    fun `owned premium performs celebration without launching billing`() {
-        val engine = LinternaEngine(FakeTorch(), FakePremiumStore(owned = true))
+    fun `owned premium runs and completes its celebration without billing`() {
+        val torch = FakeTorch()
+        val engine = LinternaEngine(torch, FakePremiumStore(owned = true))
+        engine.turnOn()
 
         val result = engine.pressPremium()
 
-        assertEquals(PremiumEffect.None, result.effect)
+        assertEquals(PremiumEffect.RunPremiumSequence, result.effect)
         assertFalse(result.state.showPremiumOffer)
+        assertTrue(result.state.isPremiumCelebrating)
+        assertTrue(result.state.isTorchOn)
+        assertEquals(0, torch.offCalls)
         assertEquals(1, result.state.celebrationSequence)
-        assertTrue(result.state.notice!!.contains("cinco estrellas"))
+
+        val completed = engine.premiumCelebrationCompleted()
+        assertFalse(completed.isPremiumCelebrating)
+        assertFalse(completed.isTorchOn)
+        assertTrue(completed.notice!!.contains("cinco estrellas"))
+
+        engine.turnOn()
+        engine.pressPremium()
+        val failed = engine.premiumCelebrationFailed("fallo ceremonial")
+        assertFalse(failed.isPremiumCelebrating)
+        assertFalse(failed.isTorchOn)
+        assertTrue(failed.showPremiumOffer)
+        assertEquals(ErrorTarget.PREMIUM, failed.errorTarget)
     }
 
     @Test
@@ -177,6 +194,7 @@ class LinternaEngineTest {
         assertFalse(backgrounded.isTorchOn)
         assertFalse(backgrounded.showPremiumOffer)
         assertFalse(backgrounded.showPurchaseDialog)
+        assertEquals(backgrounded.celebrationSequence, backgrounded.dismissedCelebrationSequence)
         assertEquals(2, torch.offCalls)
     }
 
@@ -190,11 +208,14 @@ class LinternaEngineTest {
 
     private class FakeTorch(
         var turnOnResult: TorchResult = TorchResult.Success,
+        var strengthResult: TorchResult = TorchResult.Success,
         var turnOffResult: TorchResult = TorchResult.Success,
     ) : TorchPort {
         var offCalls = 0
 
         override fun turnOnAtMaximum(): TorchResult = turnOnResult
+
+        override fun setRelativeStrength(relativeStrength: Float): TorchResult = strengthResult
 
         override fun turnOff(): TorchResult {
             offCalls += 1

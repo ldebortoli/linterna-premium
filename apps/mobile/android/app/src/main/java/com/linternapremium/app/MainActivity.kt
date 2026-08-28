@@ -12,21 +12,32 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import com.linternapremium.app.ads.AdsCoordinator
 import com.linternapremium.app.billing.BillingEvents
 import com.linternapremium.app.billing.BillingGateway
 import com.linternapremium.app.billing.GooglePlayBillingGateway
 import com.linternapremium.app.domain.LinternaEngine
+import com.linternapremium.app.domain.PremiumSequenceRunner
+import com.linternapremium.app.model.EngineResult
 import com.linternapremium.app.model.LinternaState
 import com.linternapremium.app.model.PremiumEffect
+import com.linternapremium.app.model.TorchResult
 import com.linternapremium.app.platform.AndroidTorchPort
 import com.linternapremium.app.platform.PreferencesPremiumStore
+import com.linternapremium.app.ports.TorchPort
 import com.linternapremium.app.ui.LinternaPremiumScreen
 import com.linternapremium.app.ui.theme.LinternaPremiumTheme
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity(), BillingEvents {
     private lateinit var engine: LinternaEngine
+    private lateinit var torchPort: TorchPort
+    private lateinit var premiumSequenceRunner: PremiumSequenceRunner
     private var billingGateway: BillingGateway? = null
+    private var premiumSequenceJob: Job? = null
     private var uiState by mutableStateOf(LinternaState())
     private var adsReady by mutableStateOf(false)
 
@@ -41,11 +52,13 @@ class MainActivity : ComponentActivity(), BillingEvents {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        torchPort = AndroidTorchPort(
+            context = this,
+            simulateWhenUnavailable = BuildConfig.DEMO_BILLING,
+        )
+        premiumSequenceRunner = PremiumSequenceRunner(torchPort, pause = { delay(it) })
         engine = LinternaEngine(
-            torch = AndroidTorchPort(
-                context = this,
-                simulateWhenUnavailable = BuildConfig.DEMO_BILLING,
-            ),
+            torch = torchPort,
             premiumStore = PreferencesPremiumStore(this),
         )
         uiState = engine.state
@@ -88,11 +101,13 @@ class MainActivity : ComponentActivity(), BillingEvents {
     }
 
     override fun onPause() {
+        premiumSequenceJob?.cancel()
         if (::engine.isInitialized) uiState = engine.backgrounded()
         super.onPause()
     }
 
     override fun onDestroy() {
+        premiumSequenceJob?.cancel()
         billingGateway?.close()
         super.onDestroy()
     }
@@ -121,15 +136,33 @@ class MainActivity : ComponentActivity(), BillingEvents {
     }
 
     private fun pressPremium() {
-        uiState = engine.pressPremium().state
+        applyPremiumResult(engine.pressPremium())
     }
 
     private fun confirmPremiumPurchase() {
-        val result = engine.confirmPremiumPurchase(BuildConfig.DEMO_BILLING)
+        applyPremiumResult(engine.confirmPremiumPurchase(BuildConfig.DEMO_BILLING))
+    }
+
+    private fun applyPremiumResult(result: EngineResult) {
         uiState = result.state
-        if (result.effect == PremiumEffect.LaunchGooglePlay) {
-            billingGateway?.launchPurchase(this)
-                ?: onBillingMessage("Google Play Billing no está configurado en esta compilación.")
+        when (result.effect) {
+            PremiumEffect.None -> Unit
+            PremiumEffect.LaunchGooglePlay -> {
+                billingGateway?.launchPurchase(this)
+                    ?: onBillingMessage("Google Play Billing no está configurado en esta compilación.")
+            }
+
+            PremiumEffect.RunPremiumSequence -> runPremiumSequence()
+        }
+    }
+
+    private fun runPremiumSequence() {
+        premiumSequenceJob?.cancel()
+        premiumSequenceJob = lifecycleScope.launch {
+            uiState = when (val result = premiumSequenceRunner.run()) {
+                TorchResult.Success -> engine.premiumCelebrationCompleted()
+                is TorchResult.Failure -> engine.premiumCelebrationFailed(result.message)
+            }
         }
     }
 }

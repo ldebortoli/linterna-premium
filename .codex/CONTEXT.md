@@ -2,7 +2,7 @@
 
 ## Descripcion general
 
-Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxima intensidad disponible, ofrece un apagado normal gratuito y un "Apagado Premium" que apaga primero la luz, muestra una confirmacion comercial y recien entonces abre una compra oficial de Google Play para desbloquear una presentacion especial. Incluye publicidad mediante Google Mobile Ads sin bloquear la funcion principal.
+Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxima intensidad disponible, ofrece un apagado normal gratuito y un "Apagado Premium" que muestra una confirmacion comercial antes de Google Play y desbloquea fuegos artificiales con una secuencia gradual del flash. Incluye publicidad mediante Google Mobile Ads sin bloquear la funcion principal.
 
 ## Estado detectado
 
@@ -30,7 +30,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Lint: `npm run lint`.
 - APK de prueba: se genera desde Apps Dashboard o, cuando el usuario lo pide expresamente, con `npm run build:apk`.
 - CI público: pruebas, cobertura y lint sobre `main` y pull requests; no genera APKs.
-- Baseline verificado: 13 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el motor de dominio y Android Lint sin observaciones.
+- Baseline verificado: 17 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el dominio y Android Lint sin observaciones.
 
 ## Convenciones
 
@@ -39,5 +39,5 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - La memoria persistente vive en `.codex/` y se carga siguiendo `AGENTS.md`.
 - La version canonica vive en `version.properties`; `app.json` y Gradle deben coincidir.
 - Ningun identificador real de anuncios, producto o credencial se versiona como secreto. Los valores publicables de Google se inyectan por propiedades de Gradle.
-- Los dos recorridos de apagado cortan la linterna inmediatamente. El pago nunca es requisito para apagarla.
+- El apagado normal y el recorrido Premium sin licencia cortan la linterna inmediatamente. Con Premium activo, una secuencia lenta de menos de tres segundos regula la potencia cuando el hardware lo permite y garantiza el apagado final incluso ante fallo, cancelacion o salida de la app.
 - La variante `demo` simula la linterna únicamente cuando el dispositivo no tiene flash, para poder probar el recorrido en emulador; la variante `play` nunca simula hardware.
