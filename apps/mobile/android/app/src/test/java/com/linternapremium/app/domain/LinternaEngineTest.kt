@@ -222,22 +222,6 @@ class LinternaEngineTest {
     }
 
     @Test
-    fun `background always requests torch off and resets transient UI`() {
-        val torch = FakeTorch()
-        val engine = LinternaEngine(torch, FakePremiumStore())
-        engine.turnOn()
-        engine.pressPremium()
-
-        val backgrounded = engine.backgrounded()
-
-        assertFalse(backgrounded.isTorchOn)
-        assertFalse(backgrounded.showPremiumOffer)
-        assertFalse(backgrounded.showPurchaseDialog)
-        assertEquals(backgrounded.celebrationSequence, backgrounded.dismissedCelebrationSequence)
-        assertEquals(1, torch.offCalls)
-    }
-
-    @Test
     fun `external torch state immediately selects the matching screen`() {
         val engine = LinternaEngine(FakeTorch(), FakePremiumStore())
 

@@ -49,8 +49,12 @@ if (errors.length === 0) {
   if (!androidTorch.includes("registerTorchCallback") || !androidTorch.includes("unregisterTorchCallback")) {
     errors.push("La observacion del flash real debe registrarse y liberarse con CameraManager");
   }
-  if (!mainActivity.includes("uiState = engine.backgrounded()")) {
-    errors.push("Salir o cerrar la app debe conservar el apagado de seguridad");
+  const onDestroyMethod = mainActivity.slice(mainActivity.indexOf("override fun onDestroy"), mainActivity.indexOf("override fun onPriceAvailable"));
+  if (mainActivity.includes("override fun onPause") || engine.includes("fun backgrounded")) {
+    errors.push("Salir o cambiar de app no debe apagar ni limpiar el estado de la linterna");
+  }
+  if (onDestroyMethod.includes("turnOff") || onDestroyMethod.includes("backgrounded")) {
+    errors.push("Cerrar la actividad no debe apagar deliberadamente la linterna");
   }
   if (!premiumSequence.includes("finally") || !premiumSequence.includes("torch.turnOff()")) {
     errors.push("La secuencia Premium debe apagar el flash incluso si se interrumpe o falla");

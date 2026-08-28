@@ -141,3 +141,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decision: mantener el flash encendido al abrir la confirmacion Premium y al cancelarla con `Ahora no`; apagarlo con la opcion plebeya, al completar una compra mediante la secuencia Premium o al pasar la app a segundo plano/cerrarla. Observar `CameraManager.TorchCallback` durante la vida de la actividad para reflejar inmediatamente un flash encendido desde Android y liberar el callback al destruirla. Una compra exitosa con el flash ya apagado no debe volver a encenderlo.
 - Motivo: preservar el remate del flujo Premium hasta que exista una decisión efectiva, reflejar el estado físico aunque la app no haya encendido el LED y mantener un cierre seguro.
+
+## D-021 - Flash persistente fuera de la actividad
+
+- Estado: vigente; reemplaza D-007 y la regla de salida/segundo plano de D-020.
+- Fecha: 2026-08-28.
+- Decision: no apagar ni limpiar el estado del flash en `onPause`, al ir a Inicio, cambiar de app, abrir Google Play ni cerrar la actividad. Solo la accion plebeya, la secuencia Premium completada o el propio sistema deben apagarlo. Mantener la secuencia Premium activa al perder foco para que complete su apagado; cancelarla en `onDestroy` solo si todavia estaba ejecutandose, confiando en su `finally`. No agregar un servicio persistente para intentar sobrevivir a la muerte del proceso.
+- Motivo: la persistencia del flash fuera de la app forma parte central del chiste; Android puede apagarlo al matar el proceso, reclamar la camara o aplicar sus propias restricciones y ese limite se acepta.

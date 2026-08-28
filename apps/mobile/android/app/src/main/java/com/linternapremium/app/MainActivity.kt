@@ -117,12 +117,6 @@ class MainActivity : ComponentActivity(), BillingEvents {
         billingGateway?.start()
     }
 
-    override fun onPause() {
-        premiumSequenceJob?.cancel()
-        if (::engine.isInitialized) uiState = engine.backgrounded()
-        super.onPause()
-    }
-
     override fun onDestroy() {
         premiumSequenceJob?.cancel()
         if (::torchPort.isInitialized) torchPort.observeState(null)

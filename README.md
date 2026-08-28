@@ -5,7 +5,7 @@ Una linterna Android con un chiste transparente: el apagado normal siempre es gr
 ## Estado de esta entrega
 
 - Linterna fisica con intensidad maxima cuando Android y el hardware lo permiten.
-- Apagado automatico al enviar la app a segundo plano.
+- El flash permanece encendido al ir a Inicio, cambiar de app, abrir Google Play o cerrar la actividad; Android puede apagarlo si mata el proceso o necesita la cámara.
 - Si el flash ya estaba encendido desde Android al abrir la app, la pantalla se sincroniza y muestra directamente ambos apagados.
 - Boton Premium grande y boton normal gratuito claramente visible.
 - Abrir o cancelar la confirmacion Premium no apaga el flash; la compra exitosa inicia el efecto Premium y lo apaga al terminar.

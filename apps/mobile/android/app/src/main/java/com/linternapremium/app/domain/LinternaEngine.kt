@@ -205,18 +205,6 @@ class LinternaEngine(
         return state
     }
 
-    fun backgrounded(): LinternaState {
-        torch.turnOff()
-        state = state.copy(
-            isTorchOn = false,
-            showPremiumOffer = false,
-            showPurchaseDialog = false,
-            isPremiumCelebrating = false,
-            dismissedCelebrationSequence = state.celebrationSequence,
-        )
-        return state
-    }
-
     fun syncTorchState(isTorchOn: Boolean): LinternaState {
         state = state.copy(isTorchOn = isTorchOn)
         return state
