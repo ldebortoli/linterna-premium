@@ -12,6 +12,7 @@ Configurar las cuentas e identificadores reales de Google cuando el usuario deci
 
 - Android nativo Kotlin/Compose implementado en version 0.2.1 (versionCode 4).
 - Repositorio público en `https://github.com/ldebortoli/linterna-premium`, rama principal `main`, con Secret Scanning y Push Protection habilitados.
+- Visibilidad publica y rama `main` verificadas directamente con GitHub el 2026-08-28.
 - El boton principal de Apagado Premium ya no muestra precio ni condiciones comerciales; al tocarlo aparece una confirmacion con precio, `Compra unica · Sin suscripcion` y luego Google Play. La variante local presenta la misma confirmacion como simulacion sin cobro.
 - Con Premium activo, el boton ejecuta fuegos artificiales y un pulso visual de tres segundos sincronizado con una curva del flash: baja, sube, baja, sube y desciende hasta apagarse. Android 13+ usa potencia real si el hardware expone varios niveles; el fallback conserva el LED estable, anima la pantalla y apaga al final.
 - La secuencia se cancela al perder foco y el ejecutor apaga el flash en `finally` ante exito, error o cancelacion.
@@ -21,7 +22,8 @@ Configurar las cuentas e identificadores reales de Google cuando el usuario deci
 - Apps Dashboard reconoce el perfil Android nativo y puede generar/archivar el APK.
 - Apps Dashboard 0.2.8 genera para Linterna Premium una leyenda Telegram que menciona sólo a `@galerazo34` y nunca a Nico.
 - Validacion mas reciente: `npm test`, `npm run coverage` y `npm run lint`; 17/17 pruebas, 100% de instrucciones/ramas/lineas/metodos del dominio y Android Lint correcto. No se genero un APK para la version 0.2.1.
-- CI público sobre `main` y pull requests ejecuta pruebas, cobertura y lint, con cancelación de corridas reemplazadas y sin build de APK.
+- Los cinco primeros runs de CI fallaron por `spawnSync ./gradlew EACCES`, no por cuota. `apps/mobile/android/gradlew` quedo corregido de `100644` a `100755`.
+- CI público sobre `main` y pull requests conserva pruebas, cobertura y lint, con cancelación de corridas reemplazadas y sin build de APK. El run disparado por la correccion no se monitorea por politica.
 - QA visual previo sobre 0.1.0: encendido demo, apagado normal, dialogo de compra sin cobro, Premium persistente sin anuncios, apagado al perder foco y pantalla compacta con texto al 130%. La confirmacion, la celebracion y el restablecimiento de 0.2.1 quedan pendientes de revision visual cuando se solicite una nueva APK.
 - No hay elementos procesados en `USER_QUEUE.md`.
 

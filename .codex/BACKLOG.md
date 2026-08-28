@@ -12,6 +12,7 @@ No hay tareas en curso.
 
 # DONE
 
+- [2026-08-28] Diagnosticar cinco fallos de CI como `gradlew EACCES`, no cuota; corregir el modo Git a `100755`, conservar CI sin APK y verificar que `ldebortoli/linterna-premium` siga publico sobre `main`.
 - [2026-08-28] Agregar `Restablecer edicion mortal` exclusivamente en demo para borrar Premium simulado, reactivar anuncios de prueba y repetir el recorrido; validar 17 pruebas, cobertura total y lint sin generar APK.
 - [2026-08-28] Agregar fuegos artificiales y pulso visual al Apagado Premium, mas una curva lenta de potencia real en hardware compatible con apagado garantizado y fallback seguro; validar 17 pruebas, cobertura total y lint sin generar APK.
 - [2026-08-28] Simplificar el boton de Apagado Premium y mover precio, compra unica y ausencia de suscripcion a la confirmacion previa; validar 13 pruebas, cobertura total y lint sin generar APK.

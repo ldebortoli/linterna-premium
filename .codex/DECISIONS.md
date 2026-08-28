@@ -92,3 +92,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decision: permitir borrar la licencia Premium simulada desde la pantalla apagada unicamente en la variante `demo`; persistir el regreso a la edicion mortal y reactivar anuncios de prueba. Ocultar la accion y rechazar su ejecucion en la variante Play.
 - Motivo: repetir localmente los recorridos con y sin Premium sin fingir que una compra real puede revocarse o reembolsarse desde la aplicacion.
+
+## D-014 - Mantener CI liviano y Gradle ejecutable
+
+- Estado: vigente.
+- Fecha: 2026-08-28.
+- Decision: conservar el CI publico de pruebas, cobertura y lint sin build de APK; versionar `apps/mobile/android/gradlew` con modo `100755` para Linux.
+- Motivo: los cinco fallos iniciales fueron `spawnSync ./gradlew EACCES`, no agotamiento de minutos. Corregir el permiso elimina la causa sin desactivar una verificacion util ni agregar trabajo costoso.

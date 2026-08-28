@@ -30,6 +30,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Lint: `npm run lint`.
 - APK de prueba: se genera desde Apps Dashboard o, cuando el usuario lo pide expresamente, con `npm run build:apk`.
 - CI público: pruebas, cobertura y lint sobre `main` y pull requests; no genera APKs.
+- El wrapper Linux `apps/mobile/android/gradlew` se versiona como ejecutable (`100755`) para que GitHub Actions pueda iniciar Gradle.
 - Baseline verificado: 17 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el dominio y Android Lint sin observaciones.
 
 ## Convenciones
