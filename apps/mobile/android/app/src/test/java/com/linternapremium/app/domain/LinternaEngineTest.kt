@@ -66,7 +66,7 @@ class LinternaEngineTest {
         val torch = FakeTorch(turnOffResult = TorchResult.Failure("no se pudo apagar"))
         val engine = LinternaEngine(torch, FakePremiumStore())
 
-        val result = engine.pressPremium(isDemo = false)
+        val result = engine.pressPremium()
 
         assertEquals(PremiumEffect.None, result.effect)
         assertEquals(ErrorTarget.PREMIUM, result.state.errorTarget)
@@ -77,7 +77,7 @@ class LinternaEngineTest {
     fun `owned premium performs celebration without launching billing`() {
         val engine = LinternaEngine(FakeTorch(), FakePremiumStore(owned = true))
 
-        val result = engine.pressPremium(isDemo = false)
+        val result = engine.pressPremium()
 
         assertEquals(PremiumEffect.None, result.effect)
         assertFalse(result.state.showPremiumOffer)
@@ -86,39 +86,46 @@ class LinternaEngineTest {
     }
 
     @Test
-    fun `demo premium opens an explicitly simulated purchase`() {
-        val result = LinternaEngine(FakeTorch(), FakePremiumStore()).pressPremium(isDemo = true)
+    fun `premium opens a confirmation before any purchase`() {
+        val result = LinternaEngine(FakeTorch(), FakePremiumStore()).pressPremium()
 
         assertEquals(PremiumEffect.None, result.effect)
-        assertTrue(result.state.showDemoPurchase)
+        assertTrue(result.state.showPurchaseDialog)
         assertFalse(result.state.isTorchOn)
     }
 
     @Test
-    fun `play premium turns off then requests Google Play`() {
+    fun `play confirmation requests Google Play only after the torch is off`() {
         val torch = FakeTorch()
-        val result = LinternaEngine(torch, FakePremiumStore()).pressPremium(isDemo = false)
+        val engine = LinternaEngine(torch, FakePremiumStore())
+
+        val premature = engine.confirmPremiumPurchase(isDemo = false)
+        assertEquals(PremiumEffect.None, premature.effect)
+
+        engine.pressPremium()
+        val result = engine.confirmPremiumPurchase(isDemo = false)
 
         assertEquals(PremiumEffect.LaunchGooglePlay, result.effect)
         assertFalse(result.state.isTorchOn)
+        assertTrue(result.state.showPurchaseDialog)
         assertEquals(1, torch.offCalls)
     }
 
     @Test
-    fun `demo confirmation persists ownership and can be dismissed`() {
+    fun `purchase confirmation can be dismissed and demo persists ownership`() {
         val store = FakePremiumStore()
         val engine = LinternaEngine(FakeTorch(), store)
-        engine.pressPremium(isDemo = true)
+        engine.pressPremium()
 
-        val dismissed = engine.dismissDemoPurchase()
-        assertFalse(dismissed.showDemoPurchase)
+        val dismissed = engine.dismissPurchase()
+        assertFalse(dismissed.showPurchaseDialog)
         assertFalse(dismissed.showPremiumOffer)
 
-        engine.pressPremium(isDemo = true)
-        val confirmed = engine.confirmDemoPurchase()
+        engine.pressPremium()
+        val confirmed = engine.confirmPremiumPurchase(isDemo = true).state
         assertTrue(store.owned)
         assertTrue(confirmed.isPremiumOwned)
-        assertFalse(confirmed.showDemoPurchase)
+        assertFalse(confirmed.showPurchaseDialog)
         assertTrue(confirmed.notice!!.contains("No se realizó"))
         assertEquals(1, confirmed.celebrationSequence)
     }
@@ -143,7 +150,13 @@ class LinternaEngineTest {
         assertEquals("ARS 999", engine.updatePrice("ARS 999").priceLabel)
         val failed = engine.billingFailed("Google Play sin conexion")
         assertTrue(failed.showPremiumOffer)
+        assertFalse(failed.showPurchaseDialog)
         assertEquals(ErrorTarget.PREMIUM, failed.errorTarget)
+
+        engine.pressPremium()
+        engine.confirmPremiumPurchase(isDemo = false)
+        val failedAfterConfirmation = engine.billingFailed("Producto no disponible")
+        assertTrue(failedAfterConfirmation.showPurchaseDialog)
 
         val purchased = engine.billingPurchased()
         assertTrue(store.owned)
@@ -157,13 +170,13 @@ class LinternaEngineTest {
         val torch = FakeTorch()
         val engine = LinternaEngine(torch, FakePremiumStore())
         engine.turnOn()
-        engine.pressPremium(isDemo = true)
+        engine.pressPremium()
 
         val backgrounded = engine.backgrounded()
 
         assertFalse(backgrounded.isTorchOn)
         assertFalse(backgrounded.showPremiumOffer)
-        assertFalse(backgrounded.showDemoPurchase)
+        assertFalse(backgrounded.showPurchaseDialog)
         assertEquals(2, torch.offCalls)
     }
 

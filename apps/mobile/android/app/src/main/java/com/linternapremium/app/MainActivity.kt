@@ -68,8 +68,8 @@ class MainActivity : ComponentActivity(), BillingEvents {
                     onTurnOn = ::requestTorch,
                     onPremium = ::pressPremium,
                     onNormalOff = { uiState = engine.turnOffNormally() },
-                    onConfirmDemoPurchase = { uiState = engine.confirmDemoPurchase() },
-                    onDismissDemoPurchase = { uiState = engine.dismissDemoPurchase() },
+                    onConfirmPurchase = ::confirmPremiumPurchase,
+                    onDismissPurchase = { uiState = engine.dismissPurchase() },
                     onDismissOffer = { uiState = engine.dismissPremiumOffer() },
                 )
             }
@@ -121,7 +121,11 @@ class MainActivity : ComponentActivity(), BillingEvents {
     }
 
     private fun pressPremium() {
-        val result = engine.pressPremium(BuildConfig.DEMO_BILLING)
+        uiState = engine.pressPremium().state
+    }
+
+    private fun confirmPremiumPurchase() {
+        val result = engine.confirmPremiumPurchase(BuildConfig.DEMO_BILLING)
         uiState = result.state
         if (result.effect == PremiumEffect.LaunchGooglePlay) {
             billingGateway?.launchPurchase(this)

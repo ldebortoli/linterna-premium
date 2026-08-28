@@ -71,3 +71,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decisión: los mensajes de Telegram que acompañan artefactos de Linterna Premium mencionan únicamente al propietario `@galerazo34` y nunca a Nico.
 - Motivo: Linterna Premium es un proyecto personal del propietario.
+
+## D-011 - Informacion comercial al confirmar
+
+- Estado: vigente.
+- Fecha: 2026-08-28.
+- Decision: mantener el boton principal de Apagado Premium centrado en el chiste y mostrar precio, compra unica y ausencia de suscripcion en un dialogo inmediatamente anterior a la simulacion local o a Google Play.
+- Motivo: simplificar la pantalla principal sin ocultar las condiciones comerciales en el momento de decidir la compra.

@@ -60,7 +60,7 @@ class LinternaEngine(
         return state
     }
 
-    fun pressPremium(isDemo: Boolean): EngineResult {
+    fun pressPremium(): EngineResult {
         val offResult = torch.turnOff()
         if (offResult is TorchResult.Failure) {
             state = state.copy(error = offResult.message, errorTarget = ErrorTarget.PREMIUM)
@@ -83,30 +83,35 @@ class LinternaEngine(
             return EngineResult(state)
         }
 
-        if (isDemo) {
-            state = state.copy(showDemoPurchase = true)
-            return EngineResult(state)
-        }
-
-        return EngineResult(state, PremiumEffect.LaunchGooglePlay)
+        state = state.copy(showPurchaseDialog = true)
+        return EngineResult(state)
     }
 
-    fun confirmDemoPurchase(): LinternaState {
+    fun confirmPremiumPurchase(isDemo: Boolean): EngineResult {
+        if (!state.showPurchaseDialog) return EngineResult(state)
+
+        if (!isDemo) return EngineResult(state, PremiumEffect.LaunchGooglePlay)
+
         premiumStore.setPremiumOwned(true)
         state = state.copy(
             isPremiumOwned = true,
             showPremiumOffer = false,
-            showDemoPurchase = false,
+            showPurchaseDialog = false,
             notice = "Premium de prueba activado. No se realizó ningún cobro.",
             error = null,
             errorTarget = null,
             celebrationSequence = state.celebrationSequence + 1,
         )
-        return state
+        return EngineResult(state)
     }
 
-    fun dismissDemoPurchase(): LinternaState {
-        state = state.copy(showDemoPurchase = false, showPremiumOffer = false)
+    fun dismissPurchase(): LinternaState {
+        state = state.copy(
+            showPurchaseDialog = false,
+            showPremiumOffer = false,
+            error = null,
+            errorTarget = null,
+        )
         return state
     }
 
@@ -120,6 +125,7 @@ class LinternaEngine(
         state = state.copy(
             isPremiumOwned = true,
             showPremiumOffer = false,
+            showPurchaseDialog = false,
             notice = "Premium activado. Gracias por financiar la oscuridad.",
             error = null,
             errorTarget = null,
@@ -144,7 +150,7 @@ class LinternaEngine(
 
     fun backgrounded(): LinternaState {
         torch.turnOff()
-        state = state.copy(isTorchOn = false, showPremiumOffer = false, showDemoPurchase = false)
+        state = state.copy(isTorchOn = false, showPremiumOffer = false, showPurchaseDialog = false)
         return state
     }
 

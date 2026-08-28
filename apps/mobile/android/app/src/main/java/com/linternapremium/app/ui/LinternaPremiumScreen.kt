@@ -77,8 +77,8 @@ fun LinternaPremiumScreen(
     onTurnOn: () -> Unit,
     onPremium: () -> Unit,
     onNormalOff: () -> Unit,
-    onConfirmDemoPurchase: () -> Unit,
-    onDismissDemoPurchase: () -> Unit,
+    onConfirmPurchase: () -> Unit,
+    onDismissPurchase: () -> Unit,
     onDismissOffer: () -> Unit,
 ) {
     val celebration = remember { Animatable(0f) }
@@ -154,10 +154,13 @@ fun LinternaPremiumScreen(
         }
     }
 
-    if (state.showDemoPurchase) {
-        DemoPurchaseDialog(
-            onConfirm = onConfirmDemoPurchase,
-            onDismiss = onDismissDemoPurchase,
+    if (state.showPurchaseDialog) {
+        PremiumPurchaseDialog(
+            priceLabel = state.priceLabel,
+            isDemo = isDemo,
+            errorMessage = state.error.takeIf { state.errorTarget == ErrorTarget.PREMIUM },
+            onConfirm = onConfirmPurchase,
+            onDismiss = onDismissPurchase,
         )
     }
 }
@@ -306,7 +309,6 @@ private fun OffOptions(
         if (state.errorTarget == ErrorTarget.PREMIUM) state.error?.let { ActionError(it) }
         PremiumButton(
             owned = state.isPremiumOwned,
-            priceLabel = state.priceLabel,
             onClick = onPremium,
         )
         if (state.isTorchOn) {
@@ -327,7 +329,7 @@ private fun OffOptions(
 }
 
 @Composable
-private fun PremiumButton(owned: Boolean, priceLabel: String, onClick: () -> Unit) {
+private fun PremiumButton(owned: Boolean, onClick: () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -358,7 +360,7 @@ private fun PremiumButton(owned: Boolean, priceLabel: String, onClick: () -> Uni
                     letterSpacing = 0.6.sp,
                 )
                 Text(
-                    text = if (owned) "Ya es tuyo" else "$priceLabel • sin suscripcion",
+                    text = if (owned) "Ya es tuyo" else "Oscuridad cinco estrellas",
                     color = Color(0xCC211524),
                     fontSize = 12.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -400,19 +402,44 @@ private fun ActionError(message: String) {
 }
 
 @Composable
-private fun DemoPurchaseDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
+private fun PremiumPurchaseDialog(
+    priceLabel: String,
+    isDemo: Boolean,
+    errorMessage: String?,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Apagado Premium") },
         text = {
-            Text(
-                "Esta es una compra simulada para probar la app. No se cobrará dinero ni se pedirá una tarjeta. " +
-                    "La versión de Google Play abrirá el pago oficial de Google.",
-            )
+            Column {
+                Text(
+                    text = if (isDemo) "Prueba local" else priceLabel,
+                    fontWeight = FontWeight.Bold,
+                )
+                Text(
+                    text = "Compra única · Sin suscripción",
+                    modifier = Modifier.padding(top = 4.dp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                Text(
+                    text = if (isDemo) {
+                        "Esta es una compra simulada: no se cobrará dinero ni se pedirá una tarjeta."
+                    } else {
+                        "Al continuar, Google Play abrirá el pago oficial para que revises y confirmes la compra."
+                    },
+                    modifier = Modifier.padding(top = 16.dp),
+                )
+                errorMessage?.let {
+                    Spacer(Modifier.height(16.dp))
+                    ActionError(it)
+                }
+            }
         },
         confirmButton = {
             Button(onClick = onConfirm) {
-                Text("Simular compra Premium")
+                Text(if (isDemo) "Simular compra Premium" else "Continuar con Google Play")
             }
         },
         dismissButton = {

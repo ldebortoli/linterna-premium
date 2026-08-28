@@ -23,9 +23,12 @@ for (const relativePath of requiredFiles) {
 
 if (errors.length === 0) {
   const engine = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/LinternaEngine.kt");
-  const premiumMethod = engine.slice(engine.indexOf("fun pressPremium"), engine.indexOf("fun confirmDemoPurchase"));
-  if (premiumMethod.indexOf("torch.turnOff()") > premiumMethod.indexOf("PremiumEffect.LaunchGooglePlay")) {
-    errors.push("El apagado Premium debe cortar la linterna antes de abrir Google Play");
+  const premiumMethod = engine.slice(engine.indexOf("fun pressPremium"), engine.indexOf("fun confirmPremiumPurchase"));
+  const confirmationMethod = engine.slice(engine.indexOf("fun confirmPremiumPurchase"), engine.indexOf("fun dismissPurchase"));
+  if (!premiumMethod.includes("torch.turnOff()")) errors.push("El apagado Premium debe cortar la linterna antes de ofrecer la compra");
+  if (premiumMethod.includes("PremiumEffect.LaunchGooglePlay")) errors.push("Google Play debe abrirse recien despues de confirmar la compra");
+  if (!confirmationMethod.includes("showPurchaseDialog") || !confirmationMethod.includes("PremiumEffect.LaunchGooglePlay")) {
+    errors.push("La compra debe exigir la confirmacion previa antes de abrir Google Play");
   }
   if (!engine.includes("fun turnOffNormally")) errors.push("Falta el apagado normal gratuito");
 
@@ -47,4 +50,3 @@ if (errors.length > 0) {
 }
 
 console.log("Estructura, seguridad de apagado y separacion demo/Play verificadas.");
-

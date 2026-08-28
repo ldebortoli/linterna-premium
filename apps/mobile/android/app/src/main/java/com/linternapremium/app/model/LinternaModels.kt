@@ -10,8 +10,8 @@ data class LinternaState(
     val isTorchOn: Boolean = false,
     val isPremiumOwned: Boolean = false,
     val showPremiumOffer: Boolean = false,
-    val showDemoPurchase: Boolean = false,
-    val priceLabel: String = "Compra unica",
+    val showPurchaseDialog: Boolean = false,
+    val priceLabel: String = "Precio en Google Play",
     val notice: String? = null,
     val error: String? = null,
     val errorTarget: ErrorTarget? = null,
@@ -32,4 +32,3 @@ data class EngineResult(
     val state: LinternaState,
     val effect: PremiumEffect = PremiumEffect.None,
 )
-

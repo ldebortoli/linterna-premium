@@ -1,6 +1,6 @@
 {
   "name": "linterna-premium-workspace",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Herramientas de desarrollo para la app Android Linterna Premium.",
   "scripts": {
@@ -16,4 +16,3 @@
     "node": ">=20"
   }
 }
-

@@ -2,7 +2,7 @@
 
 ## Descripcion general
 
-Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxima intensidad disponible, ofrece un apagado normal gratuito y un "Apagado Premium" que apaga primero la luz y luego abre una compra oficial de Google Play para desbloquear una presentacion especial. Incluye publicidad mediante Google Mobile Ads sin bloquear la funcion principal.
+Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxima intensidad disponible, ofrece un apagado normal gratuito y un "Apagado Premium" que apaga primero la luz, muestra una confirmacion comercial y recien entonces abre una compra oficial de Google Play para desbloquear una presentacion especial. Incluye publicidad mediante Google Mobile Ads sin bloquear la funcion principal.
 
 ## Estado detectado
 
