@@ -6,16 +6,17 @@ Entregar Linterna Premium como aplicacion Android nativa mantenible, verificable
 
 ## Tarea actual
 
-Primera entrega terminada; la siguiente etapa es configurar las cuentas e identificadores reales de Google.
+Configurar las cuentas e identificadores reales de Google cuando el usuario decida avanzar con la publicación comercial.
 
 ## Estado actual
 
 - Android nativo Kotlin/Compose implementado en versión 0.1.0 (versionCode 1).
-- Repositorio privado publicado en `https://github.com/ldebortoli/linterna-premium`, rama `main`.
+- Repositorio público en `https://github.com/ldebortoli/linterna-premium`, rama principal `main`, con Secret Scanning y Push Protection habilitados.
 - El APK de prueba está en `apps/mobile/android/app/build/outputs/apk/demo/debug/app-demo-debug.apk`; usa compra simulada explícita y anuncios oficiales de prueba.
 - Google Play Billing y Google Mobile Ads quedan separados por variantes hasta que existan cuentas e identificadores reales.
 - Apps Dashboard reconoce el perfil Android nativo y puede generar/archivar el APK.
-- Validación final: `npm test`, `npm run coverage`, `npm run lint` y `npm run build:apk`; 13/13 pruebas y 100% de instrucciones/ramas/líneas/métodos del motor.
+- Validación más reciente: `npm test`, `npm run coverage` y `npm run lint`; 13/13 pruebas, 100% de instrucciones/ramas/líneas/métodos del motor y Android Lint correcto. No se generó un APK para el cambio de visibilidad/CI.
+- CI público sobre `main` y pull requests ejecuta pruebas, cobertura y lint, con cancelación de corridas reemplazadas y sin build de APK.
 - QA visual: encendido demo, apagado normal, diálogo de compra sin cobro, Premium persistente sin anuncios, apagado al perder foco y pantalla compacta con texto al 130%.
 - No hay elementos procesados en `USER_QUEUE.md`.
 
@@ -31,4 +32,4 @@ Primera entrega terminada; la siguiente etapa es configurar las cuentas e identi
 - El cobro real queda bloqueado hasta crear la app y el producto en Play Console; debug debe permanecer sin cargos.
 - Los anuncios reales quedan bloqueados hasta registrar AdMob y completar consentimiento/privacidad.
 - Nunca conservar la linterna encendida al salir, perder foco o pulsar cualquiera de los apagados.
-- GitHub Secret Scanning no es elegible para este repositorio privado en el plan actual: la API respondió HTTP 422; Push Protection permanece deshabilitada por esa dependencia.
+- Los identificadores reales y la firma de producción no deben versionarse; Secret Scanning y Push Protection están habilitados como segunda barrera.

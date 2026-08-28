@@ -57,3 +57,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decisión: Premium elimina anuncios y agrega la presentación especial, pero el apagado normal permanece visible, gratuito e inmediato.
 - Motivo: conservar el tono humorístico con consentimiento claro y sin bloquear una función esencial detrás de un pago.
+
+## D-009 - Repositorio público y APK bajo demanda
+
+- Estado: vigente.
+- Fecha: 2026-08-28.
+- Decisión: mantener el repositorio público sobre `main`, con CI rápido de pruebas, cobertura y lint; generar APKs únicamente por pedido explícito o para probar o reparar el pipeline de build.
+- Motivo: facilitar la publicación del código sin gastar tiempo ni recursos construyendo artefactos Android en cada cambio.

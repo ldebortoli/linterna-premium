@@ -7,7 +7,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 ## Estado detectado
 
 - Stack: Android nativo, Kotlin, Jetpack Compose, Material 3, Gradle.
-- Git: repositorio privado `https://github.com/ldebortoli/linterna-premium` en rama `main`.
+- Git: repositorio público `https://github.com/ldebortoli/linterna-premium` en rama principal `main`, con Secret Scanning y Push Protection habilitados.
 - Android: `minSdk 24`, `compileSdk 36`, Java 17 como bytecode objetivo.
 - Integraciones: Google Play Billing para el producto no consumible `premium_blackout_pack`; Google Mobile Ads con identificadores de prueba solo en builds de desarrollo.
 - Privacidad: no hay cuentas, backend propio ni captura directa de tarjetas. Google Play procesa el pago.
@@ -28,6 +28,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Cobertura: `npm run coverage`.
 - Lint: `npm run lint`.
 - APK de prueba: se genera desde Apps Dashboard o, cuando el usuario lo pide expresamente, con `npm run build:apk`.
+- CI público: pruebas, cobertura y lint sobre `main` y pull requests; no genera APKs.
 - Baseline verificado: 13 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el motor de dominio y Android Lint sin observaciones.
 
 ## Convenciones

@@ -21,7 +21,7 @@ Una linterna Android con un chiste transparente: el apagado normal siempre es gr
 - Node.js 20 o superior para los comandos de validacion.
 - Un teléfono Android con flash para probar la función física. El emulador sirve para revisar la interfaz, pero normalmente no ofrece linterna.
 
-## Validar y compilar
+## Validar
 
 ```powershell
 npm install
@@ -29,6 +29,13 @@ npm test
 npm run test:android
 npm run coverage
 npm run lint
+```
+
+El CI público ejecuta estos controles sobre `main` y pull requests, con cancelación de corridas reemplazadas. No compila ni publica APKs.
+
+Los artefactos Android se generan únicamente cuando el usuario lo pide o cuando se está probando o reparando el pipeline de build. En ese caso:
+
+```powershell
 npm run build:apk
 ```
 
