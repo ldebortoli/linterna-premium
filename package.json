@@ -1,0 +1,19 @@
+{
+  "name": "linterna-premium-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Herramientas de desarrollo para la app Android Linterna Premium.",
+  "scripts": {
+    "test": "node tools/verify-project.mjs && npm --prefix apps/mobile run test",
+    "test:android": "npm --prefix apps/mobile run test:android",
+    "coverage": "npm --prefix apps/mobile run coverage",
+    "lint": "npm --prefix apps/mobile run lint",
+    "check:version": "node tools/verify-version.mjs",
+    "build:apk": "npm --prefix apps/mobile run build:apk",
+    "install:android": "npm --prefix apps/mobile run install:android"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+

@@ -1,0 +1,13 @@
+{
+  "app": {
+    "name": "Linterna Premium",
+    "slug": "linterna-premium",
+    "version": "0.1.0",
+    "orientation": "default",
+    "android": {
+      "package": "com.linternapremium.app",
+      "versionCode": 1,
+      "nativeProject": "android"
+    }
+  }
+}
