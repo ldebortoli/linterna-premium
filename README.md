@@ -9,9 +9,11 @@ Una linterna Android con un chiste transparente: el apagado normal siempre es gr
 - Boton Premium grande y boton normal gratuito claramente visible.
 - Apagado Premium con fuegos artificiales, pulso visual y una curva lenta de potencia real en telefonos compatibles; en el resto se conserva el efecto visual y el apagado final seguro.
 - La variante demo permite restablecer la edicion plebeya para repetir las pruebas de compra y anuncios; esta accion no existe en Play.
-- Selector persistente en la pantalla principal con Español, English,
-  Português, Français, Italiano, Deutsch, Русский, 日本語 y 简体中文; toda la
-  interfaz, los avisos, Billing y la accesibilidad usan el idioma elegido.
+- Selector persistente en la pantalla principal con los 18 idiomas de Galerazo
+  Bot —incluidas las variantes regionales de español, portugués y chino,
+  latín, catalán, euskera, guaraní y quechua/Runa Simi— más mandarín, cantonés
+  y coreano. El menú se abre debajo de su botón, tiene alto limitado y scroll;
+  toda la interfaz, los avisos, Billing y la accesibilidad usan el idioma elegido.
 - Compra simulada, sin dinero ni tarjeta, en la variante `demo`. Si un
   emulador no ofrece flash, esa misma variante simula el encendido para permitir
   revisar toda la interfaz; un teléfono con flash siempre usa el LED real.

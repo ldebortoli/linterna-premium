@@ -127,3 +127,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decision: Apps Dashboard debe generar Linterna como `demoRelease`, no depurable y firmada con el keystore QA local estable de Tivio/A la Altura suministrado por variable de entorno. El archivo permanece ignorado y `playRelease` usa una firma de producción independiente.
 - Motivo: conservar una identidad de instalación estable entre versiones internas y reducir advertencias repetidas asociadas a paquetes/certificados nuevos, sin publicar una clave ni confundir QA con producción.
+
+## D-019 - Catálogo regional de 21 opciones y menú acotado
+
+- Estado: vigente; reemplaza D-017.
+- Fecha: 2026-08-28.
+- Decision: ofrecer las 18 opciones reales del catálogo de Galerazo Bot más mandarín, cantonés y coreano, distinguiendo español argentino/español de España, portugués brasileño/portugués de Portugal y chino simplificado/tradicional. Euskera/vasco y Runa Simi/quechua son una sola opción cada uno. Mantener todos los textos visibles, errores, Billing, anuncios de prueba y accesibilidad dentro del mismo catálogo. Anclar el dropdown al botón de idiomas dentro del extremo derecho, limitarlo a 360 dp de alto y habilitar scroll interno.
+- Motivo: igualar el catálogo fuente y sumar las variantes pedidas sin duplicar nombres de una misma lengua ni permitir que un menú largo se desplace a la izquierda o sobrepase la pantalla.

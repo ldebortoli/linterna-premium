@@ -15,7 +15,7 @@ class LinternaEngine(
     private val torch: TorchPort,
     private val premiumStore: PremiumStore,
     private val text: () -> com.linternapremium.app.localization.LinternaText = {
-        LinternaTextCatalog.forLanguage(AppLanguage.SPANISH)
+        LinternaTextCatalog.forLanguage(AppLanguage.SPANISH_ARGENTINA)
     },
 ) {
     var state = LinternaState(isPremiumOwned = premiumStore.isPremiumOwned())

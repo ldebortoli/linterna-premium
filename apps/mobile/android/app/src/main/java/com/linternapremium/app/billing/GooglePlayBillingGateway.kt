@@ -23,7 +23,7 @@ class GooglePlayBillingGateway(
     private val productId: String,
     private val events: BillingEvents,
     private val text: () -> LinternaText = {
-        LinternaTextCatalog.forLanguage(AppLanguage.SPANISH)
+        LinternaTextCatalog.forLanguage(AppLanguage.SPANISH_ARGENTINA)
     },
 ) : BillingGateway, PurchasesUpdatedListener {
     private var productDetails: ProductDetails? = null

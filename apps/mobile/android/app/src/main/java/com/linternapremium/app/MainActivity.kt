@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
     private var premiumSequenceJob: Job? = null
     private var uiState by mutableStateOf(LinternaState())
     private var adsReady by mutableStateOf(false)
-    private var selectedLanguage by mutableStateOf(AppLanguage.SPANISH)
+    private var selectedLanguage by mutableStateOf(AppLanguage.SPANISH_ARGENTINA)
     private val currentText: LinternaText
         get() = LinternaTextCatalog.forLanguage(selectedLanguage)
 

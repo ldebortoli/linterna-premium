@@ -57,11 +57,40 @@ if (errors.length === 0) {
   if (!localization.includes("EDICIÓN PLEBEYA") || !localization.includes("Apagar linterna como un plebeyo")) {
     errors.push("Faltan la insignia o el apagado normal con terminologia plebeya");
   }
-  for (const code of ["es", "en", "pt", "fr", "it", "de", "ru", "ja", "zh"]) {
+  for (const code of [
+    "es-AR",
+    "es-ES",
+    "en",
+    "ru",
+    "la",
+    "ja",
+    "it",
+    "fr",
+    "de",
+    "nl",
+    "zh-Hans",
+    "zh-Hant",
+    "pt-BR",
+    "pt-PT",
+    "ca",
+    "eu",
+    "gn",
+    "quz",
+    "cmn-Hans",
+    "yue-Hant",
+    "ko",
+  ]) {
     if (!localization.includes(`(\"${code}\",`)) errors.push(`Falta el idioma ${code}`);
   }
   if (!screen.includes("LanguageSelector(") || !mainActivity.includes("PreferencesLanguageStore")) {
     errors.push("Falta el selector persistente de idiomas en la pantalla principal");
+  }
+  if (
+    !screen.includes("horizontalArrangement = Arrangement.End") ||
+    !screen.includes("scrollState = rememberScrollState()") ||
+    !screen.includes("heightIn(max = 360.dp)")
+  ) {
+    errors.push("El selector de idiomas debe abrir debajo de su boton y limitarse con scroll");
   }
   if (
     !gradle.includes("APPS_DASHBOARD_ANDROID_TEST_KEYSTORE_PATH") ||

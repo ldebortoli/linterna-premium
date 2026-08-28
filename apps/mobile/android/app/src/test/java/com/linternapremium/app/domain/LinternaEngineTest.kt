@@ -216,7 +216,7 @@ class LinternaEngineTest {
 
     @Test
     fun `language change clears stale feedback and localizes future messages`() {
-        var language = AppLanguage.SPANISH
+        var language = AppLanguage.SPANISH_ARGENTINA
         val engine = LinternaEngine(
             FakeTorch(),
             FakePremiumStore(),

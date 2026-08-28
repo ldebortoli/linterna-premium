@@ -20,9 +20,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -267,42 +269,48 @@ private fun LanguageSelector(
     onLanguageSelected: (AppLanguage) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
-    Box(
+    Row(
         modifier = Modifier.fillMaxWidth(),
-        contentAlignment = Alignment.CenterEnd,
+        horizontalArrangement = Arrangement.End,
     ) {
-        TextButton(
-            onClick = { expanded = true },
-            modifier = Modifier.semantics {
-                contentDescription = text[TextKey.APP_LANGUAGE]
-            },
-        ) {
-            Text(
-                text = "🌐 ${text[TextKey.LANGUAGES]} · ${selectedLanguage.nativeLabel}",
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                fontSize = 12.sp,
-            )
-        }
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-        ) {
-            LinternaTextCatalog.supportedLanguages.forEach { language ->
-                DropdownMenuItem(
-                    text = {
-                        Text(
-                            text = if (language == selectedLanguage) {
-                                "✓ ${language.nativeLabel}"
-                            } else {
-                                language.nativeLabel
-                            },
-                        )
-                    },
-                    onClick = {
-                        expanded = false
-                        onLanguageSelected(language)
-                    },
+        Box {
+            TextButton(
+                onClick = { expanded = true },
+                modifier = Modifier.semantics {
+                    contentDescription = text[TextKey.APP_LANGUAGE]
+                },
+            ) {
+                Text(
+                    text = "🌐 ${text[TextKey.LANGUAGES]} · ${selectedLanguage.nativeLabel}",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 12.sp,
                 )
+            }
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false },
+                scrollState = rememberScrollState(),
+                modifier = Modifier
+                    .heightIn(max = 360.dp)
+                    .widthIn(min = 220.dp, max = 320.dp),
+            ) {
+                LinternaTextCatalog.supportedLanguages.forEach { language ->
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                text = if (language == selectedLanguage) {
+                                    "✓ ${language.nativeLabel}"
+                                } else {
+                                    language.nativeLabel
+                                },
+                            )
+                        },
+                        onClick = {
+                            expanded = false
+                            onLanguageSelected(language)
+                        },
+                    )
+                }
             }
         }
     }

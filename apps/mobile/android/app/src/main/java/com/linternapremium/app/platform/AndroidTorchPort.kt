@@ -17,7 +17,7 @@ class AndroidTorchPort(
     context: Context,
     private val simulateWhenUnavailable: Boolean = false,
     private val text: () -> LinternaText = {
-        LinternaTextCatalog.forLanguage(AppLanguage.SPANISH)
+        LinternaTextCatalog.forLanguage(AppLanguage.SPANISH_ARGENTINA)
     },
 ) : TorchPort {
     private val cameraManager = context.getSystemService(CameraManager::class.java)
