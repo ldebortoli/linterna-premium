@@ -119,7 +119,7 @@ class LinternaEngineTest {
         assertTrue(store.owned)
         assertTrue(confirmed.isPremiumOwned)
         assertFalse(confirmed.showDemoPurchase)
-        assertTrue(confirmed.notice!!.contains("No se realizo"))
+        assertTrue(confirmed.notice!!.contains("No se realizó"))
         assertEquals(1, confirmed.celebrationSequence)
     }
 

@@ -42,7 +42,10 @@ class MainActivity : ComponentActivity(), BillingEvents {
         enableEdgeToEdge()
 
         engine = LinternaEngine(
-            torch = AndroidTorchPort(this),
+            torch = AndroidTorchPort(
+                context = this,
+                simulateWhenUnavailable = BuildConfig.DEMO_BILLING,
+            ),
             premiumStore = PreferencesPremiumStore(this),
         )
         uiState = engine.state
@@ -84,9 +87,9 @@ class MainActivity : ComponentActivity(), BillingEvents {
         billingGateway?.start()
     }
 
-    override fun onStop() {
+    override fun onPause() {
         if (::engine.isInitialized) uiState = engine.backgrounded()
-        super.onStop()
+        super.onPause()
     }
 
     override fun onDestroy() {
@@ -122,8 +125,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
         uiState = result.state
         if (result.effect == PremiumEffect.LaunchGooglePlay) {
             billingGateway?.launchPurchase(this)
-                ?: onBillingMessage("Google Play Billing no esta configurado en esta compilacion.")
+                ?: onBillingMessage("Google Play Billing no está configurado en esta compilación.")
         }
     }
 }
-

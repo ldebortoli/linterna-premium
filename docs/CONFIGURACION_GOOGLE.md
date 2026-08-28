@@ -23,7 +23,7 @@ LINTERNAPREMIUM_ADMOB_APP_ID=ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY
 LINTERNAPREMIUM_ADMOB_BANNER_ID=ca-app-pub-XXXXXXXXXXXXXXXX/ZZZZZZZZZZ
 ```
 
-En Windows, Gradle suele leer ese archivo desde `%USERPROFILE%\.gradle\gradle.properties`. Los IDs no son contrasenas, pero mantenerlos fuera del codigo evita mezclar ambientes. La compilacion `play` falla si falta alguno.
+En Windows, Gradle suele leer ese archivo desde `%USERPROFILE%\.gradle\gradle.properties`. Los IDs no son contraseñas, pero mantenerlos fuera del código evita mezclar ambientes. La compilación `play` falla si falta alguno.
 
 El modo demo usa solamente los IDs de prueba publicados por Google y rotula el banner como prueba. Nunca hagas clic repetidamente en anuncios propios, ni siquiera durante pruebas.
 
@@ -39,5 +39,4 @@ La variante `play` consulta User Messaging Platform antes de pedir anuncios. Tam
 
 ## 4. Compilacion publicable
 
-Despues de configurar firma e IDs, ejecutar desde Apps Dashboard o Android Studio la variante `playRelease`. No se versionan keystores, contrasenas ni archivos de credenciales.
-
+Después de configurar firma e IDs, ejecutar desde Apps Dashboard o Android Studio la variante `playRelease`. No se versionan keystores, contraseñas ni archivos de credenciales.

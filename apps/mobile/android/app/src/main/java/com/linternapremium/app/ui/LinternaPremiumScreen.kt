@@ -257,7 +257,7 @@ private fun TurnOnPanel(state: LinternaState, onTurnOn: () -> Unit) {
             fontWeight = FontWeight.Bold,
         )
         Text(
-            text = "Usaremos la mayor intensidad que permita tu telefono.",
+            text = "Usaremos la mayor intensidad que permita tu teléfono.",
             modifier = Modifier.padding(top = 6.dp, bottom = 20.dp),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
@@ -290,14 +290,14 @@ private fun OffOptions(
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            text = if (state.isTorchOn) "Linterna encendida al maximo" else "La linterna ya esta apagada",
+            text = if (state.isTorchOn) "Linterna encendida al máximo" else "La linterna ya está apagada",
             color = if (state.isTorchOn) Color(0xFFF3D27A) else MaterialTheme.colorScheme.onBackground,
             fontSize = 17.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
         )
         Text(
-            text = if (state.isTorchOn) "Elegi con que nivel de elegancia queres apagarla." else "Podes completar Premium o volver sin pagar.",
+            text = if (state.isTorchOn) "Elegí con qué nivel de elegancia querés apagarla." else "Podés completar Premium o volver sin pagar.",
             modifier = Modifier.padding(top = 6.dp, bottom = 20.dp),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontSize = 14.sp,
@@ -406,8 +406,8 @@ private fun DemoPurchaseDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
         title = { Text("Apagado Premium") },
         text = {
             Text(
-                "Esta es una compra simulada para probar la app. No se cobrara dinero ni se pedira una tarjeta. " +
-                    "La version de Google Play abrira el pago oficial de Google.",
+                "Esta es una compra simulada para probar la app. No se cobrará dinero ni se pedirá una tarjeta. " +
+                    "La versión de Google Play abrirá el pago oficial de Google.",
             )
         },
         confirmButton = {
@@ -453,4 +453,3 @@ private fun FlashlightGlyph(modifier: Modifier = Modifier, color: Color) {
         }
     }
 }
-

@@ -36,7 +36,7 @@ class LinternaEngine(
 
     fun permissionDenied(): LinternaState {
         state = state.copy(
-            error = "Necesitamos permiso de camara solo para controlar el flash.",
+            error = "Necesitamos permiso de cámara solo para controlar el flash.",
             errorTarget = ErrorTarget.TURN_ON,
         )
         return state
@@ -97,7 +97,7 @@ class LinternaEngine(
             isPremiumOwned = true,
             showPremiumOffer = false,
             showDemoPurchase = false,
-            notice = "Premium de prueba activado. No se realizo ningun cobro.",
+            notice = "Premium de prueba activado. No se realizó ningún cobro.",
             error = null,
             errorTarget = null,
             celebrationSequence = state.celebrationSequence + 1,

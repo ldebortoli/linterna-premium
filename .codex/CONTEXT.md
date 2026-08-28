@@ -7,10 +7,11 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 ## Estado detectado
 
 - Stack: Android nativo, Kotlin, Jetpack Compose, Material 3, Gradle.
-- Git: repositorio local en rama `main`; el remoto privado se crea en la primera entrega.
+- Git: repositorio privado `https://github.com/ldebortoli/linterna-premium` en rama `main`.
 - Android: `minSdk 24`, `compileSdk 36`, Java 17 como bytecode objetivo.
 - Integraciones: Google Play Billing para el producto no consumible `premium_blackout_pack`; Google Mobile Ads con identificadores de prueba solo en builds de desarrollo.
 - Privacidad: no hay cuentas, backend propio ni captura directa de tarjetas. Google Play procesa el pago.
+- Dashboard: perfil Android nativo `Linterna Premium` registrado en Apps Dashboard; genera la variante `demoDebug` para pruebas y `playRelease` para publicación.
 
 ## Estructura
 
@@ -27,6 +28,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Cobertura: `npm run coverage`.
 - Lint: `npm run lint`.
 - APK de prueba: se genera desde Apps Dashboard o, cuando el usuario lo pide expresamente, con `npm run build:apk`.
+- Baseline verificado: 13 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el motor de dominio y Android Lint sin observaciones.
 
 ## Convenciones
 
@@ -36,4 +38,4 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - La version canonica vive en `version.properties`; `app.json` y Gradle deben coincidir.
 - Ningun identificador real de anuncios, producto o credencial se versiona como secreto. Los valores publicables de Google se inyectan por propiedades de Gradle.
 - Los dos recorridos de apagado cortan la linterna inmediatamente. El pago nunca es requisito para apagarla.
-
+- La variante `demo` simula la linterna únicamente cuando el dispositivo no tiene flash, para poder probar el recorrido en emulador; la variante `play` nunca simula hardware.
