@@ -8,7 +8,7 @@ Una linterna Android con un chiste transparente: el apagado normal siempre es gr
 - Apagado automatico al enviar la app a segundo plano.
 - Boton Premium grande y boton normal gratuito claramente visible.
 - Apagado Premium con fuegos artificiales, pulso visual y una curva lenta de potencia real en telefonos compatibles; en el resto se conserva el efecto visual y el apagado final seguro.
-- La variante demo permite restablecer la edicion mortal para repetir las pruebas de compra y anuncios; esta accion no existe en Play.
+- La variante demo permite restablecer la edicion plebeya para repetir las pruebas de compra y anuncios; esta accion no existe en Play.
 - Compra simulada, sin dinero ni tarjeta, en la variante `demoDebug`. Si un
   emulador no ofrece flash, esa misma variante simula el encendido para permitir
   revisar toda la interfaz; un teléfono con flash siempre usa el LED real.

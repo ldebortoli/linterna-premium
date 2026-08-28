@@ -230,7 +230,7 @@ private fun AppHeader(isPremiumOwned: Boolean) {
             shape = RoundedCornerShape(999.dp),
         ) {
             Text(
-                text = if (isPremiumOwned) "PREMIUM ACTIVO" else "EDICION MORTAL",
+                text = if (isPremiumOwned) "PREMIUM ACTIVO" else "EDICIÓN PLEBEYA",
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 7.dp),
                 color = if (isPremiumOwned) Color(0xFFF3D27A) else MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 10.sp,
@@ -331,7 +331,7 @@ private fun TurnOnPanel(
                 modifier = Modifier.padding(top = 8.dp),
             ) {
                 Text(
-                    text = "Restablecer edición mortal",
+                    text = "Restablecer edición plebeya",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 13.sp,
                 )
@@ -390,7 +390,7 @@ private fun OffOptions(
                 modifier = Modifier.padding(top = 6.dp),
             ) {
                 Text(
-                    text = "Apagado normal, de mortales",
+                    text = "Apagar linterna como un plebeyo",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 13.sp,
                 )

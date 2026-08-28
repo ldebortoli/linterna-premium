@@ -148,7 +148,7 @@ class LinternaEngine(
             showPurchaseDialog = false,
             isPremiumCelebrating = false,
             dismissedCelebrationSequence = state.celebrationSequence,
-            notice = "Premium de prueba eliminado. Volviste a la edición mortal.",
+            notice = "Premium de prueba eliminado. Volviste a la edición plebeya.",
             error = null,
             errorTarget = null,
         )

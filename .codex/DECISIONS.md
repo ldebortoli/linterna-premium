@@ -106,3 +106,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decision: usar `Linterna PREMIUM` como nombre visible en launcher, interfaz, metadatos y documentacion publica; conservar `com.linternapremium.app`, `linterna-premium` y la URL del repositorio.
 - Motivo: reforzar visualmente el chiste sin romper la identidad tecnica, las instalaciones ni las integraciones existentes.
+
+## D-016 - Terminologia plebeya
+
+- Estado: vigente; reemplaza la terminologia visible de D-013.
+- Fecha: 2026-08-28.
+- Decision: usar `EDICIÓN PLEBEYA`, `Restablecer edición plebeya` y `Apagar linterna como un plebeyo` en la experiencia activa; eliminar `mortal/mortales` de interfaz, mensajes y documentacion vigente.
+- Motivo: adoptar el tono humoristico elegido por el usuario con concordancia natural en español.

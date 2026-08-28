@@ -47,6 +47,12 @@ if (errors.length === 0) {
   if (appConfig.app.name !== "Linterna PREMIUM" || !strings.includes(">Linterna PREMIUM<") || !screen.includes('text = "PREMIUM"')) {
     errors.push("El nombre visible debe ser Linterna PREMIUM en metadatos, launcher e interfaz");
   }
+  if (screen.toLowerCase().includes("mortal") || engine.toLowerCase().includes("mortal")) {
+    errors.push("La experiencia activa debe usar plebeyo en lugar de mortal");
+  }
+  if (!screen.includes("EDICIÓN PLEBEYA") || !screen.includes("Apagar linterna como un plebeyo")) {
+    errors.push("Faltan la insignia o el apagado normal con terminologia plebeya");
+  }
 
   const playManifest = read("apps/mobile/android/app/src/play/AndroidManifest.xml");
   if (playManifest.includes("ca-app-pub-3940256099942544")) {
