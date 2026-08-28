@@ -15,6 +15,7 @@ Configurar las cuentas e identificadores reales de Google cuando el usuario deci
 - El APK de prueba está en `apps/mobile/android/app/build/outputs/apk/demo/debug/app-demo-debug.apk`; usa compra simulada explícita y anuncios oficiales de prueba.
 - Google Play Billing y Google Mobile Ads quedan separados por variantes hasta que existan cuentas e identificadores reales.
 - Apps Dashboard reconoce el perfil Android nativo y puede generar/archivar el APK.
+- Apps Dashboard 0.2.8 genera para Linterna Premium una leyenda Telegram que menciona sólo a `@galerazo34` y nunca a Nico.
 - Validación más reciente: `npm test`, `npm run coverage` y `npm run lint`; 13/13 pruebas, 100% de instrucciones/ramas/líneas/métodos del motor y Android Lint correcto. No se generó un APK para el cambio de visibilidad/CI.
 - CI público sobre `main` y pull requests ejecuta pruebas, cobertura y lint, con cancelación de corridas reemplazadas y sin build de APK.
 - QA visual: encendido demo, apagado normal, diálogo de compra sin cobro, Premium persistente sin anuncios, apagado al perder foco y pantalla compacta con texto al 130%.

@@ -12,6 +12,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Integraciones: Google Play Billing para el producto no consumible `premium_blackout_pack`; Google Mobile Ads con identificadores de prueba solo en builds de desarrollo.
 - Privacidad: no hay cuentas, backend propio ni captura directa de tarjetas. Google Play procesa el pago.
 - Dashboard: perfil Android nativo `Linterna Premium` registrado en Apps Dashboard; genera la variante `demoDebug` para pruebas y `playRelease` para publicación.
+- Telegram: los mensajes de artefactos generados por Apps Dashboard mencionan sólo al propietario `@galerazo34` y nunca a Nico.
 
 ## Estructura
 

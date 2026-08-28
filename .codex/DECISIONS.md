@@ -64,3 +64,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decisión: mantener el repositorio público sobre `main`, con CI rápido de pruebas, cobertura y lint; generar APKs únicamente por pedido explícito o para probar o reparar el pipeline de build.
 - Motivo: facilitar la publicación del código sin gastar tiempo ni recursos construyendo artefactos Android en cada cambio.
+
+## D-010 - Telegram sin mención a Nico
+
+- Estado: vigente.
+- Fecha: 2026-08-28.
+- Decisión: los mensajes de Telegram que acompañan artefactos de Linterna Premium mencionan únicamente al propietario `@galerazo34` y nunca a Nico.
+- Motivo: Linterna Premium es un proyecto personal del propietario.

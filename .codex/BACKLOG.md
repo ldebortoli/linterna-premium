@@ -12,6 +12,7 @@ No hay tareas en curso.
 
 # DONE
 
+- [2026-08-28] Configurar Apps Dashboard para que los mensajes Telegram de Linterna Premium mencionen sólo a `@galerazo34`, nunca a Nico; validar sin generar ni enviar APK.
 - [2026-08-28] Inicializar la memoria persistente del proyecto.
 - [2026-08-28] Definir arquitectura Android nativa y limites de seguridad/compliance del chiste.
 - [2026-08-28] Implementar la primera versión de Linterna Premium con linterna física, apagado normal, Apagado Premium, compra simulada/Google Play Billing y publicidad demo/AdMob.
