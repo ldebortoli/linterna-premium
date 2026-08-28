@@ -94,6 +94,7 @@ fun LinternaPremiumScreen(
     onConfirmPurchase: () -> Unit,
     onDismissPurchase: () -> Unit,
     onDismissOffer: () -> Unit,
+    onResetDemoPremium: () -> Unit,
 ) {
     val celebration = remember { Animatable(0f) }
     var celebrationVisible by remember { mutableStateOf(false) }
@@ -171,7 +172,12 @@ fun LinternaPremiumScreen(
                             onDismissOffer = onDismissOffer,
                         )
                     } else {
-                        TurnOnPanel(state = state, onTurnOn = onTurnOn)
+                        TurnOnPanel(
+                            state = state,
+                            isDemo = isDemo,
+                            onTurnOn = onTurnOn,
+                            onResetDemoPremium = onResetDemoPremium,
+                        )
                     }
                 }
                 Spacer(Modifier.height(20.dp))
@@ -284,7 +290,12 @@ private fun FlashlightHero(isOn: Boolean, premiumGlow: Float?) {
 }
 
 @Composable
-private fun TurnOnPanel(state: LinternaState, onTurnOn: () -> Unit) {
+private fun TurnOnPanel(
+    state: LinternaState,
+    isDemo: Boolean,
+    onTurnOn: () -> Unit,
+    onResetDemoPremium: () -> Unit,
+) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = "Lista para iluminar",
@@ -313,6 +324,24 @@ private fun TurnOnPanel(state: LinternaState, onTurnOn: () -> Unit) {
             ),
         ) {
             Text("Encender linterna", fontSize = 17.sp, fontWeight = FontWeight.Bold)
+        }
+        if (isDemo && state.isPremiumOwned) {
+            TextButton(
+                onClick = onResetDemoPremium,
+                modifier = Modifier.padding(top = 8.dp),
+            ) {
+                Text(
+                    text = "Restablecer edición mortal",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 13.sp,
+                )
+            }
+            Text(
+                text = "Sólo borra el Premium simulado de este dispositivo.",
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontSize = 11.sp,
+                textAlign = TextAlign.Center,
+            )
         }
     }
 }

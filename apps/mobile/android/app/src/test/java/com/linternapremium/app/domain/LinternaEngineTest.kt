@@ -145,6 +145,12 @@ class LinternaEngineTest {
         assertFalse(confirmed.showPurchaseDialog)
         assertTrue(confirmed.notice!!.contains("No se realizó"))
         assertEquals(1, confirmed.celebrationSequence)
+
+        val reset = engine.resetPremiumForTesting()
+        assertFalse(store.owned)
+        assertFalse(reset.isPremiumOwned)
+        assertFalse(reset.isTorchOn)
+        assertTrue(reset.notice!!.contains("edición mortal"))
     }
 
     @Test

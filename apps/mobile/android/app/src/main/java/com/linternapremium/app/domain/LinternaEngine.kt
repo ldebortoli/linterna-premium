@@ -138,6 +138,23 @@ class LinternaEngine(
         return EngineResult(state)
     }
 
+    fun resetPremiumForTesting(): LinternaState {
+        torch.turnOff()
+        premiumStore.setPremiumOwned(false)
+        state = state.copy(
+            isTorchOn = false,
+            isPremiumOwned = false,
+            showPremiumOffer = false,
+            showPurchaseDialog = false,
+            isPremiumCelebrating = false,
+            dismissedCelebrationSequence = state.celebrationSequence,
+            notice = "Premium de prueba eliminado. Volviste a la edición mortal.",
+            error = null,
+            errorTarget = null,
+        )
+        return state
+    }
+
     fun dismissPurchase(): LinternaState {
         state = state.copy(
             showPurchaseDialog = false,

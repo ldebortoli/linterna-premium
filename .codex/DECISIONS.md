@@ -85,3 +85,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decision: el apagado normal y el Premium sin licencia siguen apagando de inmediato; con Premium activo, ejecutar una curva lenta de potencia de menos de tres segundos junto con fuegos artificiales en pantalla y apagar el flash en un bloque `finally`. Usar niveles reales solo cuando Android y el hardware los exponen; en el resto conservar el LED estable y simular el pulso en la interfaz hasta el apagado final.
 - Motivo: convertir Premium en una experiencia visible y graciosa sin introducir destellos rapidos ni permitir que el flash quede encendido al fallar, cancelar o salir de la app.
+
+## D-013 - Restablecimiento limitado a demo
+
+- Estado: vigente.
+- Fecha: 2026-08-28.
+- Decision: permitir borrar la licencia Premium simulada desde la pantalla apagada unicamente en la variante `demo`; persistir el regreso a la edicion mortal y reactivar anuncios de prueba. Ocultar la accion y rechazar su ejecucion en la variante Play.
+- Motivo: repetir localmente los recorridos con y sin Premium sin fingir que una compra real puede revocarse o reembolsarse desde la aplicacion.

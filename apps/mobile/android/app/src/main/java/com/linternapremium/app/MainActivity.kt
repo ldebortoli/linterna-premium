@@ -84,15 +84,12 @@ class MainActivity : ComponentActivity(), BillingEvents {
                     onConfirmPurchase = ::confirmPremiumPurchase,
                     onDismissPurchase = { uiState = engine.dismissPurchase() },
                     onDismissOffer = { uiState = engine.dismissPremiumOffer() },
+                    onResetDemoPremium = ::resetDemoPremium,
                 )
             }
         }
 
-        if (!uiState.isPremiumOwned && BuildConfig.ADMOB_BANNER_ID.isNotBlank()) {
-            AdsCoordinator(BuildConfig.DEMO_BILLING).requestPermissionAndInitialize(this) {
-                runOnUiThread { adsReady = true }
-            }
-        }
+        initializeAdsIfEligible()
     }
 
     override fun onResume() {
@@ -141,6 +138,21 @@ class MainActivity : ComponentActivity(), BillingEvents {
 
     private fun confirmPremiumPurchase() {
         applyPremiumResult(engine.confirmPremiumPurchase(BuildConfig.DEMO_BILLING))
+    }
+
+    private fun resetDemoPremium() {
+        if (!BuildConfig.DEMO_BILLING) return
+        premiumSequenceJob?.cancel()
+        adsReady = false
+        uiState = engine.resetPremiumForTesting()
+        initializeAdsIfEligible()
+    }
+
+    private fun initializeAdsIfEligible() {
+        if (adsReady || uiState.isPremiumOwned || BuildConfig.ADMOB_BANNER_ID.isBlank()) return
+        AdsCoordinator(BuildConfig.DEMO_BILLING).requestPermissionAndInitialize(this) {
+            runOnUiThread { adsReady = true }
+        }
     }
 
     private fun applyPremiumResult(result: EngineResult) {

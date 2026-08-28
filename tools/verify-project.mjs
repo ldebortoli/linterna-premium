@@ -25,6 +25,8 @@ for (const relativePath of requiredFiles) {
 if (errors.length === 0) {
   const engine = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/LinternaEngine.kt");
   const premiumSequence = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/domain/PremiumSequenceRunner.kt");
+  const mainActivity = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/MainActivity.kt");
+  const screen = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/ui/LinternaPremiumScreen.kt");
   const premiumMethod = engine.slice(engine.indexOf("fun pressPremium"), engine.indexOf("fun confirmPremiumPurchase"));
   const confirmationMethod = engine.slice(engine.indexOf("fun confirmPremiumPurchase"), engine.indexOf("fun dismissPurchase"));
   if (!premiumMethod.includes("torch.turnOff()")) errors.push("El apagado Premium debe cortar la linterna antes de ofrecer la compra");
@@ -35,6 +37,9 @@ if (errors.length === 0) {
   if (!engine.includes("fun turnOffNormally")) errors.push("Falta el apagado normal gratuito");
   if (!premiumSequence.includes("finally") || !premiumSequence.includes("torch.turnOff()")) {
     errors.push("La secuencia Premium debe apagar el flash incluso si se interrumpe o falla");
+  }
+  if (!mainActivity.includes("if (!BuildConfig.DEMO_BILLING) return") || !screen.includes("isDemo && state.isPremiumOwned")) {
+    errors.push("El restablecimiento de Premium debe quedar limitado a la variante demo");
   }
 
   const playManifest = read("apps/mobile/android/app/src/play/AndroidManifest.xml");

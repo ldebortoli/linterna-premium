@@ -41,3 +41,4 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Ningun identificador real de anuncios, producto o credencial se versiona como secreto. Los valores publicables de Google se inyectan por propiedades de Gradle.
 - El apagado normal y el recorrido Premium sin licencia cortan la linterna inmediatamente. Con Premium activo, una secuencia lenta de menos de tres segundos regula la potencia cuando el hardware lo permite y garantiza el apagado final incluso ante fallo, cancelacion o salida de la app.
 - La variante `demo` simula la linterna únicamente cuando el dispositivo no tiene flash, para poder probar el recorrido en emulador; la variante `play` nunca simula hardware.
+- La variante `demo` permite borrar la licencia simulada y volver a la edicion mortal; la variante `play` no expone ni ejecuta este restablecimiento.
