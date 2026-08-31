@@ -8,10 +8,11 @@
 
 # IN PROGRESS
 
-- [P0] Estabilizar el CI por pedido explicito: corregir cada fallo y monitorear los runs sucesivos hasta obtener verde, sin generar APK.
+- Sin tareas activas.
 
 # DONE
 
+- [2026-08-31] Estabilizar CI por pedido explicito: diagnosticar el workflow inválido `33411847184`, mover la inicialización del SDK aislado desde `jobs.quality.env` a un paso Bash con `$RUNNER_TEMP`/`$GITHUB_ENV`, validar localmente contratos, cobertura 100% y lint, y monitorear el run `33412352768` hasta verde sin generar APK.
 - [2026-08-31] Corregir el CI fallido `33409711980`: pruebas y cobertura pasaban, pero Lint detectaba la API 37 preinstalada y elevaba `targetSdk 36` a `OldTargetApi`; aislar el SDK del job en `runner.temp`, fijar plataforma/build-tools 36, ignorar `.kotlin/` y validar contratos, 22/22 tests, cobertura 100% y lint local sin generar APK.
 - [2026-08-31] Entregar Linterna PREMIUM 0.4.3 (versionCode 11): quitar todo aviso posterior al apagado plebeyo y ampliar la celebración Premium a once fuegos artificiales, 56 piezas de confeti/monedas, luces suaves de marquesina y tragamonedas 7·7·7; verificar 22/22 tests, cobertura 100% y lint sin generar APK.
 - [2026-08-31] Agregar `.gitattributes` con finales de linea deterministas y formatos binarios explicitos; verificar el mismo control del proyecto desde un checkout limpio con `core.autocrlf=true` antes del push.
