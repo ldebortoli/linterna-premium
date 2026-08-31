@@ -95,6 +95,9 @@ private val FireworkColors = listOf(
 )
 
 private val ReelSymbols = listOf("7", "★", "♦", "♛", "●")
+internal const val PREMIUM_CELEBRATION_DURATION_MILLIS = 15_000
+private const val PremiumTorchVisualDurationFraction = 3_000f / PREMIUM_CELEBRATION_DURATION_MILLIS
+private const val PremiumCelebrationCycles = 5f
 
 @Composable
 fun LinternaPremiumScreen(
@@ -121,13 +124,20 @@ fun LinternaPremiumScreen(
             try {
                 celebrationVisible = true
                 celebration.snapTo(0f)
-                celebration.animateTo(1f, tween(3_000, easing = LinearEasing))
+                celebration.animateTo(
+                    targetValue = 1f,
+                    animationSpec = tween(PREMIUM_CELEBRATION_DURATION_MILLIS, easing = LinearEasing),
+                )
             } finally {
                 celebrationVisible = false
             }
         }
     }
-    val premiumGlow = if (celebrationVisible) premiumGlowAt(celebration.value) else null
+    val premiumGlow = if (celebrationVisible) {
+        premiumGlowAt(premiumTorchProgressAt(celebration.value))
+    } else {
+        null
+    }
 
     Box(
         modifier = Modifier
@@ -141,13 +151,14 @@ fun LinternaPremiumScreen(
                 if (celebrationVisible) {
                     drawRect(
                         color = Color(0xFFFFE8A3),
-                        alpha = 0.025f + premiumGlowAt(celebration.value) * 0.055f,
+                        alpha = 0.025f + celebrationPulseAt(celebration.value) * 0.055f,
                     )
                     drawCircle(
                         brush = PremiumGradient,
-                        radius = size.minDimension * (0.28f + celebration.value * 0.72f),
+                        radius = size.minDimension *
+                            (0.28f + premiumTorchProgressAt(celebration.value) * 0.72f),
                         center = Offset(size.width / 2f, size.height * 0.4f),
-                        alpha = 0.12f * (1f - celebration.value),
+                        alpha = 0.12f * (1f - premiumTorchProgressAt(celebration.value)),
                     )
                 }
             },
@@ -540,30 +551,85 @@ private fun PremiumButton(owned: Boolean, enabled: Boolean, text: LinternaText, 
 
 @Composable
 private fun PremiumFireworks(progress: Float, text: LinternaText, modifier: Modifier = Modifier) {
+    val effectProgress = repeatingCelebrationProgressAt(progress)
     Box(
         modifier = modifier.semantics { contentDescription = text[TextKey.FIREWORKS_A11Y] },
     ) {
         Canvas(Modifier.matchParentSize()) {
-            drawCelebrationConfetti(progress)
-            drawMarqueeLights(progress)
-            drawFirework(progress, 0.00f, 0.16f, 0.18f, FireworkColors[0])
-            drawFirework(progress, 0.06f, 0.83f, 0.16f, FireworkColors[1])
-            drawFirework(progress, 0.14f, 0.50f, 0.28f, FireworkColors[2])
-            drawFirework(progress, 0.22f, 0.24f, 0.40f, FireworkColors[3])
-            drawFirework(progress, 0.30f, 0.77f, 0.38f, FireworkColors[4])
-            drawFirework(progress, 0.38f, 0.10f, 0.56f, FireworkColors[5])
-            drawFirework(progress, 0.44f, 0.91f, 0.58f, FireworkColors[0])
-            drawFirework(progress, 0.50f, 0.40f, 0.60f, FireworkColors[1])
-            drawFirework(progress, 0.56f, 0.68f, 0.64f, FireworkColors[2])
-            drawFirework(progress, 0.64f, 0.18f, 0.76f, FireworkColors[4])
-            drawFirework(progress, 0.70f, 0.82f, 0.78f, FireworkColors[3])
+            val continuousProgress = progress * PremiumCelebrationCycles
+            drawCelebrationConfetti(continuousProgress)
+            drawMarqueeLights(continuousProgress)
+            drawFirework(effectProgress, 0.00f, 0.16f, 0.18f, FireworkColors[0])
+            drawFirework(effectProgress, 0.06f, 0.83f, 0.16f, FireworkColors[1])
+            drawFirework(effectProgress, 0.14f, 0.50f, 0.28f, FireworkColors[2])
+            drawFirework(effectProgress, 0.22f, 0.24f, 0.40f, FireworkColors[3])
+            drawFirework(effectProgress, 0.30f, 0.77f, 0.38f, FireworkColors[4])
+            drawFirework(effectProgress, 0.38f, 0.10f, 0.56f, FireworkColors[5])
+            drawFirework(effectProgress, 0.44f, 0.91f, 0.58f, FireworkColors[0])
+            drawFirework(effectProgress, 0.50f, 0.40f, 0.60f, FireworkColors[1])
+            drawFirework(effectProgress, 0.56f, 0.68f, 0.64f, FireworkColors[2])
+            drawFirework(effectProgress, 0.64f, 0.18f, 0.76f, FireworkColors[4])
+            drawFirework(effectProgress, 0.70f, 0.82f, 0.78f, FireworkColors[3])
         }
+        PremiumCelebrationMessage(
+            message = text[TextKey.PREMIUM_CELEBRATION_CONGRATS],
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(horizontal = 28.dp, vertical = 48.dp),
+        )
         PremiumSlotMachine(
-            progress = progress,
+            progress = effectProgress,
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(horizontal = 30.dp)
                 .clearAndSetSemantics { },
+        )
+        PremiumMiniSlotMachine(
+            progress = offsetCelebrationProgressAt(progress, 0.00f),
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(start = 22.dp, top = 136.dp)
+                .clearAndSetSemantics { },
+        )
+        PremiumMiniSlotMachine(
+            progress = offsetCelebrationProgressAt(progress, 0.24f),
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(end = 22.dp, top = 236.dp)
+                .clearAndSetSemantics { },
+        )
+        PremiumMiniSlotMachine(
+            progress = offsetCelebrationProgressAt(progress, 0.48f),
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(start = 22.dp, bottom = 210.dp)
+                .clearAndSetSemantics { },
+        )
+        PremiumMiniSlotMachine(
+            progress = offsetCelebrationProgressAt(progress, 0.72f),
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = 22.dp, bottom = 104.dp)
+                .clearAndSetSemantics { },
+        )
+    }
+}
+
+@Composable
+private fun PremiumCelebrationMessage(message: String, modifier: Modifier = Modifier) {
+    Surface(
+        modifier = modifier.widthIn(max = 340.dp),
+        color = Color(0xED21172A),
+        shape = RoundedCornerShape(22.dp),
+        shadowElevation = 18.dp,
+    ) {
+        Text(
+            text = "🎉  $message  🎉",
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 14.dp),
+            color = Color(0xFFFFDE7A),
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Black,
+            textAlign = TextAlign.Center,
         )
     }
 }
@@ -612,11 +678,67 @@ private fun PremiumSlotMachine(progress: Float, modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+private fun PremiumMiniSlotMachine(progress: Float, modifier: Modifier = Modifier) {
+    Surface(
+        modifier = modifier.widthIn(min = 116.dp, max = 132.dp),
+        color = Color(0xE82D1B35),
+        shape = RoundedCornerShape(17.dp),
+        shadowElevation = 12.dp,
+    ) {
+        Column(
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 9.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = "✦ 7 · 7 · 7 ✦",
+                color = Color(0xFFFFD86A),
+                fontSize = 9.sp,
+                fontWeight = FontWeight.Black,
+                letterSpacing = 0.5.sp,
+            )
+            Row(
+                modifier = Modifier.padding(top = 6.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                repeat(3) { reelIndex ->
+                    Surface(
+                        modifier = Modifier.size(width = 28.dp, height = 34.dp),
+                        color = Color(0xFFF8EEDA),
+                        shape = RoundedCornerShape(7.dp),
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Text(
+                                text = reelSymbolAt(progress, reelIndex),
+                                color = if (progress >= 0.78f) Color(0xFFE02C54) else Color(0xFF2A1C31),
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Black,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 private fun reelSymbolAt(progress: Float, reelIndex: Int): String {
     if (progress >= 0.78f) return "7"
     val frame = floor(progress.coerceIn(0f, 1f) * 8f).toInt()
     return ReelSymbols[(frame + reelIndex * 2) % ReelSymbols.size]
 }
+
+internal fun premiumTorchProgressAt(progress: Float): Float =
+    (progress / PremiumTorchVisualDurationFraction).coerceIn(0f, 1f)
+
+internal fun repeatingCelebrationProgressAt(progress: Float): Float =
+    if (progress >= 1f) 1f else (progress.coerceAtLeast(0f) * PremiumCelebrationCycles) % 1f
+
+private fun offsetCelebrationProgressAt(progress: Float, offset: Float): Float =
+    if (progress >= 0.96f) 1f else (repeatingCelebrationProgressAt(progress) + offset) % 1f
+
+private fun celebrationPulseAt(progress: Float): Float =
+    ((sin(progress.coerceIn(0f, 1f) * PremiumCelebrationCycles * 2f * PI) + 1f) / 2f).toFloat()
 
 private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCelebrationConfetti(progress: Float) {
     repeat(56) { index ->

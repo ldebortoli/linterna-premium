@@ -176,3 +176,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-31.
 - Decision: crear el SDK aislado en un paso Bash usando `$RUNNER_TEMP` y exportar sus rutas mediante `$GITHUB_ENV` antes de `setup-android`; no usar el contexto `runner` en `jobs.<job>.env`.
 - Motivo: GitHub valida el contexto de `jobs.<job>.env` antes de asignar un runner; `${{ runner.temp }}` en ese nivel invalido por completo el workflow `33411847184` y no llego a crear jobs.
+
+## D-026 - Fiesta Premium prolongada e independiente del flash
+
+- Estado: vigente; amplia D-012 y D-022 sin prolongar la regulacion fisica.
+- Fecha: 2026-08-31.
+- Decision: mantener la curva del flash y su brillo representativo dentro de los primeros tres segundos, pero prolongar la capa festiva a 15 segundos. Repetir cinco rondas de fuegos, confeti y marquesina; mostrar una felicitacion traducida a todo el catalogo y una tragamonedas central más cuatro compactas repartidas por la pantalla, todas terminando en 7·7·7.
+- Motivo: dejar que el flash quede apagado enseguida y conservar durante más tiempo el remate visual que el usuario aprobo, sin convertir la prolongacion en parpadeos fisicos ni en un estrobo de pantalla completa.

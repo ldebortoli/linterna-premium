@@ -23,7 +23,16 @@ class LinternaLocalizationTest {
         LinternaTextCatalog.supportedLanguages.forEach { language ->
             assertTrue("Missing translations for ${language.code}", LinternaTextCatalog.missingKeys(language).isEmpty())
             assertTrue(LinternaTextCatalog.forLanguage(language)[TextKey.TURN_ON].isNotBlank())
+            assertTrue(
+                LinternaTextCatalog.forLanguage(language)[TextKey.PREMIUM_CELEBRATION_CONGRATS].isNotBlank(),
+            )
         }
+        assertEquals(
+            "¡Felicitaciones por tu Apagado Premium!",
+            LinternaTextCatalog.forLanguage(AppLanguage.SPANISH_ARGENTINA)[
+                TextKey.PREMIUM_CELEBRATION_CONGRATS
+            ],
+        )
     }
 
     @Test
