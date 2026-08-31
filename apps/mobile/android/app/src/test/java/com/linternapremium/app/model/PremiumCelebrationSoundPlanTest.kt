@@ -12,6 +12,9 @@ class PremiumCelebrationSoundPlanTest {
         assertEquals(6, PREMIUM_REEL_TONES_PER_ROUND)
         assertEquals(8, PREMIUM_COIN_TONES_PER_ROUND)
         assertEquals(4, PREMIUM_JACKPOT_CHIMES_PER_ROUND)
+        assertEquals(5, PREMIUM_VICTORY_FANFARE_COUNT)
+        assertEquals(5, PREMIUM_HURRA_CHANT_COUNT)
+        assertEquals(5, PREMIUM_CROWD_CHEER_COUNT)
     }
 
     @Test
@@ -20,5 +23,13 @@ class PremiumCelebrationSoundPlanTest {
 
         assertEquals(15 * PremiumCasinoSoundSynthesizer.SAMPLE_RATE, pcm.size)
         assertEquals(true, pcm.any { it.toInt() != 0 })
+    }
+
+    @Test
+    fun `final trumpet victory remains audible through the final instant`() {
+        val pcm = PremiumCasinoSoundSynthesizer.synthesize()
+        val finalWindow = pcm.takeLast(PremiumCasinoSoundSynthesizer.SAMPLE_RATE / 10)
+
+        assertEquals(true, finalWindow.any { kotlin.math.abs(it.toInt()) > 500 })
     }
 }

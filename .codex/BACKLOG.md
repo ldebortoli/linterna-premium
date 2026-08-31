@@ -12,6 +12,7 @@
 
 # DONE
 
+- [2026-08-31] Entregar Linterna PREMIUM 0.4.6 (versionCode 14): reforzar cada ronda del audio Premium con fanfarrias de cuatro notas, ovacion y coro sintetizado de `¡hurra!`, más una trompeta final hasta el segundo 15; verificar 27/27 tests, duración y cierre audible, cobertura 100% y lint sin generar APK.
 - [2026-08-31] Entregar Linterna PREMIUM 0.4.5 (versionCode 13): conservar el apagado fisico en menos de 3 segundos y llevar toda la fiesta a 15 segundos con 144 piezas de confeti/monedas, 36 premios flotantes, nueve tragamonedas y audio PCM sintetizado de rodillos, monedas, campanadas y jackpot; verificar 26/26 tests, pista no silenciosa de duración exacta, cobertura 100% y lint sin generar APK.
 - [2026-08-31] Entregar Linterna PREMIUM 0.4.4 (versionCode 12): prolongar la fiesta Premium a 15 segundos independientemente del apagado fisico de menos de 3 segundos, repetir cinco rondas visuales, agregar felicitacion en 21 idiomas y cuatro tragamonedas compactas además de la central; verificar 24/24 tests, cobertura 100% y lint sin generar APK.
 - [2026-08-31] Estabilizar CI por pedido explicito: diagnosticar el workflow inválido `33411847184`, mover la inicialización del SDK aislado desde `jobs.quality.env` a un paso Bash con `$RUNNER_TEMP`/`$GITHUB_ENV`, validar localmente contratos, cobertura 100% y lint, y monitorear el run `33412352768` hasta verde sin generar APK.

@@ -1,6 +1,6 @@
 {
   "name": "linterna-premium-mobile",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "private": true,
   "description": "Comandos portables para la aplicacion Android nativa.",
   "scripts": {

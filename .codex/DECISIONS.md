@@ -190,3 +190,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-31.
 - Decision: mantener toda la fiesta Premium en 15 segundos y la linterna apagada dentro de los primeros 3. Elevar el contenido a 144 piezas de confeti/monedas, 36 premios flotantes y nueve tragamonedas. Sintetizar en memoria una pista PCM mono de 15 segundos con clics de rodillo, monedas, campanadas y acordes de jackpot; reproducirla mediante `AudioTrack` con uso multimedia/juego, sin permiso nuevo ni archivo de audio versionado. Cancelar y liberar el audio al volver a encender, restablecer demo o destruir la actividad.
 - Motivo: sumar el feedback de casino pedido por el usuario con sincronizacion exacta, volumen controlado por Android y sin añadir una descarga, credencial, permiso sensible ni audio que sobreviva a la experiencia visible.
+
+## D-028 - Fanfarria, ovacion y hurra sintetizados
+
+- Estado: vigente; amplia D-027 sin cambiar la duración.
+- Fecha: 2026-08-31.
+- Decision: añadir a cada una de las cinco rondas una fanfarria de cuatro notas con timbre de trompeta, una ovacion filtrada y un coro sintetizado de `¡hurra!`; reforzar la quinta ronda con una trompeta aguda que se extiende hasta el segundo 15. Conservar la pista en PCM local, el canal multimedia, la cancelacion existente y el apagado fisico dentro de los primeros 3 segundos.
+- Motivo: aumentar la sensación de victoria y premio pedida por el usuario sin depender de TTS, descargas o grabaciones externas, y sin prolongar ni hacer parpadear el flash.
