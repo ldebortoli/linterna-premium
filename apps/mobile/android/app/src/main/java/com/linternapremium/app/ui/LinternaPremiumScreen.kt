@@ -558,6 +558,7 @@ private fun PremiumFireworks(progress: Float, text: LinternaText, modifier: Modi
         Canvas(Modifier.matchParentSize()) {
             val continuousProgress = progress * PremiumCelebrationCycles
             drawCelebrationConfetti(continuousProgress)
+            drawCelebrationPrizes(continuousProgress)
             drawMarqueeLights(continuousProgress)
             drawFirework(effectProgress, 0.00f, 0.16f, 0.18f, FireworkColors[0])
             drawFirework(effectProgress, 0.06f, 0.83f, 0.16f, FireworkColors[1])
@@ -610,6 +611,34 @@ private fun PremiumFireworks(progress: Float, text: LinternaText, modifier: Modi
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(end = 22.dp, bottom = 104.dp)
+                .clearAndSetSemantics { },
+        )
+        PremiumMicroSlotMachine(
+            progress = offsetCelebrationProgressAt(progress, 0.12f),
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 318.dp)
+                .clearAndSetSemantics { },
+        )
+        PremiumMicroSlotMachine(
+            progress = offsetCelebrationProgressAt(progress, 0.36f),
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .padding(start = 7.dp, bottom = 116.dp)
+                .clearAndSetSemantics { },
+        )
+        PremiumMicroSlotMachine(
+            progress = offsetCelebrationProgressAt(progress, 0.60f),
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .padding(end = 7.dp, top = 124.dp)
+                .clearAndSetSemantics { },
+        )
+        PremiumMicroSlotMachine(
+            progress = offsetCelebrationProgressAt(progress, 0.84f),
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 28.dp)
                 .clearAndSetSemantics { },
         )
     }
@@ -722,6 +751,49 @@ private fun PremiumMiniSlotMachine(progress: Float, modifier: Modifier = Modifie
     }
 }
 
+@Composable
+private fun PremiumMicroSlotMachine(progress: Float, modifier: Modifier = Modifier) {
+    Surface(
+        modifier = modifier.widthIn(min = 88.dp, max = 96.dp),
+        color = Color(0xE6291832),
+        shape = RoundedCornerShape(14.dp),
+        shadowElevation = 10.dp,
+    ) {
+        Column(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 7.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = "✦ 777 ✦",
+                color = Color(0xFFFFD86A),
+                fontSize = 8.sp,
+                fontWeight = FontWeight.Black,
+            )
+            Row(
+                modifier = Modifier.padding(top = 4.dp),
+                horizontalArrangement = Arrangement.spacedBy(3.dp),
+            ) {
+                repeat(3) { reelIndex ->
+                    Surface(
+                        modifier = Modifier.size(width = 20.dp, height = 25.dp),
+                        color = Color(0xFFF8EEDA),
+                        shape = RoundedCornerShape(5.dp),
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Text(
+                                text = reelSymbolAt(progress, reelIndex),
+                                color = if (progress >= 0.78f) Color(0xFFE02C54) else Color(0xFF2A1C31),
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Black,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 private fun reelSymbolAt(progress: Float, reelIndex: Int): String {
     if (progress >= 0.78f) return "7"
     val frame = floor(progress.coerceIn(0f, 1f) * 8f).toInt()
@@ -741,7 +813,7 @@ private fun celebrationPulseAt(progress: Float): Float =
     ((sin(progress.coerceIn(0f, 1f) * PremiumCelebrationCycles * 2f * PI) + 1f) / 2f).toFloat()
 
 private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCelebrationConfetti(progress: Float) {
-    repeat(56) { index ->
+    repeat(144) { index ->
         val lane = ((index * 47) % 101) / 100f
         val offset = ((index * 29) % 113) / 113f
         val fall = (offset + progress * (1.10f + (index % 5) * 0.09f)) % 1.12f
@@ -772,6 +844,123 @@ private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCelebrationConf
             }
         }
     }
+}
+
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCelebrationPrizes(progress: Float) {
+    repeat(36) { index ->
+        val lane = ((index * 61 + 13) % 103) / 102f
+        val offset = ((index * 37 + 7) % 127) / 127f
+        val fall = (offset + progress * (0.72f + (index % 4) * 0.08f)) % 1.16f
+        val center = Offset(
+            x = size.width * lane + cos((progress * 3.4f + index) * 1.3f) * 18.dp.toPx(),
+            y = size.height * (fall - 0.08f),
+        )
+        val prizeScale = 0.82f + (index % 4) * 0.09f
+        rotate(degrees = sin(progress * 2f + index) * 13f, pivot = center) {
+            when (index % 4) {
+                0 -> drawPrizeGift(center, prizeScale, FireworkColors[index % FireworkColors.size])
+                1 -> drawPrizeDiamond(center, prizeScale)
+                2 -> drawPrizeCrown(center, prizeScale)
+                else -> drawPrizeCoin(center, prizeScale)
+            }
+        }
+    }
+}
+
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawPrizeGift(
+    center: Offset,
+    scale: Float,
+    color: Color,
+) {
+    val width = 19.dp.toPx() * scale
+    val height = 17.dp.toPx() * scale
+    drawRoundRect(
+        color = color.copy(alpha = 0.94f),
+        topLeft = Offset(center.x - width / 2f, center.y - height / 2f),
+        size = Size(width, height),
+        cornerRadius = androidx.compose.ui.geometry.CornerRadius(3.dp.toPx()),
+    )
+    drawRect(
+        color = Color(0xFFFFE994),
+        topLeft = Offset(center.x - 2.dp.toPx() * scale, center.y - height / 2f),
+        size = Size(4.dp.toPx() * scale, height),
+    )
+    drawRect(
+        color = Color(0xFFFFE994),
+        topLeft = Offset(center.x - width / 2f, center.y - 2.dp.toPx() * scale),
+        size = Size(width, 4.dp.toPx() * scale),
+    )
+    drawCircle(
+        Color(0xFFFFD166),
+        3.5.dp.toPx() * scale,
+        center + Offset(-3.dp.toPx() * scale, -height / 2f),
+    )
+    drawCircle(
+        Color(0xFFFFD166),
+        3.5.dp.toPx() * scale,
+        center + Offset(3.dp.toPx() * scale, -height / 2f),
+    )
+}
+
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawPrizeDiamond(center: Offset, scale: Float) {
+    val halfWidth = 10.dp.toPx() * scale
+    val halfHeight = 12.dp.toPx() * scale
+    val path = Path().apply {
+        moveTo(center.x, center.y - halfHeight)
+        lineTo(center.x + halfWidth, center.y - halfHeight * 0.25f)
+        lineTo(center.x, center.y + halfHeight)
+        lineTo(center.x - halfWidth, center.y - halfHeight * 0.25f)
+        close()
+    }
+    drawPath(path, Color(0xFF75E8FF).copy(alpha = 0.94f))
+    drawLine(
+        color = Color.White.copy(alpha = 0.80f),
+        start = Offset(center.x, center.y - halfHeight),
+        end = Offset(center.x, center.y + halfHeight),
+        strokeWidth = 1.5.dp.toPx(),
+    )
+}
+
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawPrizeCrown(center: Offset, scale: Float) {
+    val width = 21.dp.toPx() * scale
+    val height = 15.dp.toPx() * scale
+    val path = Path().apply {
+        moveTo(center.x - width / 2f, center.y + height / 2f)
+        lineTo(center.x - width / 2f, center.y - height * 0.35f)
+        lineTo(center.x - width * 0.20f, center.y)
+        lineTo(center.x, center.y - height / 2f)
+        lineTo(center.x + width * 0.20f, center.y)
+        lineTo(center.x + width / 2f, center.y - height * 0.35f)
+        lineTo(center.x + width / 2f, center.y + height / 2f)
+        close()
+    }
+    drawPath(path, Color(0xFFFFD45C).copy(alpha = 0.96f))
+    drawLine(
+        color = Color(0xFFB97916),
+        start = Offset(center.x - width / 2f, center.y + height * 0.23f),
+        end = Offset(center.x + width / 2f, center.y + height * 0.23f),
+        strokeWidth = 2.dp.toPx(),
+    )
+}
+
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawPrizeCoin(center: Offset, scale: Float) {
+    val radius = 10.dp.toPx() * scale
+    drawCircle(Color(0xFFFFD45C).copy(alpha = 0.96f), radius, center)
+    drawCircle(Color(0xFFB97916).copy(alpha = 0.86f), radius * 0.70f, center)
+    drawLine(
+        color = Color(0xFFFFF0A8),
+        start = Offset(center.x - radius * 0.38f, center.y - radius * 0.35f),
+        end = Offset(center.x + radius * 0.40f, center.y - radius * 0.35f),
+        strokeWidth = 2.dp.toPx(),
+        cap = StrokeCap.Round,
+    )
+    drawLine(
+        color = Color(0xFFFFF0A8),
+        start = Offset(center.x + radius * 0.40f, center.y - radius * 0.35f),
+        end = Offset(center.x - radius * 0.20f, center.y + radius * 0.42f),
+        strokeWidth = 2.dp.toPx(),
+        cap = StrokeCap.Round,
+    )
 }
 
 private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawMarqueeLights(progress: Float) {

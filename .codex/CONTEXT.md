@@ -35,7 +35,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - El wrapper Linux `apps/mobile/android/gradlew` se versiona como ejecutable (`100755`) para que GitHub Actions pueda iniciar Gradle.
 - `.gitattributes` fija LF para texto, conserva CRLF en scripts `.bat` y marca formatos binarios para que los checkouts de Windows y Linux sean deterministas.
 - `.gitignore` excluye `.kotlin/` además de los directorios de Gradle/build para no versionar cachés locales del compilador.
-- Baseline verificado: 24 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el alcance de cobertura y Android Lint sin observaciones.
+- Baseline verificado: 26 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el alcance de cobertura y Android Lint sin observaciones.
 
 ## Convenciones
 
@@ -45,7 +45,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - La version canonica vive en `version.properties`; `app.json` y Gradle deben coincidir.
 - Ningun identificador real de anuncios, producto o credencial se versiona como secreto. Los valores publicables de Google se inyectan por propiedades de Gradle.
 - El apagado normal corta la linterna inmediatamente. Abrir o cancelar la confirmacion Premium, ir a Inicio, cambiar de app, abrir Google Play o cerrar la actividad conservan el flash encendido mientras Android mantenga el recurso; una compra exitosa inicia la secuencia Premium y garantiza el apagado final. Con Premium ya activo, esa misma secuencia lenta de menos de tres segundos regula la potencia cuando el hardware lo permite.
-- El apagado plebeyo no muestra aviso posterior. La celebracion Premium dura 15 segundos aunque la curva fisica y su reflejo visual terminen en los primeros 3: repite cinco rondas de once fuegos artificiales, 56 piezas de confeti/monedas y luces suaves de marquesina, muestra una felicitacion localizada y distribuye una tragamonedas central más cuatro compactas que terminan en 7·7·7. Las luces pulsan por debajo de tres cambios por segundo y no usan un estrobo de pantalla completa.
+- El apagado plebeyo no muestra aviso posterior. La celebracion Premium audiovisual dura 15 segundos aunque la curva fisica y su reflejo visual terminen en los primeros 3: repite cinco rondas de once fuegos artificiales, 144 piezas de confeti/monedas, 36 regalos/diamantes/coronas/premios y luces suaves de marquesina; muestra una felicitacion localizada y distribuye una tragamonedas central más ocho compactas que terminan en 7·7·7. El audio sintetizado usa el canal multimedia sin permisos para reproducir clics de rodillo, cascadas de monedas, campanadas y jackpot durante los 15 segundos. Las luces pulsan por debajo de tres cambios por segundo y no usan un estrobo de pantalla completa.
 - La variante `demo` simula la linterna únicamente cuando el dispositivo no tiene flash, para poder probar el recorrido en emulador; la variante `play` nunca simula hardware.
 - La variante `demo` permite borrar la licencia simulada y volver a la edicion plebeya; la variante `play` no expone ni ejecuta este restablecimiento.
 - La elección de idioma se guarda localmente; la primera apertura usa el idioma y la región compatibles del dispositivo y cae a español argentino cuando no coincide con el catálogo. El menú se ancla debajo del botón de idiomas, limita su alto a 360 dp y permite desplazamiento interno.

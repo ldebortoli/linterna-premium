@@ -12,6 +12,7 @@
 
 # DONE
 
+- [2026-08-31] Entregar Linterna PREMIUM 0.4.5 (versionCode 13): conservar el apagado fisico en menos de 3 segundos y llevar toda la fiesta a 15 segundos con 144 piezas de confeti/monedas, 36 premios flotantes, nueve tragamonedas y audio PCM sintetizado de rodillos, monedas, campanadas y jackpot; verificar 26/26 tests, pista no silenciosa de duración exacta, cobertura 100% y lint sin generar APK.
 - [2026-08-31] Entregar Linterna PREMIUM 0.4.4 (versionCode 12): prolongar la fiesta Premium a 15 segundos independientemente del apagado fisico de menos de 3 segundos, repetir cinco rondas visuales, agregar felicitacion en 21 idiomas y cuatro tragamonedas compactas además de la central; verificar 24/24 tests, cobertura 100% y lint sin generar APK.
 - [2026-08-31] Estabilizar CI por pedido explicito: diagnosticar el workflow inválido `33411847184`, mover la inicialización del SDK aislado desde `jobs.quality.env` a un paso Bash con `$RUNNER_TEMP`/`$GITHUB_ENV`, validar localmente contratos, cobertura 100% y lint, y monitorear el run `33412352768` hasta verde sin generar APK.
 - [2026-08-31] Corregir el CI fallido `33409711980`: pruebas y cobertura pasaban, pero Lint detectaba la API 37 preinstalada y elevaba `targetSdk 36` a `OldTargetApi`; aislar el SDK del job en `runner.temp`, fijar plataforma/build-tools 36, ignorar `.kotlin/` y validar contratos, 22/22 tests, cobertura 100% y lint local sin generar APK.

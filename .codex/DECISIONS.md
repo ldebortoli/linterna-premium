@@ -183,3 +183,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-31.
 - Decision: mantener la curva del flash y su brillo representativo dentro de los primeros tres segundos, pero prolongar la capa festiva a 15 segundos. Repetir cinco rondas de fuegos, confeti y marquesina; mostrar una felicitacion traducida a todo el catalogo y una tragamonedas central más cuatro compactas repartidas por la pantalla, todas terminando en 7·7·7.
 - Motivo: dejar que el flash quede apagado enseguida y conservar durante más tiempo el remate visual que el usuario aprobo, sin convertir la prolongacion en parpadeos fisicos ni en un estrobo de pantalla completa.
+
+## D-027 - Casino audiovisual sintetizado y cancelable
+
+- Estado: vigente; amplia D-026.
+- Fecha: 2026-08-31.
+- Decision: mantener toda la fiesta Premium en 15 segundos y la linterna apagada dentro de los primeros 3. Elevar el contenido a 144 piezas de confeti/monedas, 36 premios flotantes y nueve tragamonedas. Sintetizar en memoria una pista PCM mono de 15 segundos con clics de rodillo, monedas, campanadas y acordes de jackpot; reproducirla mediante `AudioTrack` con uso multimedia/juego, sin permiso nuevo ni archivo de audio versionado. Cancelar y liberar el audio al volver a encender, restablecer demo o destruir la actividad.
+- Motivo: sumar el feedback de casino pedido por el usuario con sincronizacion exacta, volumen controlado por Android y sin añadir una descarga, credencial, permiso sensible ni audio que sobreviva a la experiencia visible.

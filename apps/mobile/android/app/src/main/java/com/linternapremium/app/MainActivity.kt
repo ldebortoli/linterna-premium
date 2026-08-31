@@ -29,6 +29,7 @@ import com.linternapremium.app.model.LinternaState
 import com.linternapremium.app.model.PremiumEffect
 import com.linternapremium.app.model.TorchResult
 import com.linternapremium.app.platform.AndroidTorchPort
+import com.linternapremium.app.platform.PremiumCelebrationSoundPlayer
 import com.linternapremium.app.platform.PreferencesPremiumStore
 import com.linternapremium.app.ports.TorchPort
 import com.linternapremium.app.ui.LinternaPremiumScreen
@@ -41,9 +42,11 @@ class MainActivity : ComponentActivity(), BillingEvents {
     private lateinit var engine: LinternaEngine
     private lateinit var torchPort: TorchPort
     private lateinit var premiumSequenceRunner: PremiumSequenceRunner
+    private lateinit var premiumCelebrationSoundPlayer: PremiumCelebrationSoundPlayer
     private lateinit var languageStore: PreferencesLanguageStore
     private var billingGateway: BillingGateway? = null
     private var premiumSequenceJob: Job? = null
+    private var premiumCelebrationSoundJob: Job? = null
     private var uiState by mutableStateOf(LinternaState())
     private var adsReady by mutableStateOf(false)
     private var selectedLanguage by mutableStateOf(AppLanguage.SPANISH_ARGENTINA)
@@ -53,7 +56,12 @@ class MainActivity : ComponentActivity(), BillingEvents {
     private val cameraPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission(),
     ) { granted ->
-        uiState = if (granted) engine.turnOn() else engine.permissionDenied()
+        uiState = if (granted) {
+            premiumCelebrationSoundJob?.cancel()
+            engine.turnOn()
+        } else {
+            engine.permissionDenied()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +77,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
             text = { currentText },
         )
         premiumSequenceRunner = PremiumSequenceRunner(torchPort, pause = { delay(it) })
+        premiumCelebrationSoundPlayer = PremiumCelebrationSoundPlayer()
         engine = LinternaEngine(
             torch = torchPort,
             premiumStore = PreferencesPremiumStore(this),
@@ -99,7 +108,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
                     isDemo = BuildConfig.DEMO_BILLING,
                     onTurnOn = ::requestTorch,
                     onPremium = ::pressPremium,
-                    onNormalOff = { uiState = engine.turnOffNormally() },
+                    onNormalOff = ::turnOffNormally,
                     onConfirmPurchase = ::confirmPremiumPurchase,
                     onDismissPurchase = { uiState = engine.dismissPurchase() },
                     onDismissOffer = { uiState = engine.dismissPremiumOffer() },
@@ -119,6 +128,8 @@ class MainActivity : ComponentActivity(), BillingEvents {
 
     override fun onDestroy() {
         premiumSequenceJob?.cancel()
+        premiumCelebrationSoundJob?.cancel()
+        if (::premiumCelebrationSoundPlayer.isInitialized) premiumCelebrationSoundPlayer.close()
         if (::torchPort.isInitialized) torchPort.observeState(null)
         billingGateway?.close()
         super.onDestroy()
@@ -141,6 +152,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
 
     private fun requestTorch() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            premiumCelebrationSoundJob?.cancel()
             uiState = engine.turnOn()
         } else {
             cameraPermission.launch(Manifest.permission.CAMERA)
@@ -158,6 +170,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
     private fun resetDemoPremium() {
         if (!BuildConfig.DEMO_BILLING) return
         premiumSequenceJob?.cancel()
+        premiumCelebrationSoundJob?.cancel()
         adsReady = false
         uiState = engine.resetPremiumForTesting()
         initializeAdsIfEligible()
@@ -185,12 +198,21 @@ class MainActivity : ComponentActivity(), BillingEvents {
 
     private fun runPremiumSequence() {
         premiumSequenceJob?.cancel()
+        premiumCelebrationSoundJob?.cancel()
+        premiumCelebrationSoundJob = lifecycleScope.launch {
+            premiumCelebrationSoundPlayer.play()
+        }
         premiumSequenceJob = lifecycleScope.launch {
             uiState = when (val result = premiumSequenceRunner.run()) {
                 TorchResult.Success -> engine.premiumCelebrationCompleted()
                 is TorchResult.Failure -> engine.premiumCelebrationFailed(result.message)
             }
         }
+    }
+
+    private fun turnOffNormally() {
+        premiumCelebrationSoundJob?.cancel()
+        uiState = engine.turnOffNormally()
     }
 
     private fun selectLanguage(language: AppLanguage) {

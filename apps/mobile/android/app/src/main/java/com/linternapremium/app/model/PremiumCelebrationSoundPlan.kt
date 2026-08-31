@@ -1,0 +1,10 @@
+package com.linternapremium.app.model
+
+internal const val PREMIUM_SOUND_ROUND_COUNT = 5
+internal const val PREMIUM_SOUND_ROUND_DURATION_MILLIS = 3_000L
+internal const val PREMIUM_SOUND_DURATION_MILLIS =
+    PREMIUM_SOUND_ROUND_COUNT * PREMIUM_SOUND_ROUND_DURATION_MILLIS
+internal const val PREMIUM_REEL_TONES_PER_ROUND = 6
+internal const val PREMIUM_COIN_TONES_PER_ROUND = 8
+internal const val PREMIUM_JACKPOT_CHIMES_PER_ROUND = 4
+
