@@ -148,3 +148,17 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-28.
 - Decision: no apagar ni limpiar el estado del flash en `onPause`, al ir a Inicio, cambiar de app, abrir Google Play ni cerrar la actividad. Solo la accion plebeya, la secuencia Premium completada o el propio sistema deben apagarlo. Mantener la secuencia Premium activa al perder foco para que complete su apagado; cancelarla en `onDestroy` solo si todavia estaba ejecutandose, confiando en su `finally`. No agregar un servicio persistente para intentar sobrevivir a la muerte del proceso.
 - Motivo: la persistencia del flash fuera de la app forma parte central del chiste; Android puede apagarlo al matar el proceso, reclamar la camara o aplicar sus propias restricciones y ese limite se acepta.
+
+## D-022 - Contraste entre apagado plebeyo y celebracion Premium
+
+- Estado: vigente; amplía D-012 y D-016.
+- Fecha: 2026-08-31.
+- Decision: el apagado plebeyo debe volver directamente al estado listo sin aviso de exito. La celebracion Premium debe concentrar el feedback visual con once fuegos artificiales, confeti y monedas, luces de marquesina pulsantes y tres rodillos que terminan en 7·7·7, además del pulso y la curva de potencia existentes. Mantener las luces decorativas por debajo de tres cambios por segundo y evitar estrobos de pantalla completa.
+- Motivo: hacer deliberadamente austera la salida gratuita y convertir el Premium en un remate mucho más absurdo y gratificante sin introducir destellos rápidos innecesarios.
+
+## D-023 - Finales de linea deterministas
+
+- Estado: vigente.
+- Fecha: 2026-08-31.
+- Decision: versionar `.gitattributes` con LF canonico para texto, CRLF explicito para `.bat` y formatos de imagen, Java archive y keystore marcados como binarios.
+- Motivo: evitar falsos fallos o reescrituras masivas de formato entre el desarrollo en Windows y el CI en Linux.

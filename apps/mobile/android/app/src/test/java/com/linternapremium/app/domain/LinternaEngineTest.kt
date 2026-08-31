@@ -52,7 +52,7 @@ class LinternaEngineTest {
 
         val success = engine.turnOffNormally()
         assertFalse(success.isTorchOn)
-        assertTrue(success.notice!!.contains("Dignidad"))
+        assertNull(success.notice)
         assertNull(success.error)
 
         engine.turnOn()
@@ -232,7 +232,7 @@ class LinternaEngineTest {
     @Test
     fun `clearNotice removes an existing notice`() {
         val engine = LinternaEngine(FakeTorch(), FakePremiumStore())
-        engine.turnOffNormally()
+        engine.billingPurchased()
 
         assertNull(engine.clearNotice().notice)
     }

@@ -57,6 +57,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.role
@@ -73,6 +74,7 @@ import com.linternapremium.app.localization.LinternaTextCatalog
 import com.linternapremium.app.localization.TextKey
 import kotlin.math.PI
 import kotlin.math.cos
+import kotlin.math.floor
 import kotlin.math.sin
 
 private val PremiumGradient = Brush.horizontalGradient(
@@ -88,7 +90,11 @@ private val FireworkColors = listOf(
     Color(0xFFE26D9E),
     Color(0xFF9D6CFF),
     Color(0xFF6DD6C2),
+    Color(0xFFFF8A5B),
+    Color(0xFF65B8FF),
 )
+
+private val ReelSymbols = listOf("7", "★", "♦", "♛", "●")
 
 @Composable
 fun LinternaPremiumScreen(
@@ -534,14 +540,142 @@ private fun PremiumButton(owned: Boolean, enabled: Boolean, text: LinternaText, 
 
 @Composable
 private fun PremiumFireworks(progress: Float, text: LinternaText, modifier: Modifier = Modifier) {
-    Canvas(
+    Box(
         modifier = modifier.semantics { contentDescription = text[TextKey.FIREWORKS_A11Y] },
     ) {
-        drawFirework(progress, 0.00f, 0.20f, 0.24f, FireworkColors[0])
-        drawFirework(progress, 0.16f, 0.78f, 0.20f, FireworkColors[1])
-        drawFirework(progress, 0.32f, 0.46f, 0.38f, FireworkColors[2])
-        drawFirework(progress, 0.50f, 0.82f, 0.48f, FireworkColors[3])
-        drawFirework(progress, 0.66f, 0.24f, 0.53f, FireworkColors[1])
+        Canvas(Modifier.matchParentSize()) {
+            drawCelebrationConfetti(progress)
+            drawMarqueeLights(progress)
+            drawFirework(progress, 0.00f, 0.16f, 0.18f, FireworkColors[0])
+            drawFirework(progress, 0.06f, 0.83f, 0.16f, FireworkColors[1])
+            drawFirework(progress, 0.14f, 0.50f, 0.28f, FireworkColors[2])
+            drawFirework(progress, 0.22f, 0.24f, 0.40f, FireworkColors[3])
+            drawFirework(progress, 0.30f, 0.77f, 0.38f, FireworkColors[4])
+            drawFirework(progress, 0.38f, 0.10f, 0.56f, FireworkColors[5])
+            drawFirework(progress, 0.44f, 0.91f, 0.58f, FireworkColors[0])
+            drawFirework(progress, 0.50f, 0.40f, 0.60f, FireworkColors[1])
+            drawFirework(progress, 0.56f, 0.68f, 0.64f, FireworkColors[2])
+            drawFirework(progress, 0.64f, 0.18f, 0.76f, FireworkColors[4])
+            drawFirework(progress, 0.70f, 0.82f, 0.78f, FireworkColors[3])
+        }
+        PremiumSlotMachine(
+            progress = progress,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 30.dp)
+                .clearAndSetSemantics { },
+        )
+    }
+}
+
+@Composable
+private fun PremiumSlotMachine(progress: Float, modifier: Modifier = Modifier) {
+    Surface(
+        modifier = modifier.widthIn(min = 220.dp, max = 290.dp),
+        color = Color(0xF221172A),
+        shape = RoundedCornerShape(24.dp),
+        shadowElevation = 18.dp,
+    ) {
+        Column(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 13.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = "✦  7 · 7 · 7  ✦",
+                color = Color(0xFFFFD86A),
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Black,
+                letterSpacing = 1.2.sp,
+            )
+            Row(
+                modifier = Modifier.padding(top = 9.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                repeat(3) { reelIndex ->
+                    Surface(
+                        modifier = Modifier.size(width = 58.dp, height = 64.dp),
+                        color = Color(0xFFF8EEDA),
+                        shape = RoundedCornerShape(12.dp),
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Text(
+                                text = reelSymbolAt(progress, reelIndex),
+                                color = if (progress >= 0.78f) Color(0xFFE02C54) else Color(0xFF2A1C31),
+                                fontSize = 30.sp,
+                                fontWeight = FontWeight.Black,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+private fun reelSymbolAt(progress: Float, reelIndex: Int): String {
+    if (progress >= 0.78f) return "7"
+    val frame = floor(progress.coerceIn(0f, 1f) * 8f).toInt()
+    return ReelSymbols[(frame + reelIndex * 2) % ReelSymbols.size]
+}
+
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCelebrationConfetti(progress: Float) {
+    repeat(56) { index ->
+        val lane = ((index * 47) % 101) / 100f
+        val offset = ((index * 29) % 113) / 113f
+        val fall = (offset + progress * (1.10f + (index % 5) * 0.09f)) % 1.12f
+        val center = Offset(
+            x = size.width * lane + sin((progress * 5f + index) * 1.7f) * 13.dp.toPx(),
+            y = size.height * (fall - 0.06f),
+        )
+        val color = FireworkColors[index % FireworkColors.size]
+        if (index % 4 == 0) {
+            drawCircle(
+                color = Color(0xFFFFD45C).copy(alpha = 0.90f),
+                radius = (4 + index % 3).dp.toPx(),
+                center = center,
+            )
+            drawCircle(
+                color = Color(0xFFB97916).copy(alpha = 0.85f),
+                radius = (2 + index % 2).dp.toPx(),
+                center = center,
+            )
+        } else {
+            rotate(degrees = progress * 540f + index * 31f, pivot = center) {
+                drawRoundRect(
+                    color = color.copy(alpha = 0.88f),
+                    topLeft = Offset(center.x - 3.dp.toPx(), center.y - 6.dp.toPx()),
+                    size = Size(6.dp.toPx(), 12.dp.toPx()),
+                    cornerRadius = androidx.compose.ui.geometry.CornerRadius(1.5.dp.toPx()),
+                )
+            }
+        }
+    }
+}
+
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawMarqueeLights(progress: Float) {
+    val inset = 13.dp.toPx()
+    val bulbRadius = 4.5.dp.toPx()
+    val horizontalCount = 11
+    val verticalCount = 18
+    var lightIndex = 0
+
+    fun bulb(center: Offset) {
+        val wave = (sin(progress * (PI * 8.0) + lightIndex * 0.82) + 1.0).toFloat() / 2f
+        val color = FireworkColors[lightIndex % FireworkColors.size]
+        drawCircle(color.copy(alpha = 0.16f + wave * 0.28f), bulbRadius * 2.2f, center)
+        drawCircle(color.copy(alpha = 0.38f + wave * 0.62f), bulbRadius, center)
+        lightIndex += 1
+    }
+
+    repeat(horizontalCount) { index ->
+        val x = inset + (size.width - inset * 2f) * index / (horizontalCount - 1)
+        bulb(Offset(x, inset))
+        bulb(Offset(x, size.height - inset))
+    }
+    repeat(verticalCount - 2) { index ->
+        val y = inset + (size.height - inset * 2f) * (index + 1) / (verticalCount - 1)
+        bulb(Offset(inset, y))
+        bulb(Offset(size.width - inset, y))
     }
 }
 
@@ -558,8 +692,8 @@ private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawFirework(
     val center = Offset(size.width * centerX, size.height * centerY)
     val radius = size.minDimension * (0.04f + 0.18f * FastOutSlowInEasing.transform(phase))
     val alpha = (1f - phase) * 0.95f
-    repeat(16) { index ->
-        val angle = (2.0 * PI * index / 16.0).toFloat()
+    repeat(20) { index ->
+        val angle = (2.0 * PI * index / 20.0).toFloat()
         val directionX = cos(angle)
         val directionY = sin(angle)
         val start = Offset(

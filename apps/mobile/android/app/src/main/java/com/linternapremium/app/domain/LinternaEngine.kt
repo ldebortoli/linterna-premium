@@ -57,7 +57,7 @@ class LinternaEngine(
                 showPremiumOffer = false,
                 isPremiumCelebrating = false,
                 dismissedCelebrationSequence = state.celebrationSequence,
-                notice = text()[TextKey.NORMAL_OFF_NOTICE],
+                notice = null,
                 error = null,
                 errorTarget = null,
             )

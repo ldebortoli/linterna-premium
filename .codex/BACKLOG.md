@@ -12,6 +12,8 @@
 
 # DONE
 
+- [2026-08-31] Entregar Linterna PREMIUM 0.4.3 (versionCode 11): quitar todo aviso posterior al apagado plebeyo y ampliar la celebración Premium a once fuegos artificiales, 56 piezas de confeti/monedas, luces suaves de marquesina y tragamonedas 7·7·7; verificar 22/22 tests, cobertura 100% y lint sin generar APK.
+- [2026-08-31] Agregar `.gitattributes` con finales de linea deterministas y formatos binarios explicitos; verificar el mismo control del proyecto desde un checkout limpio con `core.autocrlf=true` antes del push.
 - [2026-08-28] Entregar Linterna PREMIUM 0.4.2 (versionCode 10): retirar el apagado de `onPause` para conservar el flash al ir a Inicio, cambiar de app, abrir Google Play o cerrar la actividad, aceptando que Android puede apagarlo al matar el proceso; verificar 22/22 tests, cobertura 100% y lint sin generar APK.
 - [2026-08-28] Entregar Linterna PREMIUM 0.4.1 (versionCode 9): conservar el flash al abrir/cancelar la confirmación Premium, iniciar el apagado especial después de una compra exitosa, mantener el corte al salir/cerrar y sincronizar la UI con una linterna encendida externamente mediante `TorchCallback`; verificar 23/23 tests, cobertura 100% y lint sin generar APK.
 - [2026-08-28] Entregar Linterna PREMIUM 0.4.0 (versionCode 8): anclar el dropdown debajo del botón de idiomas, limitarlo a 360 dp con scroll y ampliar la traducción integral a las 18 opciones reales de Galerazo Bot más mandarín, cantonés y coreano; verificar 21/21 tests, cobertura 100% y lint sin generar APK.

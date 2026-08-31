@@ -43,6 +43,10 @@ if (errors.length === 0) {
     errors.push("La compra debe exigir la confirmacion previa antes de abrir Google Play");
   }
   if (!engine.includes("fun turnOffNormally")) errors.push("Falta el apagado normal gratuito");
+  const normalOffMethod = engine.slice(engine.indexOf("fun turnOffNormally"), engine.indexOf("fun pressPremium"));
+  if (!normalOffMethod.includes("notice = null") || normalOffMethod.includes("NORMAL_OFF_NOTICE")) {
+    errors.push("El apagado plebeyo no debe mostrar ningun aviso posterior");
+  }
   if (!engine.includes("fun syncTorchState") || !mainActivity.includes("torchPort.observeState")) {
     errors.push("La app debe sincronizarse con una linterna encendida desde fuera");
   }
@@ -105,6 +109,14 @@ if (errors.length === 0) {
     !screen.includes("heightIn(max = 360.dp)")
   ) {
     errors.push("El selector de idiomas debe abrir debajo de su boton y limitarse con scroll");
+  }
+  if (
+    !screen.includes("PremiumSlotMachine") ||
+    !screen.includes("drawCelebrationConfetti") ||
+    !screen.includes("drawMarqueeLights") ||
+    !screen.includes('text = "✦  7 · 7 · 7  ✦"')
+  ) {
+    errors.push("La celebracion Premium debe incluir tragamonedas, confeti y luces de marquesina");
   }
   if (
     !gradle.includes("APPS_DASHBOARD_ANDROID_TEST_KEYSTORE_PATH") ||

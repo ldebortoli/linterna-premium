@@ -33,6 +33,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - APK de prueba: se genera desde Apps Dashboard o, cuando el usuario lo pide expresamente, con `npm run build:apk`.
 - CI público: pruebas, cobertura y lint sobre `main` y pull requests; no genera APKs.
 - El wrapper Linux `apps/mobile/android/gradlew` se versiona como ejecutable (`100755`) para que GitHub Actions pueda iniciar Gradle.
+- `.gitattributes` fija LF para texto, conserva CRLF en scripts `.bat` y marca formatos binarios para que los checkouts de Windows y Linux sean deterministas.
 - Baseline verificado: 22 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el alcance de cobertura y Android Lint sin observaciones.
 
 ## Convenciones
@@ -43,6 +44,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - La version canonica vive en `version.properties`; `app.json` y Gradle deben coincidir.
 - Ningun identificador real de anuncios, producto o credencial se versiona como secreto. Los valores publicables de Google se inyectan por propiedades de Gradle.
 - El apagado normal corta la linterna inmediatamente. Abrir o cancelar la confirmacion Premium, ir a Inicio, cambiar de app, abrir Google Play o cerrar la actividad conservan el flash encendido mientras Android mantenga el recurso; una compra exitosa inicia la secuencia Premium y garantiza el apagado final. Con Premium ya activo, esa misma secuencia lenta de menos de tres segundos regula la potencia cuando el hardware lo permite.
+- El apagado plebeyo no muestra aviso posterior. La celebracion Premium superpone once fuegos artificiales, 56 piezas de confeti/monedas, luces suaves de marquesina y tres rodillos que terminan en 7·7·7; las luces pulsan por debajo de tres cambios por segundo y no usan un estrobo de pantalla completa.
 - La variante `demo` simula la linterna únicamente cuando el dispositivo no tiene flash, para poder probar el recorrido en emulador; la variante `play` nunca simula hardware.
 - La variante `demo` permite borrar la licencia simulada y volver a la edicion plebeya; la variante `play` no expone ni ejecuta este restablecimiento.
 - La elección de idioma se guarda localmente; la primera apertura usa el idioma y la región compatibles del dispositivo y cae a español argentino cuando no coincide con el catálogo. El menú se ancla debajo del botón de idiomas, limita su alto a 360 dp y permite desplazamiento interno.
