@@ -6,7 +6,7 @@ Entregar Linterna PREMIUM como aplicacion Android nativa mantenible, verificable
 
 ## Tarea actual
 
-Configurar las cuentas e identificadores reales de Google cuando el usuario decida avanzar con la publicacion comercial.
+Estabilizar CI por autorizacion explicita del usuario: corregir y monitorear cada run hasta que pase, sin generar APK.
 
 ## Estado actual
 
@@ -33,7 +33,7 @@ Configurar las cuentas e identificadores reales de Google cuando el usuario deci
 - Los cinco primeros runs de CI fallaron por `spawnSync ./gradlew EACCES`, no por cuota. `apps/mobile/android/gradlew` quedo corregido de `100644` a `100755`.
 - `.gitattributes` fija LF para texto, CRLF para `.bat` y trata JAR, imagenes y keystores como binarios; se verifico el control rapido desde un checkout limpio compatible con `core.autocrlf=true`.
 - CI público sobre `main` y pull requests conserva pruebas, cobertura y lint, con cancelación de corridas reemplazadas y sin build de APK. El run disparado por la correccion no se monitorea por politica.
-- El run `33409711980` de `6d98b5f` confirmó que contratos y cobertura pasaban, pero Lint fallaba por `OldTargetApi`: el runner tenia API 37 preinstalada aunque el workflow solicitaba API 36. El workflow ahora aísla `ANDROID_HOME`/`ANDROID_SDK_ROOT` en `${{ runner.temp }}/android-sdk` e instala solo plataforma 36 y build-tools 36.0.0; el contrato local exige esa configuración. El run nuevo posterior al fix no se monitorea por politica.
+- El run `33409711980` de `6d98b5f` confirmó que contratos y cobertura pasaban, pero Lint fallaba por `OldTargetApi`: el runner tenia API 37 preinstalada aunque el workflow solicitaba API 36. El primer arreglo (`3559668`) uso `${{ runner.temp }}` en `jobs.quality.env`; GitHub rechazo el workflow `33411847184` antes de crear jobs porque el contexto `runner` no existe en ese nivel. La correccion en curso crea `$RUNNER_TEMP/android-sdk` en un paso Bash, exporta `ANDROID_HOME`/`ANDROID_SDK_ROOT` mediante `$GITHUB_ENV` e instala solo plataforma 36 y build-tools 36.0.0. El usuario autorizo excepcionalmente monitorear y depurar los runs sucesivos hasta verde.
 - `.kotlin/` queda ignorado como caché local del compilador y no se versiona.
 - QA visual previo sobre 0.1.0: encendido demo, apagado normal, dialogo de compra sin cobro, Premium persistente sin anuncios, apagado al perder foco y pantalla compacta con texto al 130%. El selector/traducciones 0.4.0, el flujo/sincronizacion 0.4.1, la persistencia fuera de la actividad 0.4.2 y la celebracion ampliada 0.4.3 quedan pendientes de revisión cuando el usuario solicite una nueva APK.
 - No hay elementos procesados en `USER_QUEUE.md`.

@@ -8,7 +8,7 @@
 
 # IN PROGRESS
 
-- Sin tareas activas.
+- [P0] Estabilizar el CI por pedido explicito: corregir cada fallo y monitorear los runs sucesivos hasta obtener verde, sin generar APK.
 
 # DONE
 

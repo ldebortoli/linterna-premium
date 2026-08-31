@@ -127,8 +127,9 @@ if (errors.length === 0) {
     errors.push("La APK de prueba debe ser demoRelease con la firma QA estable");
   }
   if (
-    !workflow.includes("ANDROID_HOME: ${{ runner.temp }}/android-sdk") ||
-    !workflow.includes("ANDROID_SDK_ROOT: ${{ runner.temp }}/android-sdk") ||
+    !workflow.includes('sdk_root="$RUNNER_TEMP/android-sdk"') ||
+    !workflow.includes('echo "ANDROID_HOME=$sdk_root" >> "$GITHUB_ENV"') ||
+    !workflow.includes('echo "ANDROID_SDK_ROOT=$sdk_root" >> "$GITHUB_ENV"') ||
     !workflow.includes("platforms;android-36")
   ) {
     errors.push("CI debe usar un SDK Android aislado y fijado en API 36");
