@@ -6,6 +6,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "utf8");
 const requiredFiles = [
   "version.properties",
+  ".github/workflows/ci.yml",
   "apps/mobile/app.json",
   "apps/mobile/android/app/src/main/AndroidManifest.xml",
   "apps/mobile/android/app/src/main/res/values/strings.xml",
@@ -35,6 +36,7 @@ if (errors.length === 0) {
   const mobilePackage = JSON.parse(read("apps/mobile/package.json"));
   const appConfig = JSON.parse(read("apps/mobile/app.json"));
   const strings = read("apps/mobile/android/app/src/main/res/values/strings.xml");
+  const workflow = read(".github/workflows/ci.yml");
   const premiumMethod = engine.slice(engine.indexOf("fun pressPremium"), engine.indexOf("fun confirmPremiumPurchase"));
   const confirmationMethod = engine.slice(engine.indexOf("fun confirmPremiumPurchase"), engine.indexOf("fun dismissPurchase"));
   if (premiumMethod.includes("torch.turnOff()")) errors.push("Abrir la confirmacion Premium no debe apagar la linterna");
@@ -123,6 +125,13 @@ if (errors.length === 0) {
     mobilePackage.scripts["build:apk"] !== "node ../../tools/run-gradle.mjs assembleDemoRelease"
   ) {
     errors.push("La APK de prueba debe ser demoRelease con la firma QA estable");
+  }
+  if (
+    !workflow.includes("ANDROID_HOME: ${{ runner.temp }}/android-sdk") ||
+    !workflow.includes("ANDROID_SDK_ROOT: ${{ runner.temp }}/android-sdk") ||
+    !workflow.includes("platforms;android-36")
+  ) {
+    errors.push("CI debe usar un SDK Android aislado y fijado en API 36");
   }
 
   const playManifest = read("apps/mobile/android/app/src/play/AndroidManifest.xml");

@@ -162,3 +162,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-31.
 - Decision: versionar `.gitattributes` con LF canonico para texto, CRLF explicito para `.bat` y formatos de imagen, Java archive y keystore marcados como binarios.
 - Motivo: evitar falsos fallos o reescrituras masivas de formato entre el desarrollo en Windows y el CI en Linux.
+
+## D-024 - SDK Android aislado y fijado en CI
+
+- Estado: vigente.
+- Fecha: 2026-08-31.
+- Decision: ejecutar CI con `ANDROID_HOME` y `ANDROID_SDK_ROOT` apuntando a `${{ runner.temp }}/android-sdk`, instalando de forma explicita plataforma Android 36 y build-tools 36.0.0. Conservar `compileSdk`/`targetSdk` 36 hasta una migracion probada, sin desactivar `OldTargetApi` ni reducir `warningsAsErrors`.
+- Motivo: `ubuntu-latest` incorporo una plataforma 37 ajena al workflow; Android Lint la descubrio y fallo todos los runs por `OldTargetApi` pese a que el job solicitaba API 36 y las pruebas/cobertura pasaban. Un SDK limpio hace reproducible el conjunto de plataformas sin ocultar errores reales.

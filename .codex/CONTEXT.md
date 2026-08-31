@@ -31,9 +31,10 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Cobertura: `npm run coverage`.
 - Lint: `npm run lint`.
 - APK de prueba: se genera desde Apps Dashboard o, cuando el usuario lo pide expresamente, con `npm run build:apk`.
-- CI público: pruebas, cobertura y lint sobre `main` y pull requests; no genera APKs.
+- CI público: pruebas, cobertura y lint sobre `main` y pull requests; no genera APKs. Usa un SDK aislado bajo `runner.temp` con plataforma/build-tools 36 para que Lint no dependa de plataformas preinstaladas en `ubuntu-latest`.
 - El wrapper Linux `apps/mobile/android/gradlew` se versiona como ejecutable (`100755`) para que GitHub Actions pueda iniciar Gradle.
 - `.gitattributes` fija LF para texto, conserva CRLF en scripts `.bat` y marca formatos binarios para que los checkouts de Windows y Linux sean deterministas.
+- `.gitignore` excluye `.kotlin/` además de los directorios de Gradle/build para no versionar cachés locales del compilador.
 - Baseline verificado: 22 pruebas unitarias, 100% de instrucciones/ramas/líneas/métodos en el alcance de cobertura y Android Lint sin observaciones.
 
 ## Convenciones
