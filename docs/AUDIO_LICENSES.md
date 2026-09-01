@@ -1,0 +1,89 @@
+# Audio de la celebración Premium
+
+## Licencia y procedencia
+
+Revisado el 2026-09-01: [Mixkit Sound Effects Free License](https://mixkit.co/license/#sfxFree),
+incluido su [texto completo](https://mixkit.co/license/modal/sfxFree/), permite incorporar estos
+efectos a productos creativos comerciales y no comerciales. No permite redistribuir los efectos
+aislados, como stock, en herramientas/plantillas ni junto con archivos fuente; tampoco atribuirse
+su autoría o registrarlos en sistemas de gestión de derechos.
+
+Por eso **ni los MP3 originales ni los recortes PCM se versionan**. Se empaquetan localmente como
+parte de Linterna PREMIUM. El repositorio público conserva la receta, los enlaces oficiales y
+los hashes SHA-256 de originales y recortes en `audio/premium-sfx.json`. La licencia no convierte
+los clips en código abierto. No exportar los efectos como biblioteca o soundboard.
+
+También se revisó la [Acceptable Use Policy de Envato](https://help.elements.envato.com/hc/en-us/articles/31035788503321-Acceptable-Use-Policy).
+Las tragamonedas y premios de Linterna son decorativos, sin apuestas ni premios monetarios.
+El apagado gratuito siempre está disponible; la compra Premium es una mejora audiovisual explícita.
+Un futuro cambio hacia apuestas reales o promoción de apuestas exige revisar la licencia antes de reutilizar estos recursos.
+
+Fuentes: [catálogo Crowd](https://mixkit.co/free-sound-effects/crowd/) y
+[catálogo Win](https://mixkit.co/free-sound-effects/win/). Los siete clips fueron aprobados por el
+usuario; `Huge crowd cheering victory` (462, candidato 1) fue rechazado y está excluido.
+
+| ID | Efecto aprobado | Recorte utilizado |
+| --- | --- | --- |
+| 531 | Birthday crowd party cheer | Desde 0,15 s, 1,40 s |
+| 459 | Male crowd cheering short | Desde 0,05 s, 1,15 s |
+| 437 | Small crowd ovation | Desde 0,10 s, 1,40 s |
+| 2012 | Males yes victory | Desde 0 s, 0,95 s |
+| 2011 | Male voice cheer victory | Desde 0 s, 0,85 s |
+| 1934 | Payout award | Desde 0 s, 1,35 s |
+| 1928 | Slot machine win | Desde 0 s, 1,30 s |
+
+## Preparación reproducible (solo antes de un build solicitado)
+
+Requiere Node.js y FFmpeg 9.0 disponible en PATH. Tras leer la licencia:
+
+```powershell
+npm run audio:prepare -- --source-dir <carpeta-de-preescuchas-aprobadas>
+# O descargar exactamente las siete fuentes oficiales fijadas por SHA-256:
+npm run audio:prepare -- --download
+npm run audio:verify
+```
+
+El generador comprueba los originales, recorta y remuestrea a PCM mono s16le/22.050 Hz, comprueba
+duración y SHA-256 de salida. Si otra versión de FFmpeg cambia los bytes, detenerse y revisar la
+diferencia; no actualizar hashes a ciegas. El caché descargado queda bajo `artifacts/` y los recortes
+bajo `apps/mobile/android/app/src/main/assets/premium-sfx/`, ambos ignorados por Git.
+
+`build:apk` e `install:android` verifican estos recursos antes de Gradle y fallan con una instrucción
+de preparación si faltan o no coinciden. Invocar Gradle directamente omite ese control: usar los
+comandos del proyecto para las distribuciones. No se generan APKs al preparar o validar audio.
+
+## Mezcla y reproducción
+
+`PremiumRealSoundPlan.kt` fija cinco tandas alrededor de 0 / 3,35 / 6,4 / 9,3 / 12,4 segundos.
+Se combinan como máximo un premio/casino y una voz/grupo. Los fades duran 30 ms de entrada y 140 ms
+de salida. Hay descansos sin fondo constante. Se conserva la fanfarria/jackpot original en el
+último segundo de cada ronda de tres segundos, sin competir con los premios reales. La mezcla
+completa dura 15 segundos; no cambia la curva física del flash ni la fiesta visual.
+
+El reproductor precarga la mezcla al abrir la pantalla. En modo estático Android devuelve
+`STATE_NO_STATIC_DATA` hasta escribir PCM: ese estado es válido y ahora se comprueba `READY`
+**después** de la carga. Ver [contrato de AudioTrack](https://developer.android.com/reference/android/media/AudioTrack#STATE_NO_STATIC_DATA).
+Los fallos se registran con la etiqueta `PremiumCelebrationAudio`. Si una ejecución fuera del
+build validado carece de clips, registra el problema y conserva como fallback la pista sintetizada.
+Los botones de volumen controlan multimedia; no se fuerza el volumen ni se cambia la salida Bluetooth.
+La cancelación libera el track en `finally` y la reproducción no excede el plazo visual de 15 segundos.
+
+## Validación
+
+```powershell
+npm test
+npm run audio:verify
+npm run coverage
+npm run lint
+```
+
+Las pruebas puras comprueban los siete IDs, concurrencia limitada, fades, descansos, duración,
+decodificación PCM, señal final y el protocolo de carga estática (incluidos errores y escritura
+incompleta). El umbral de cobertura del dominio sigue en 100% para instrucciones, ramas, líneas
+y métodos. No incluye adaptadores Android ni UI.
+
+La prueba local `PremiumAudioAssetsTest` utiliza los clips preparados y escribe una preescucha
+en `apps/mobile/android/app/build/reports/audio/premium-celebration-preview.wav`. Se omite
+explícitamente en el checkout público sin assets licenciados; el resto de pruebas y Lint no
+necesitan descargas. La escucha en un teléfono y la prueba real de volumen/ruteo quedan para la
+siguiente APK solicitada: una señal PCM válida no prueba por sí sola la salida del altavoz.

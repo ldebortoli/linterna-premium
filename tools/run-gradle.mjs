@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { verifyPreparedAudio } from "./prepare-premium-audio.mjs";
 
 const toolsDirectory = path.dirname(fileURLToPath(import.meta.url));
 const androidDirectory = path.resolve(toolsDirectory, "../apps/mobile/android");
@@ -9,6 +10,9 @@ const tasks = process.argv.slice(2);
 if (tasks.length === 0) {
   throw new Error("Indica al menos una tarea de Gradle.");
 }
+
+// Tests/lint need no third-party downloads; distributable builds must include the approved SFX.
+if (tasks.some((task) => /(?:^|:)(?:assemble|bundle|install)/i.test(task))) verifyPreparedAudio();
 
 const isWindows = process.platform === "win32";
 const command = isWindows ? (process.env.ComSpec || "cmd.exe") : "./gradlew";

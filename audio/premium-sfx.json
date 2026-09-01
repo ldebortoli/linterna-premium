@@ -1,0 +1,93 @@
+{
+  "license": "https://mixkit.co/license/#sfxFree",
+  "verifiedOn": "2026-09-01",
+  "sampleRate": 22050,
+  "encoding": "signed PCM 16-bit little-endian mono",
+  "assets": [
+    {
+      "id": 531,
+      "title": "Birthday crowd party cheer",
+      "previewFile": "02-festejo-cumpleanos.mp3",
+      "category": "crowd",
+      "durationMillis": 1400,
+      "sourceOffsetSeconds": 0.15,
+      "sourceSha256": "1868575f736b260a1b15b2a331e2a9c9bd1eb79d463bb4780552fc7844d7f7a9",
+      "pcmSha256": "56090beb2563b867d8a578f0c76b8e3dd91ce51bea5857731823ec38ffb5898e",
+      "sourceUrl": "https://assets.mixkit.co/active_storage/sfx/531/531-preview.mp3",
+      "sourcePage": "https://mixkit.co/free-sound-effects/crowd/"
+    },
+    {
+      "id": 459,
+      "title": "Male crowd cheering short",
+      "previewFile": "03-grupo-hombres-festejo-corto.mp3",
+      "category": "crowd",
+      "durationMillis": 1150,
+      "sourceOffsetSeconds": 0.05,
+      "sourceSha256": "2bbde3e55e1dd4766d278a7e34a00e6b9cc15bb61ef5f521d30ed59e9a3a0d4b",
+      "pcmSha256": "22b90f135ad6f36013e7e825c4e8690403bac500663dc28d05c488763e38e31e",
+      "sourceUrl": "https://assets.mixkit.co/active_storage/sfx/459/459-preview.mp3",
+      "sourcePage": "https://mixkit.co/free-sound-effects/crowd/"
+    },
+    {
+      "id": 437,
+      "title": "Small crowd ovation",
+      "previewFile": "04-ovacion-grupo-pequeno.mp3",
+      "category": "crowd",
+      "durationMillis": 1400,
+      "sourceOffsetSeconds": 0.1,
+      "sourceSha256": "21cc2a5e75d3ce8e26deadea8929fe11d5a6868ee839aea058d7121834afa78d",
+      "pcmSha256": "2401c287fe7c33e8fc5111e0c85b46261716b07e585d0b0868ab9e636fa5e535",
+      "sourceUrl": "https://assets.mixkit.co/active_storage/sfx/437/437-preview.mp3",
+      "sourcePage": "https://mixkit.co/free-sound-effects/crowd/"
+    },
+    {
+      "id": 2012,
+      "title": "Males yes victory",
+      "previewFile": "05-hombres-gritando-si-victoria.mp3",
+      "category": "win",
+      "durationMillis": 950,
+      "sourceOffsetSeconds": 0,
+      "sourceSha256": "0e58b61c982c8453993b5115e121b001a5fd8f5780e2a22e57d1842dadeb6a6d",
+      "pcmSha256": "c3033db6877d3dd8bb95fcc51fda3fd39625e070ceda7d70be8a3bd8a311867a",
+      "sourceUrl": "https://assets.mixkit.co/active_storage/sfx/2012/2012-preview.mp3",
+      "sourcePage": "https://mixkit.co/free-sound-effects/win/"
+    },
+    {
+      "id": 2011,
+      "title": "Male voice cheer victory",
+      "previewFile": "06-voz-masculina-festejo-victoria.mp3",
+      "category": "win",
+      "durationMillis": 850,
+      "sourceOffsetSeconds": 0,
+      "sourceSha256": "dabcdde0abec0f67bb3ae0016fd4f28d2979243a44b7a480272aaf5c5c4312e5",
+      "pcmSha256": "aa289882f1a791f804fa84612e4bfca4fb47dd2f08cd56a61e655fdec7e46f5d",
+      "sourceUrl": "https://assets.mixkit.co/active_storage/sfx/2011/2011-preview.mp3",
+      "sourcePage": "https://mixkit.co/free-sound-effects/win/"
+    },
+    {
+      "id": 1934,
+      "title": "Payout award",
+      "previewFile": "07-premio-payout.mp3",
+      "category": "win",
+      "durationMillis": 1350,
+      "sourceOffsetSeconds": 0,
+      "sourceSha256": "9f6cbd67e156e9ee4ea2bbf7ec3af14bedc0d82a8b6def1443450c4089f14b23",
+      "pcmSha256": "bb14f027a3bf508c88d2ed7411852dc8ed590239c134f852eaba87dd7d77103c",
+      "sourceUrl": "https://assets.mixkit.co/active_storage/sfx/1934/1934-preview.mp3",
+      "sourcePage": "https://mixkit.co/free-sound-effects/win/"
+    },
+    {
+      "id": 1928,
+      "title": "Slot machine win",
+      "previewFile": "08-tragaperras-premio.mp3",
+      "category": "win",
+      "durationMillis": 1300,
+      "sourceOffsetSeconds": 0,
+      "sourceSha256": "95b4079ab5646329b02b1704cb44f225cf35e430fb06de2b6957272254a8c6dc",
+      "pcmSha256": "007f39e8d0a438e1b1136375366bb5820b61e157e46582e90363b5541aa7f45d",
+      "sourceUrl": "https://assets.mixkit.co/active_storage/sfx/1928/1928-preview.mp3",
+      "sourcePage": "https://mixkit.co/free-sound-effects/win/"
+    }
+  ],
+  "converter": "FFmpeg 9.0 (libswresample, PCM s16le)"
+}

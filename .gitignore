@@ -32,3 +32,6 @@ reports/
 artifacts/
 *.log
 *.pid
+
+# Licensed SFX: packaged locally, never redistributed alongside source code.
+apps/mobile/android/app/src/main/assets/premium-sfx/

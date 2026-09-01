@@ -197,3 +197,18 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-31.
 - Decision: añadir a cada una de las cinco rondas una fanfarria de cuatro notas con timbre de trompeta, una ovacion filtrada y un coro sintetizado de `¡hurra!`; reforzar la quinta ronda con una trompeta aguda que se extiende hasta el segundo 15. Conservar la pista en PCM local, el canal multimedia, la cancelacion existente y el apagado fisico dentro de los primeros 3 segundos.
 - Motivo: aumentar la sensación de victoria y premio pedida por el usuario sin depender de TTS, descargas o grabaciones externas, y sin prolongar ni hacer parpadear el flash.
+
+## D-029 - Cargar AudioTrack estático antes de exigir READY
+
+- Estado: vigente; corrige el diagnóstico preliminar de silencio registrado el 2026-08-31.
+- Fecha: 2026-09-01.
+- Decisión: aceptar `STATE_NO_STATIC_DATA` después de construir un `MODE_STATIC`; escribir la pista completa y comprobar `STATE_INITIALIZED` después. Registrar errores, liberar el track en el `finally` de su coroutine propietaria y dirigir los botones de volumen al canal multimedia sin subirlo automáticamente.
+- Motivo: el código 0.4.6 descartaba todas las pistas recién creadas antes del primer write porque confundía un estado estático vacío válido con una inicialización fallida. No se demostró un rechazo por tamaño del búfer ni por volumen. El protocolo puro ahora tiene pruebas de orden y de errores; la comprobación en altavoz real queda para la siguiente APK solicitada.
+
+## D-030 - Festejos reales escalonados y fuentes licenciadas fuera de Git
+
+- Estado: vigente; amplía D-027/D-028 y reemplaza el requisito de no usar recursos grabados.
+- Fecha: 2026-09-01.
+- Decisión: incorporar los siete efectos Mixkit aprobados (531, 459, 437, 2012, 2011, 1934, 1928), excluyendo el 462 rechazado. Preparar recortes PCM de 0,85–1,4 segundos, fades de 30/140 ms y cinco tandas con máximo un premio más una voz/grupo. Conservar el remate sintetizado en el último segundo de cada ronda, con pausas entre tandas y sin fondo continuo. No cambiar los 15 segundos ni el flash/visual.
+- Decisión de distribución: la licencia permite el producto creativo final pero prohíbe efectos aislados o con archivos fuente; mantener MP3 y PCM fuera del repositorio público. Versionar receta, URLs, SHA-256 de fuentes/recortes y documentación. Preparar localmente con FFmpeg 9.0 y verificar los siete recursos antes de builds/install solicitados; CI rápido no descarga ni redistribuye clips.
+- Motivo: sumar los festejos reales elegidos sin superponer todos los audios ni publicar una biblioteca de terceros. Las tragamonedas son decorativas, sin apuestas ni premios monetarios; un cambio de ese alcance exige volver a revisar las condiciones.

@@ -11,3 +11,6 @@
 *.ico binary
 *.keystore binary
 *.jks binary
+*.mp3 binary
+*.pcm binary
+*.wav binary

@@ -2,6 +2,7 @@ package com.linternapremium.app
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.media.AudioManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -77,7 +78,9 @@ class MainActivity : ComponentActivity(), BillingEvents {
             text = { currentText },
         )
         premiumSequenceRunner = PremiumSequenceRunner(torchPort, pause = { delay(it) })
-        premiumCelebrationSoundPlayer = PremiumCelebrationSoundPlayer()
+        volumeControlStream = AudioManager.STREAM_MUSIC
+        premiumCelebrationSoundPlayer = PremiumCelebrationSoundPlayer(this)
+        lifecycleScope.launch { premiumCelebrationSoundPlayer.prepare() }
         engine = LinternaEngine(
             torch = torchPort,
             premiumStore = PreferencesPremiumStore(this),
