@@ -1,5 +1,6 @@
 # TODO
 
+- [P1] Reparar y validar en un telefono real la reproduccion del audio Premium 0.4.6: el reproductor actual silencia las excepciones de `AudioTrack`; migrar a una salida robusta por streaming o registrar un resultado observable y comprobar volumen multimedia/ruteo antes de la proxima APK.
 - [P1] Configurar en Play Console el producto `premium_blackout_pack`, firmar una version y probar el pago con un tester licenciado.
 - [P1] Crear AdMob, registrar la app y reemplazar los identificadores de anuncios de produccion mediante propiedades locales seguras.
 - [P1] Publicar politica de privacidad y completar las declaraciones de Data safety, anuncios y contenido en Google Play.
