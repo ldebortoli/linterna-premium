@@ -18,7 +18,7 @@ export function verifyPreparedAudio() {
     const file = path.join(destination, `${asset.id}.pcm`);
     if (!fs.existsSync(file)) throw new Error("Faltan los efectos con licencia. Ejecutá npm run audio:prepare -- --download, previa lectura de docs/AUDIO_LICENSES.md.");
     const pcm = fs.readFileSync(file);
-    if (pcm.length !== Math.floor(recipe.sampleRate * asset.durationMillis / 1000) * 2) {
+    if (pcm.length !== asset.pcmSamples * 2) {
       throw new Error(`Duración PCM incorrecta: ${asset.id}`);
     }
     if (hash(pcm) !== asset.pcmSha256) throw new Error(`Hash PCM incorrecto: ${asset.id}`);
@@ -48,15 +48,15 @@ async function prepare() {
       fs.writeFileSync(sourceFile, Buffer.from(await response.arrayBuffer()));
     }
     if (hash(fs.readFileSync(sourceFile)) !== asset.sourceSha256) throw new Error(`La fuente ${asset.id} difiere de la aprobada; no continuar.`);
-    const samples = Math.floor(recipe.sampleRate * asset.durationMillis / 1000);
     const outputFile = path.join(destination, `${asset.id}.pcm`);
     const result = spawnSync("ffmpeg", ["-hide_banner", "-loglevel", "error", "-y", "-i", sourceFile,
       "-ac", "1", "-ar", String(recipe.sampleRate), "-af",
-      `atrim=start=${asset.sourceOffsetSeconds}:duration=${asset.durationMillis / 1000},asetpts=PTS-STARTPTS,aresample=${recipe.sampleRate},aformat=sample_fmts=s16:channel_layouts=mono,apad=whole_len=${samples},atrim=end_sample=${samples}`,
+      `aresample=${recipe.sampleRate},aformat=sample_fmts=s16:channel_layouts=mono`,
       "-f", "s16le", "-acodec", "pcm_s16le", "-map_metadata", "-1", outputFile], { stdio: "inherit", shell: false });
     if (result.error) throw result.error;
     if (result.status !== 0) throw new Error(`FFmpeg falló para ${asset.id}`);
-    console.log(`${asset.id}: ${hash(fs.readFileSync(outputFile))}`);
+    const pcm = fs.readFileSync(outputFile);
+    console.log(`${asset.id}: samples=${pcm.length / 2} sha256=${hash(pcm)}`);
   }
   verifyPreparedAudio();
 }

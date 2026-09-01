@@ -11,7 +11,7 @@ Una linterna Android con un chiste transparente: el apagado normal siempre es gr
 - Abrir o cancelar la confirmacion Premium no apaga el flash; la compra exitosa inicia el efecto Premium y lo apaga al terminar.
 - Apagado Premium con once fuegos artificiales, confeti/monedas, luces de marquesina pulsantes, tragamonedas 7·7·7, pulso visual y una curva lenta de potencia real en telefonos compatibles; en el resto se conserva el efecto visual y el apagado final seguro.
 - El apagado plebeyo vuelve directamente al estado listo, sin mostrar un aviso de confirmacion.
-- La fiesta dura 15 segundos y combina siete festejos reales en ráfagas con las fanfarrias originales;
+- La fiesta dura 15 segundos y encadena siete festejos reales completos, con solapes y repeticiones sin silencios, sobre las fanfarrias originales;
   el flash se apaga durante los primeros tres. Ver [preparación y licencias del audio](docs/AUDIO_LICENSES.md).
 - La variante demo permite restablecer la edicion plebeya para repetir las pruebas de compra y anuncios; esta accion no existe en Play.
 - Selector persistente en la pantalla principal con los 18 idiomas de Galerazo

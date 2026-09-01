@@ -1,6 +1,7 @@
 package com.linternapremium.app.domain
 
 import com.linternapremium.app.model.PREMIUM_REAL_SOUND_CUES
+import com.linternapremium.app.model.PREMIUM_APPROVED_CLIP_SAMPLES
 import com.linternapremium.app.model.PremiumCasinoSoundSynthesizer
 import java.io.File
 import java.nio.ByteBuffer
@@ -17,7 +18,7 @@ class PremiumAudioAssetsTest {
         assumeTrue("Licensed clips are an opt-in local integration suite", directory.isDirectory)
         val clips = PREMIUM_REAL_SOUND_CUES.associate { cue ->
             val pcm = PremiumCelebrationMixer.decodePcm(File(directory, "${cue.assetId}.pcm").readBytes())
-            assertTrue(pcm.size >= 22050 * cue.durationMillis / 1000)
+            assertEquals(PREMIUM_APPROVED_CLIP_SAMPLES.getValue(cue.assetId), pcm.size)
             assertTrue(pcm.any { kotlin.math.abs(it.toInt()) > 500 })
             cue.assetId to pcm
         }
@@ -25,8 +26,14 @@ class PremiumAudioAssetsTest {
         assertEquals(330750, mixed.size)
         assertTrue(mixed.none { it == Short.MIN_VALUE || it == Short.MAX_VALUE })
         PREMIUM_REAL_SOUND_CUES.forEach { cue ->
-            val region = mixed.sliceArray(22050 * cue.startMillis / 1000 until 22050 * (cue.startMillis + cue.durationMillis) / 1000)
+            val start = 22050 * cue.startMillis / 1000
+            val region = mixed.sliceArray(start until start + PREMIUM_APPROVED_CLIP_SAMPLES.getValue(cue.assetId))
             assertTrue(region.any { kotlin.math.abs(it.toInt()) > 500 })
+        }
+        val windowSize = 22050 / 50
+        mixed.asList().chunked(windowSize).forEachIndexed { index, window ->
+            val peak = window.maxOf { kotlin.math.abs(it.toInt()) }
+            assertTrue("Audible gap near ${index * 20} ms", peak > 250)
         }
         val wav = ByteBuffer.allocate(44 + mixed.size * 2).order(ByteOrder.LITTLE_ENDIAN)
         wav.put("RIFF".toByteArray()).putInt(36 + mixed.size * 2).put("WAVEfmt ".toByteArray())

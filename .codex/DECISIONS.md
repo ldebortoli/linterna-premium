@@ -212,3 +212,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Decisión: incorporar los siete efectos Mixkit aprobados (531, 459, 437, 2012, 2011, 1934, 1928), excluyendo el 462 rechazado. Preparar recortes PCM de 0,85–1,4 segundos, fades de 30/140 ms y cinco tandas con máximo un premio más una voz/grupo. Conservar el remate sintetizado en el último segundo de cada ronda, con pausas entre tandas y sin fondo continuo. No cambiar los 15 segundos ni el flash/visual.
 - Decisión de distribución: la licencia permite el producto creativo final pero prohíbe efectos aislados o con archivos fuente; mantener MP3 y PCM fuera del repositorio público. Versionar receta, URLs, SHA-256 de fuentes/recortes y documentación. Preparar localmente con FFmpeg 9.0 y verificar los siete recursos antes de builds/install solicitados; CI rápido no descarga ni redistribuye clips.
 - Motivo: sumar los festejos reales elegidos sin superponer todos los audios ni publicar una biblioteca de terceros. Las tragamonedas son decorativas, sin apuestas ni premios monetarios; un cambio de ese alcance exige volver a revisar las condiciones.
+
+## D-031 - Cadena continua con clips completos
+
+- Estado: vigente; reemplaza la secuenciación, recortes y pausas de D-030, pero conserva sus siete fuentes aprobadas y reglas de distribución.
+- Fecha: 2026-09-01.
+- Decisión: convertir cada clip completo desde offset cero, reproducirlo hasta su final natural y solapar el siguiente antes de su cola audible. Repetir festejos para sostener los 15 segundos sin silencios programados, conservar la pista sintetizada original a menor ganancia como continuidad y excluir siempre el 462. Ningún cue puede empezar si no termina completo antes del segundo 15.
+- Motivo: el usuario aprobó los sonidos pero rechazó los huecos entre ellos; una cadena superpuesta mantiene la celebración constante sin mutilar voces, premios ni tragamonedas y conserva margen contra clipping.

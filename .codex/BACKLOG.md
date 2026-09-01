@@ -1,6 +1,6 @@
 # TODO
 
-- [P1] Validar el altavoz, volumen multimedia/ruteo e interrupciones de audio en un teléfono con APK 0.4.7 cuando el usuario pida el próximo Build App; la carga estática y los siete clips ya están corregidos/preparados, pero no se generó una nueva APK para esta entrega.
+- [P1] Validar el altavoz, volumen multimedia/ruteo e interrupciones de audio en un teléfono con APK 0.4.8 cuando el usuario pida el próximo Build App; la carga estática y los siete clips ya están corregidos/preparados, pero no se generó una nueva APK para esta entrega.
 - [P1] Configurar en Play Console el producto `premium_blackout_pack`, firmar una version y probar el pago con un tester licenciado.
 - [P1] Crear AdMob, registrar la app y reemplazar los identificadores de anuncios de produccion mediante propiedades locales seguras.
 - [P1] Publicar politica de privacidad y completar las declaraciones de Data safety, anuncios y contenido en Google Play.
@@ -13,6 +13,7 @@
 
 # DONE
 
+- [2026-09-01] Entregar 0.4.8 (versionCode 16): reemplazar pausas y recortes por once ocurrencias de los siete festejos aprobados, siempre completos desde offset cero y solapados hasta cubrir los 15 s sin silencios audibles ni cortes; conservar la pista sintetizada original a menor ganancia y excluir 462. Validar 45/45 pruebas locales, PCM real de 15,000 s sin silencios de 20 ms a -42 dB, pico de -8,7 dB, cobertura del dominio 100%, lint y contratos; no generar APK ni monitorear CI. Reenviar el mismo pedido a la tarea `Diseña Linterna Premium`.
 - [2026-09-01] Entregar 0.4.7 (versionCode 15): siete festejos reales Mixkit aprobados en cinco tandas con fades/pausas y máximo un premio más una voz/grupo, junto al remate sintetizado original; corregir AudioTrack para aceptar STATE_NO_STATIC_DATA antes del write y registrar fallos. Mantener los 15 s y el flash/visual sin cambios. Recortes locales preparados, URLs/licencia/SHA-256 y generador versionados sin binarios licenciados. Validar 43/43 pruebas locales, PCM real de 15 s sin saturación, cobertura del dominio 100%, lint y contratos; no generar APK ni monitorear CI.
 - [2026-08-31] Entregar Linterna PREMIUM 0.4.6 (versionCode 14): reforzar cada ronda del audio Premium con fanfarrias de cuatro notas, ovacion y coro sintetizado de `¡hurra!`, más una trompeta final hasta el segundo 15; verificar 27/27 tests, duración y cierre audible, cobertura 100% y lint sin generar APK.
 - [2026-08-31] Entregar Linterna PREMIUM 0.4.5 (versionCode 13): conservar el apagado fisico en menos de 3 segundos y llevar toda la fiesta a 15 segundos con 144 piezas de confeti/monedas, 36 premios flotantes, nueve tragamonedas y audio PCM sintetizado de rodillos, monedas, campanadas y jackpot; verificar 26/26 tests, pista no silenciosa de duración exacta, cobertura 100% y lint sin generar APK.

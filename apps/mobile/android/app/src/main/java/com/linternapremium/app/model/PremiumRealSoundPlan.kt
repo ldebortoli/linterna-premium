@@ -5,25 +5,34 @@ internal enum class CelebrationSoundKind { PEOPLE, PRIZE }
 internal data class CelebrationSoundCue(
     val assetId: Int,
     val startMillis: Int,
-    val durationMillis: Int,
     val gain: Float,
     val kind: CelebrationSoundKind,
 )
 
-// Alternate a short real celebration, a pause, and the original victory fanfare.
-// At most one prize and one people clip at once. Mixkit 462 was explicitly rejected.
+// Full clips overlap before their audible tails; short voices cover quieter passages.
+// Every occurrence starts at source offset zero and must finish naturally before second 15.
 internal val PREMIUM_REAL_SOUND_CUES = listOf(
-    CelebrationSoundCue(1934, 0, 1350, 0.40f, CelebrationSoundKind.PRIZE),
-    CelebrationSoundCue(2011, 200, 850, 0.48f, CelebrationSoundKind.PEOPLE),
-    CelebrationSoundCue(1928, 3350, 1300, 0.40f, CelebrationSoundKind.PRIZE),
-    CelebrationSoundCue(459, 3500, 1150, 0.48f, CelebrationSoundKind.PEOPLE),
-    CelebrationSoundCue(531, 6400, 1400, 0.56f, CelebrationSoundKind.PEOPLE),
-    CelebrationSoundCue(1934, 9300, 1350, 0.40f, CelebrationSoundKind.PRIZE),
-    CelebrationSoundCue(2012, 9350, 950, 0.48f, CelebrationSoundKind.PEOPLE),
-    CelebrationSoundCue(437, 12400, 1400, 0.48f, CelebrationSoundKind.PEOPLE),
-    CelebrationSoundCue(1928, 12400, 1300, 0.40f, CelebrationSoundKind.PRIZE),
+    CelebrationSoundCue(1934, 0, 0.30f, CelebrationSoundKind.PRIZE),
+    CelebrationSoundCue(2011, 150, 0.36f, CelebrationSoundKind.PEOPLE),
+    CelebrationSoundCue(459, 500, 0.30f, CelebrationSoundKind.PEOPLE),
+    CelebrationSoundCue(2012, 3900, 0.36f, CelebrationSoundKind.PEOPLE),
+    CelebrationSoundCue(1928, 4100, 0.30f, CelebrationSoundKind.PRIZE),
+    CelebrationSoundCue(531, 6600, 0.28f, CelebrationSoundKind.PEOPLE),
+    CelebrationSoundCue(2011, 7000, 0.34f, CelebrationSoundKind.PEOPLE),
+    CelebrationSoundCue(437, 8600, 0.30f, CelebrationSoundKind.PEOPLE),
+    CelebrationSoundCue(1934, 9150, 0.30f, CelebrationSoundKind.PRIZE),
+    CelebrationSoundCue(2012, 13000, 0.36f, CelebrationSoundKind.PEOPLE),
+    CelebrationSoundCue(2011, 14055, 0.36f, CelebrationSoundKind.PEOPLE),
 )
 
-internal const val PREMIUM_VICTORY_START_IN_ROUND_MILLIS = 1980
-internal const val PREMIUM_REAL_SOUND_FADE_IN_MILLIS = 30
-internal const val PREMIUM_REAL_SOUND_FADE_OUT_MILLIS = 140
+internal val PREMIUM_APPROVED_CLIP_SAMPLES = mapOf(
+    531 to 118_739,
+    459 to 95_256,
+    437 to 141_090,
+    2012 to 22_822,
+    2011 to 20_837,
+    1934 to 90_357,
+    1928 to 111_095,
+)
+
+internal const val PREMIUM_SYNTHETIC_GAIN = 0.30f
