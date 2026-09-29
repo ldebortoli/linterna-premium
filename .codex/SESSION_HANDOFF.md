@@ -6,7 +6,7 @@ Entregar Linterna PREMIUM como aplicacion Android nativa mantenible, verificable
 
 ## Tarea actual
 
-Entrega 0.4.8 implementada y validada: audio continuo con clips completos y solapados durante los 15 segundos. Esperar un Build App solicitado para revisar la salida física; no hay tareas activas ni elementos en USER_QUEUE.
+Entrega 0.4.8 implementada y validada: audio continuo con clips completos y solapados durante los 15 segundos. El 2026-09-29 se documentó en `docs/PLAN_PUBLICACION_PLAY.md` la ruta actual para abrir la cuenta del propietario, conectar cobros/anuncios y publicar. La publicación real espera el alta/identidad/perfil de pagos del propietario; no hay tareas activas ni elementos en USER_QUEUE.
 
 ## Estado actual
 
@@ -42,6 +42,7 @@ Entrega 0.4.8 implementada y validada: audio continuo con clips completos y sola
 
 ## Proximos pasos
 
+0. Seguir `docs/PLAN_PUBLICACION_PLAY.md`: el propietario abre Play Console y AdMob bajo su identidad, elige precio/países, aporta datos públicos de contacto, sitio y testers. Una cuenta Play sirve para ambas apps; si es personal nueva, cada app requiere 12 testers adheridos 14 días. `playRelease` aún necesita clave de subida de producción, AAB y prueba en pista interna. No confundir los APK demo con publicables.
 1. Cuando el usuario lo pida, generar APK 0.4.8 desde Apps Dashboard; los siete clips completos ya están preparados. Probar audio continuo con volumen multimedia audible, ruteo correcto, interrupción al encender/restablecer/cerrar y ausencia de errores `PremiumCelebrationAudio` en logcat.
 2. Revisar la APK 0.4.8 cuando se genere: dropdown anclado, 21 opciones traducidas, apagado plebeyo sin aviso, confirmación Premium sin apagado prematuro, persistencia al salir/cambiar de app, detección del flash externo, celebración visual de 15 segundos con nueve tragamonedas y restablecimiento demo.
 3. Validar el flash real y, si se quiere clasificar la advertencia de Play Protect, capturar su texto exacto.
