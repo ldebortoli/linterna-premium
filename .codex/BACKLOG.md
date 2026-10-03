@@ -9,11 +9,11 @@
 
 # IN PROGRESS
 
-- [P1] [2026-10-03] IN PROGRESS: historial RELEASE_NOTES por versión/build para respuestas automáticas a APK de Apps Dashboard; revisar tickets vigentes y registrar bloqueos sin cerrar parciales.
-
 - Sin tareas activas.
 
 # DONE
+
+- [2026-10-03] Documentar RELEASE_NOTES.json por versión/build y conectar las cinco apps al publicador central Apps Dashboard 0.2.16 (625de98): archivo confirmado, texto respondiendo al APK y continuación en cadena, cortes Unicode <=4096, acumulación por app/chat/target y progreso persistido para reanudar sin duplicar APK/partes confirmadas. Regla global guardada. Nuevas notas reales verificadas por Codex Bot/admin: Tivio0.21.3/30 APK60→texto63, A la Altura0.9.4/25 APK61→texto64, En la misma0.1.5/6 APK62→texto65; sin nuevos APKs. 228/228 Dashboard,100% líneas/ramas/funciones; Tivio574/574, Altura175/175, En la misma233/233+PostGIS,100% cuatro métricas en sus alcances, gates intactos. Linterna/Gemidos: notas de futuros envíos y npm test de contratos/versiones, sin mensajes nuevos ni cambiar producto. Formatter de índice LF/autocrlf=true y shortcut/DOM/AppUserModelID/cierre correctos, helpers/Bot API/QA DB cerrados. No hay tickets nuevos: perfil Altura #1 comentado5971788617 y closed/completed con tablero Done; #2 y retests Tivio#174–#177 siguen bloqueados. Cola sin pendientes nuevos ejecutables; Git source-only publicado, CI no monitoreada.
 
 - [2026-09-29] Revisar requisitos vigentes de Play Console, cobros, AdMob y publicación de Linterna PREMIUM; documentar el orden de acciones del propietario y del proyecto en `docs/PLAN_PUBLICACION_PLAY.md`. Sin cambio de aplicación ni APK.
 - [2026-09-01] Entregar 0.4.8 (versionCode 16): reemplazar pausas y recortes por once ocurrencias de los siete festejos aprobados, siempre completos desde offset cero y solapados hasta cubrir los 15 s sin silencios audibles ni cortes; conservar la pista sintetizada original a menor ganancia y excluir 462. Validar 45/45 pruebas locales, PCM real de 15,000 s sin silencios de 20 ms a -42 dB, pico de -8,7 dB, cobertura del dominio 100%, lint y contratos; no generar APK ni monitorear CI. Reenviar el mismo pedido a la tarea `Diseña Linterna Premium`.

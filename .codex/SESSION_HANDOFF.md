@@ -1,65 +1,10 @@
-## Trabajo activo 2026-10-03
+# Session handoff · 2026-10-03 · Linterna PREMIUM
 
-- Historial de novedades por versión/build, publicación automática como respuestas al APK confirmado y cadena si supera Telegram. Central Apps Dashboard cubre las cinco apps; los productos móviles no cambian por documentación. Revisar tickets actuales y validar alcance antes de cerrar completos.
-
-# Session handoff
-
-## Objetivo general
-
-Entregar Linterna PREMIUM como aplicacion Android nativa mantenible, verificable y lista para que el usuario pruebe antes de configurar sus cuentas comerciales.
-
-## Tarea actual
-
-Entrega 0.4.8 implementada y validada: audio continuo con clips completos y solapados durante los 15 segundos. El 2026-09-29 se documentó en `docs/PLAN_PUBLICACION_PLAY.md` la ruta actual para abrir la cuenta del propietario, conectar cobros/anuncios y publicar. La publicación real espera el alta/identidad/perfil de pagos del propietario; no hay tareas activas ni elementos en USER_QUEUE.
-
-## Estado actual
-
-- Android nativo Kotlin/Compose implementado en version 0.4.8 (versionCode 16).
-- El nombre visible es `Linterna PREMIUM` en el launcher, la interfaz y `app.json`; package id, slug y URL del repositorio no cambiaron.
-- Repositorio público en `https://github.com/ldebortoli/linterna-premium`, rama principal `main`, con Secret Scanning y Push Protection habilitados.
-- Visibilidad publica y rama `main` verificadas directamente con GitHub el 2026-08-28.
-- El boton principal de Apagado Premium ya no muestra precio ni condiciones comerciales; al tocarlo aparece una confirmacion con precio, `Compra unica · Sin suscripcion` y luego Google Play. Abrirla o elegir `Ahora no` deja el flash encendido. La variante local presenta la misma confirmacion como simulacion sin cobro y, al confirmar, inicia recien entonces la secuencia Premium que termina apagando.
-- La app registra `CameraManager.TorchCallback`: si el flash estaba encendido desde Android antes de abrir o volver a la actividad, el estado se sincroniza y aparecen directamente Apagado Premium y el apagado plebeyo. El callback se libera en `onDestroy`.
-- `onPause` ya no apaga ni limpia la linterna: ir a Inicio, cambiar de app, abrir Google Play o cerrar la actividad deja el flash encendido mientras Android mantenga el proceso/recurso. No hay servicio persistente; Android puede apagarlo al matar el proceso, reclamar la camara o aplicar restricciones del dispositivo.
-- Con Premium activo, el boton ejecuta un pulso visual de tres segundos sincronizado con una curva del flash: baja, sube, baja, sube y desciende hasta apagarse. Android 13+ usa potencia real si el hardware expone varios niveles; el fallback conserva el LED estable, anima la pantalla y apaga al final. El apagado fisico no se prolonga por la fiesta visual.
-- La celebracion Premium 0.4.8 permanece 15 segundos y repite cinco rondas con once fuegos artificiales, 144 piezas de confeti/monedas, 36 regalos/diamantes/coronas/premios y luces suaves de marquesina en los cuatro bordes. Muestra `¡Felicitaciones por tu Apagado Premium!` traducido a las 21 opciones y distribuye una tragamonedas central más ocho compactas por la pantalla; todas cambian por debajo de tres cuadros por segundo y terminan en 7·7·7. El apagado plebeyo no muestra ningun aviso posterior y vuelve directamente al estado listo.
-- El audio 0.4.8 encadena once ocurrencias de los siete Mixkit aprobados (531, 459, 437, 2012, 2011, 1934, 1928; excluye 462). Cada archivo se convierte completo desde offset cero, se reproduce hasta su final natural y solapa el siguiente antes de su cola audible; las repeticiones cubren los 15 s sin pausas programadas. La pista sintetizada original permanece completa a ganancia 0,30 como continuidad y remate. Precarga al abrir y usa multimedia; no fuerza volumen ni Bluetooth. MP3/PCM no se versionan por licencia: receta, muestras, procedencia y hashes quedan en `audio/premium-sfx.json` y `docs/AUDIO_LICENSES.md`.
-- La secuencia Premium sigue ejecutandose al perder foco y apaga al completar; si la actividad se destruye durante ella, se cancela y el ejecutor apaga el flash en `finally`.
-- La experiencia gratuita usa `EDICIÓN PLEBEYA`, `Restablecer edición plebeya` y `Apagar linterna como un plebeyo`; no quedan usos activos de mortal/mortales.
-- La pantalla principal incluye un selector persistente de 21 opciones: los 18 idiomas/variantes reales de Galerazo Bot más mandarín, cantonés y coreano. Distingue español argentino/español de España, portugués brasileño/portugués de Portugal, chino simplificado/tradicional, mandarín y cantonés; euskera/vasco y Runa Simi/quechua aparecen una sola vez cada uno. El catálogo completo cubre interfaz, avisos, errores físicos, compra, anuncios de prueba y etiquetas de accesibilidad; la primera apertura toma idioma y región compatibles y cae a español argentino.
-- El dropdown se ancla al propio botón de idiomas en el extremo derecho, abre debajo en el diseño actual, limita su alto a 360 dp, mantiene un ancho de 220-320 dp y permite scroll interno para no sobrepasar la pantalla.
-- Cuando Premium simulado esta activo y la linterna apagada, demo muestra `Restablecer edición plebeya`; borra la licencia local, reactiva anuncios de prueba y permite repetir el recorrido. La UI y el controlador bloquean esta accion en Play.
-- Apps Dashboard generó y archivó la APK 0.4.7 el 2026-09-01 como `demoRelease`, paquete `com.linternapremium.app.demo`, `versionCode 15`, no depurable y con la identidad QA estable compartida de Tivio/A la Altura. El artefacto está en `artifacts/mobile/versions/0.4.7/linterna-premium-0.4.7-android-test.apk`; 0.4.8 no se construyó en esta entrega.
-- El silencio de 0.4.6 tenía una causa de código confirmada: se exigía STATE_INITIALIZED antes del primer write, pero MODE_STATIC devuelve STATE_NO_STATIC_DATA válido hasta cargar PCM. La pista se liberaba sin escribir ni reproducir. 0.4.7 acepta el estado vacío, carga y valida después; prueba ese orden con un adaptador falso y cubre fallos de asignación/escritura/inicio. Se registran errores bajo PremiumCelebrationAudio y la coroutine propietaria libera recursos al cancelar/terminar. El diagnóstico anterior sobre rechazo por tamaño del búfer no quedó demostrado.
-- Al instalar esa APK desde Telegram, Play Protect muestra una advertencia sorteable con `Instalar de todas formas`. La evidencia local descarta una firma invalida o compatibilidad Android antigua; la explicacion mas probable es paquete/certificado debug nuevos y sin reputacion, pero hace falta el texto exacto o una captura para distinguir un analisis de app desconocida de un bloqueo por verificacion de desarrollador.
-- Google Play Billing y Google Mobile Ads quedan separados por variantes hasta que existan cuentas e identificadores reales.
-- Apps Dashboard reconoce el perfil Android nativo `Linterna PREMIUM` y puede generar/archivar el APK.
-- Apps Dashboard 0.2.9 genera para Linterna PREMIUM una leyenda Telegram que menciona sólo a `@galerazo34` y nunca a Nico.
-- Validacion local de 0.4.8: npm test, audio:verify, coverage y lint; 45/45 pruebas sin fallos ni skips locales, cobertura del dominio 100% (1093 instrucciones, 62 ramas, 180 líneas y 26 métodos) y Android Lint correcto. La preescucha real dura 15,000 s, no presenta silencios de 20 ms a -42 dB, alcanza -25,0 dB de media y -8,7 dB de pico sin saturación. CI ejecutará las 44 pruebas puras y omitirá solo la integración si faltan assets licenciados; no se descargan audios. No se generó APK ni se monitoreó CI.
-- Los cinco primeros runs de CI fallaron por `spawnSync ./gradlew EACCES`, no por cuota. `apps/mobile/android/gradlew` quedo corregido de `100644` a `100755`.
-- `.gitattributes` fija LF para texto, CRLF para `.bat` y trata JAR, imagenes y keystores como binarios; se verifico el control rapido desde un checkout limpio compatible con `core.autocrlf=true`.
-- CI público sobre `main` y pull requests conserva pruebas, cobertura y lint, con cancelación de corridas reemplazadas y sin build de APK. Por política no se monitorea habitualmente después de cada push; el usuario autorizó una excepción puntual el 2026-08-31 para depurarlo hasta verde.
-- El run `33409711980` de `6d98b5f` confirmó que contratos y cobertura pasaban, pero Lint fallaba por `OldTargetApi`: el runner tenia API 37 preinstalada aunque el workflow solicitaba API 36. El primer arreglo (`3559668`) uso `${{ runner.temp }}` en `jobs.quality.env`; GitHub rechazo el workflow `33411847184` antes de crear jobs porque el contexto `runner` no existe en ese nivel. El fix `c0be8de` crea `$RUNNER_TEMP/android-sdk` en un paso Bash, exporta `ANDROID_HOME`/`ANDROID_SDK_ROOT` mediante `$GITHUB_ENV` e instala solo plataforma 36 y build-tools 36.0.0. El run `33412352768` terminó verde con contratos, cobertura y Android Lint; no se generó APK.
-- `.kotlin/` queda ignorado como caché local del compilador y no se versiona.
-- El usuario escuchó la fiesta 0.4.7 y aprobó los sonidos, pero rechazó sus silencios; 0.4.8 corrige la secuencia. La salida 0.4.8 queda pendiente de escucha/ruteo en teléfono cuando solicite el próximo Build App; no confundir las pruebas de PCM/protocolo con reproducción física verificada.
-- No hay elementos procesados en `USER_QUEUE.md`.
-
-## Proximos pasos
-
-0. Seguir `docs/PLAN_PUBLICACION_PLAY.md`: el propietario abre Play Console y AdMob bajo su identidad, elige precio/países, aporta datos públicos de contacto, sitio y testers. Una cuenta Play sirve para ambas apps; si es personal nueva, cada app requiere 12 testers adheridos 14 días. `playRelease` aún necesita clave de subida de producción, AAB y prueba en pista interna. No confundir los APK demo con publicables.
-1. Cuando el usuario lo pida, generar APK 0.4.8 desde Apps Dashboard; los siete clips completos ya están preparados. Probar audio continuo con volumen multimedia audible, ruteo correcto, interrupción al encender/restablecer/cerrar y ausencia de errores `PremiumCelebrationAudio` en logcat.
-2. Revisar la APK 0.4.8 cuando se genere: dropdown anclado, 21 opciones traducidas, apagado plebeyo sin aviso, confirmación Premium sin apagado prematuro, persistencia al salir/cambiar de app, detección del flash externo, celebración visual de 15 segundos con nueve tragamonedas y restablecimiento demo.
-3. Validar el flash real y, si se quiere clasificar la advertencia de Play Protect, capturar su texto exacto.
-4. Crear la app y el producto no consumible `premium_blackout_pack` en Play Console.
-5. Crear la app/unidad banner en AdMob, configurar consentimiento y publicar la politica de privacidad.
-6. Inyectar IDs y firma de produccion segun `docs/CONFIGURACION_GOOGLE.md`, generar `playRelease` y probar con un tester licenciado.
-
-## Riesgos
-
-- El cobro real queda bloqueado hasta crear la app y el producto en Play Console; debug debe permanecer sin cargos.
-- Los anuncios reales quedan bloqueados hasta registrar AdMob y completar consentimiento/privacidad.
-- La persistencia fuera de la actividad depende de Android: el sistema puede apagar el flash al matar el proceso, reclamar la camara o aplicar restricciones; no se usa un servicio persistente para impedirlo.
-- La regulacion fisica de potencia requiere Android 13+ y un flash que informe mas de un nivel; debe validarse en hardware real y no se reemplaza por parpadeos rapidos en dispositivos incompatibles.
-- El balance y la salida audible dependen del altavoz y volumen/ruteo del teléfono; el PCM real y protocolo de carga ya están verificados, pero falta probar Android/hardware con APK 0.4.8. No generar APK automáticamente.
-- Los identificadores reales y la firma de producción no deben versionarse; Secret Scanning y Push Protection están habilitados como segunda barrera.
-- Las APK demo distribuidas fuera de Google Play pueden seguir mostrando advertencias de Play Protect hasta usar una firma estable y acumular reputacion o distribuir la app mediante un canal de pruebas de Google Play.
+- Pedido de novedades automáticas por APK completado. RELEASE_NOTES.json en raíz documenta 0.4.8/build16, notas publicadas en44777d5. Cada próxima iteración debe agregar versión/build con cambios revisados y conservar historial. Documentación sin cambiar app/versión/build/distributable.
+- Publicador central Apps Dashboard0.2.16/625de98 cubre los cinco perfiles: confirmar archivo y enviar texto en respuesta al APK; continuaciones en cadena cuando excede4096UTF-16, Unicode conservado, progreso persistido y reintento de sólo partes pendientes. Notas acumuladas por app/chat/target y versión anunciada sólo tras confirmación completa. Una respuesta HTTP perdida puede dejar envío ambiguo; revisar canal antes de repetir. Regla global permanente para futuros proyectos/envíos autorizados.
+- Esta app mantiene Codex Logs y menciona sólo@galerazo34, nunca Nico. No se generó ni compartió APK nuevo, ni se enviaron novedades de esta app durante la entrega. Sí se verificaron respuestas de las tres apps Nico: APK60→63,Tivio;61→64,Altura;62→65,En la misma, con identidad exacta Codex Bot/admin y sin repetir archivos. Helpers/Bot API cerrados.
+- GitHub de esta app sin issues nuevos/abiertos. Tivio/backend/landing y tres proyectosNico también revisados; no novedades ejecutables. PerfilAltura#1 comentado/cerrado completed, tableroDone; #2 y retests físicosTivio siguen bloqueados. No cierres parciales.
+- Validación local documental: JSON/schema/appId/versión/build cotejados con app.json mediante planner central; formatter desde índice autocrlf=true pasa. npm test de contratos/identidad/versiones correcto. Dashboard228/228/100% Node tres métricas; Tivio574,Altura175,Enlamisma233+PostGIS y100% cuatro métricas en sus scopes. Umbrales/alcances intactos; no nueva validación Android física/Kotlin/lector para esta documentación.
+- Dominio Android previamente45pruebas/100% instrucciones/ramas/líneas/métodos; sin nuevo cambio Kotlin ni repetición de suite pesada. Celebración15s con efectos completos continuos, flashapagado<3s,21opciones, audio local ignorado por licencia. PublicaciónPlay requiere cuentas/IDs/firma de producción/testers/datos legales; docs/PLAN_PUBLICACION_PLAY.md. No confundir demoRelease con publicable.
+- Main/origin público personal bajo ldebortoli, fuente-only/noreply. Secret Scanning y Push Protection enabled verificados por API03/10; no cambios de preferencia de cuenta ni plan. No CI remoto monitoreado, fuentes/assets/credenciales/settings existentes preservados.
+- USER_QUEUE vacío, pedido directo DONE y ningún derivado nuevo pendiente. Windows captura/control SetIsBorderRequired/0x80004002 incompatible sigue deshabilitado; browser/DOM/API/CLI como fallback. Ningún proceso QA propio ni servicio nuevo; no apagar/reiniciar servicios ajenos.
