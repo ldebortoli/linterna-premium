@@ -53,3 +53,9 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - La elección de idioma se guarda localmente; la primera apertura usa el idioma y la región compatibles del dispositivo y cae a español argentino cuando no coincide con el catálogo. El menú se ancla debajo del botón de idiomas, limita su alto a 360 dp y permite desplazamiento interno.
 - La app observa el estado real del flash mediante `CameraManager.TorchCallback`: si Android ya lo tenia encendido al abrir o volver a la app, sincroniza la pantalla y muestra directamente ambos apagados.
 - `demoRelease` usa por variable de entorno el keystore QA local de Tivio, ignorado por Git; `playRelease` no reutiliza esa identidad y debe configurarse con la firma de producción de Google Play.
+
+## Novedades de APK · regla 2026-10-03
+
+- RELEASE_NOTES.json en la raíz conserva cambios revisados por versión/build y prefijo de artefactos. Apps Dashboard central publica esas notas después de confirmar cada archivo, como respuesta al APK y continuaciones en cadena cuando superan el límite de Telegram; incluye versiones no anunciadas para esa app/chat/plataforma.
+- Codex Bot verifica identidad, destino, permisos, archivo y cada respuesta. Credenciales cifradas; recibos y progreso locales fuera de Git; reintentos continúan partes pendientes sin repetir el APK. Sólo avanzar la versión anunciada al confirmar la cadena completa. El transporte no garantiza exactamente una vez si se pierde la respuesta HTTP después de la aceptación remota.
+- Preparar una entrada por cada nueva iteración distribuible y mantener el historial. Esta documentación no cambia el comportamiento ni versión del producto móvil; el cambio de publicador se entrega en Apps Dashboard 0.2.16.

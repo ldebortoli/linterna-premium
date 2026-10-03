@@ -219,3 +219,9 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-09-01.
 - Decisión: convertir cada clip completo desde offset cero, reproducirlo hasta su final natural y solapar el siguiente antes de su cola audible. Repetir festejos para sostener los 15 segundos sin silencios programados, conservar la pista sintetizada original a menor ganancia como continuidad y excluir siempre el 462. Ningún cue puede empezar si no termina completo antes del segundo 15.
 - Motivo: el usuario aprobó los sonidos pero rechazó los huecos entre ellos; una cadena superpuesta mantiene la celebración constante sin mutilar voces, premios ni tragamonedas y conserva margen contra clipping.
+
+## 2026-10-03 · Novedades en respuesta al APK
+
+- Decisión del usuario: texto con todos los cambios de cada app después de confirmar el APK; si excede Telegram, el primero responde al archivo y cada continuación al texto anterior. Regla global vigente para todos los proyectos actuales/futuros que distribuyen APKs.
+- Un único publicador central cubre los cinco perfiles de Apps Dashboard. Notas revisadas en RELEASE_NOTES.json, identidad app/versión/build validada antes de envío y registro por app/chat/plataforma; congelar partes iniciadas y persistir confirmaciones para continuar fallos sin subir el mismo archivo. No usar mensajes genéricos, logs Git ni inventar entrega auténtica/producción.
+- Cambio de comportamiento del dashboard 0.2.16; archivos de notas de los cinco productos son documentación de builds existentes, sin cambios de app ni incremento móvil. No reconstruir ni redistribuir APKs para anunciar los tres recibos confirmados de Nico; completar sus respuestas sobre los originales. Cerrar sólo tickets totalmente implementados y verificados; los retests físicos y proveedores reales pendientes conservan bloqueos.

@@ -1,3 +1,7 @@
+## Trabajo activo 2026-10-03
+
+- Historial de novedades por versión/build, publicación automática como respuestas al APK confirmado y cadena si supera Telegram. Central Apps Dashboard cubre las cinco apps; los productos móviles no cambian por documentación. Revisar tickets actuales y validar alcance antes de cerrar completos.
+
 # Session handoff
 
 ## Objetivo general

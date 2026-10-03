@@ -9,6 +9,8 @@
 
 # IN PROGRESS
 
+- [P1] [2026-10-03] IN PROGRESS: historial RELEASE_NOTES por versión/build para respuestas automáticas a APK de Apps Dashboard; revisar tickets vigentes y registrar bloqueos sin cerrar parciales.
+
 - Sin tareas activas.
 
 # DONE

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "appId": "linterna-premium",
+  "releases": [
+    {
+      "version": "0.4.8",
+      "build": "16",
+      "changes": [
+        "Hacer continua la celebración Premium de 15 segundos: reproducir completos los siete efectos aprobados, repetir los necesarios y solapar transiciones sin pausas ni cortes.",
+        "Conservar la pista sintetizada original a menor ganancia y el remate final, sin alterar el apagado físico de la linterna dentro de los primeros tres segundos.",
+        "Verificar duración, picos, continuidad de audio y liberación de recursos. Respetar volumen y ruteo multimedia del dispositivo.",
+        "Mantener selector persistente de idiomas, apagado plebeyo gratuito, detección del flash externo, nueve tragamonedas y restablecimiento Premium exclusivo de la demo.",
+        "La firma y variante QA no habilitan cobros reales ni publicación en Google Play. La escucha y el flash físico se deben confirmar en el teléfono."
+      ]
+    }
+  ]
+}
