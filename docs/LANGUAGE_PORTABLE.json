@@ -1,0 +1,1983 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "250 installed options shared by Linterna PREMIUM and Gemidos PREMIUM; 251 source candidates reviewed, not all Internet resources",
+  "nativeReview": false,
+  "sources": [
+    {
+      "url": "https://docs.cloud.google.com/translate/docs/languages",
+      "sha256": "36faec1b454d7a31ad09f2f57b207bfabc89088c48e62d0d499e1273cb78b11b"
+    },
+    {
+      "url": "https://translate.google.com/",
+      "sha256": "44a8e14b49b234ffaea1f51368af2ac07af71223584ac24fbe460e7cfde3eeb4"
+    }
+  ],
+  "languages": [
+    {
+      "code": "es-AR",
+      "displayName": "Español (Argentina)",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "es-ES",
+      "displayName": "Español (España)",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "en",
+      "displayName": "English",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "ru",
+      "displayName": "Русский",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "la",
+      "displayName": "Latine",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "ja",
+      "displayName": "日本語",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "it",
+      "displayName": "Italiano",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "fr",
+      "displayName": "Français",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "de",
+      "displayName": "Deutsch",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "nl",
+      "displayName": "Nederlands",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "zh-Hans",
+      "displayName": "中文（简体）",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "zh-Hant",
+      "displayName": "中文（繁體）",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "pt-BR",
+      "displayName": "Português (Brasil)",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "pt-PT",
+      "displayName": "Português (Portugal)",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "ca",
+      "displayName": "Català",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "eu",
+      "displayName": "Euskara",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "gn",
+      "displayName": "Avañe'ẽ",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "quz",
+      "displayName": "Runa Simi",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "cmn-Hans",
+      "displayName": "普通话",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "yue-Hant",
+      "displayName": "粵語",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "ko",
+      "displayName": "한국어",
+      "direction": "ltr",
+      "provenance": "existing catalog preserved; not retranslated or newly certified"
+    },
+    {
+      "code": "aa",
+      "displayName": "Qafar [aa]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:09.940289+00:00"
+    },
+    {
+      "code": "ab",
+      "displayName": "Аԥсуа [ab]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:09.930380+00:00"
+    },
+    {
+      "code": "ace",
+      "displayName": "Bahasa Aceh [ace]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:09.934044+00:00"
+    },
+    {
+      "code": "ach",
+      "displayName": "Acholi [ach]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:09.935306+00:00"
+    },
+    {
+      "code": "af",
+      "displayName": "Afrikaans [af]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:11.415653+00:00"
+    },
+    {
+      "code": "ak",
+      "displayName": "Twi (Akan) . [ak]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:02.658347+00:00"
+    },
+    {
+      "code": "alz",
+      "displayName": "Alur [alz]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:12.330279+00:00"
+    },
+    {
+      "code": "am",
+      "displayName": "አማርኛ [am]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:12.390542+00:00"
+    },
+    {
+      "code": "ar",
+      "displayName": "العربية [ar]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:13.583591+00:00"
+    },
+    {
+      "code": "as",
+      "displayName": "অসমীয়া [as]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:14.433565+00:00"
+    },
+    {
+      "code": "av",
+      "displayName": "Авар [av]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:14.625003+00:00"
+    },
+    {
+      "code": "awa",
+      "displayName": "अवधी [awa]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:15.549118+00:00"
+    },
+    {
+      "code": "ay",
+      "displayName": "Aymara aru [ay]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:15.807284+00:00"
+    },
+    {
+      "code": "az",
+      "displayName": "Azərbaycan [az]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:16.798834+00:00"
+    },
+    {
+      "code": "ba",
+      "displayName": "Башҡорт . [ba]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:18.957311+00:00"
+    },
+    {
+      "code": "bal",
+      "displayName": "بلوچی . [bal]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:17.715196+00:00"
+    },
+    {
+      "code": "ban",
+      "displayName": "Basa Bali [ban]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:17.430036+00:00"
+    },
+    {
+      "code": "bbc",
+      "displayName": "Batak Toba [bbc]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:20.192472+00:00"
+    },
+    {
+      "code": "bci",
+      "displayName": "Baoulɛ [bci]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:18.903035+00:00"
+    },
+    {
+      "code": "be",
+      "displayName": "беларускі [be]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:20.962937+00:00"
+    },
+    {
+      "code": "bem",
+      "displayName": "Icibemba [bem]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:21.933619+00:00"
+    },
+    {
+      "code": "ber",
+      "displayName": "ⵜⴰⵎⴰⵣⵉⵖⵜ (ⵜⵉⴼⵉⵏⴰⵖ) [ber]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:52.768870+00:00"
+    },
+    {
+      "code": "ber-Latn",
+      "displayName": "Tamaziɣt [ber-Latn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:51.921915+00:00"
+    },
+    {
+      "code": "bew",
+      "displayName": "Betawi [bew]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:22.362655+00:00"
+    },
+    {
+      "code": "bg",
+      "displayName": "български [bg]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:25.777554+00:00"
+    },
+    {
+      "code": "bho",
+      "displayName": "भोजपुरी के बा [bho]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:23.027479+00:00"
+    },
+    {
+      "code": "bik",
+      "displayName": "Bikol [bik]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:23.607717+00:00"
+    },
+    {
+      "code": "bm",
+      "displayName": "Bamanankan [bm]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:17.932231+00:00"
+    },
+    {
+      "code": "bm-Nkoo",
+      "displayName": "ߒߞߏ [bm-Nkoo]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:25.309741+00:00"
+    },
+    {
+      "code": "bn",
+      "displayName": "বাংলা [bn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:22.208629+00:00"
+    },
+    {
+      "code": "bo",
+      "displayName": "བོད་ཡིག། [bo]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:55.564533+00:00"
+    },
+    {
+      "code": "br",
+      "displayName": "Brezhoneg [br]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:24.562245+00:00"
+    },
+    {
+      "code": "bs",
+      "displayName": "bosanski [bs]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:24.092056+00:00"
+    },
+    {
+      "code": "bts",
+      "displayName": "Batak Simalungun [bts]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:20.073695+00:00"
+    },
+    {
+      "code": "btx",
+      "displayName": "Batak Karo [btx]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:19.784541+00:00"
+    },
+    {
+      "code": "bua",
+      "displayName": "Буряад [bua]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:26.238932+00:00"
+    },
+    {
+      "code": "ce",
+      "displayName": "Нохчийн [ce]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:27.796038+00:00"
+    },
+    {
+      "code": "ceb",
+      "displayName": "Cebuano [ceb]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:26.711219+00:00"
+    },
+    {
+      "code": "cgg",
+      "displayName": "Kiga [cgg]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:03.034668+00:00"
+    },
+    {
+      "code": "ch",
+      "displayName": "Chamorro [ch]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:26.816907+00:00"
+    },
+    {
+      "code": "chk",
+      "displayName": "Chon Chuuk [chk]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:29.028706+00:00"
+    },
+    {
+      "code": "chm",
+      "displayName": "Луговой марий [chm]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:21.819711+00:00"
+    },
+    {
+      "code": "ckb",
+      "displayName": "کوردی (سۆرانی) [ckb]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:06.793089+00:00"
+    },
+    {
+      "code": "cnh",
+      "displayName": "Hakha Chin [cnh]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:48.381969+00:00"
+    },
+    {
+      "code": "co",
+      "displayName": "corsu [co]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:29.937588+00:00"
+    },
+    {
+      "code": "crh",
+      "displayName": "Къырымтатар . [crh]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:30.449806+00:00"
+    },
+    {
+      "code": "crh-Latn",
+      "displayName": "Qırımtatar (latin) [crh-Latn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:31.126112+00:00"
+    },
+    {
+      "code": "crs",
+      "displayName": "Kreol Seselwa [crs]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:42.702091+00:00"
+    },
+    {
+      "code": "cs",
+      "displayName": "český [cs]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:32.056291+00:00"
+    },
+    {
+      "code": "cv",
+      "displayName": "чуваши [cv]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:29.060604+00:00"
+    },
+    {
+      "code": "cy",
+      "displayName": "Cymraeg [cy]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:08.021700+00:00"
+    },
+    {
+      "code": "da",
+      "displayName": "dansk [da]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:32.591402+00:00"
+    },
+    {
+      "code": "din",
+      "displayName": "Dinka [din]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:33.956916+00:00"
+    },
+    {
+      "code": "doi",
+      "displayName": "डोगरी [doi]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:34.769950+00:00"
+    },
+    {
+      "code": "dov",
+      "displayName": "Dombe [dov]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:35.479436+00:00"
+    },
+    {
+      "code": "dv",
+      "displayName": "ދިވެހި... [dv]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:34.266276+00:00"
+    },
+    {
+      "code": "dyu",
+      "displayName": "Dyula [dyu]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:36.185645+00:00"
+    },
+    {
+      "code": "dz",
+      "displayName": "རྫོང་ཁ། [dz]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:36.439258+00:00"
+    },
+    {
+      "code": "ee",
+      "displayName": "Ewe [ee]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:38.435853+00:00"
+    },
+    {
+      "code": "el",
+      "displayName": "Έλληνας [el]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:47.132610+00:00"
+    },
+    {
+      "code": "eo",
+      "displayName": "Esperanto [eo]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:36.951659+00:00"
+    },
+    {
+      "code": "et",
+      "displayName": "eesti keel [et]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:37.656053+00:00"
+    },
+    {
+      "code": "fa",
+      "displayName": "فارسی [fa]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:33.867343+00:00"
+    },
+    {
+      "code": "fa-AF",
+      "displayName": "دری [fa-AF]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:33.260429+00:00"
+    },
+    {
+      "code": "ff",
+      "displayName": "Fulfulde [ff]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:44.567548+00:00"
+    },
+    {
+      "code": "fi",
+      "displayName": "suomalainen [fi]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:40.632365+00:00"
+    },
+    {
+      "code": "fil",
+      "displayName": "Filipino (Tagalog) [fil]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:39.828038+00:00"
+    },
+    {
+      "code": "fj",
+      "displayName": "Vaka-Viti [fj]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:39.036904+00:00"
+    },
+    {
+      "code": "fo",
+      "displayName": "Føroyskt [fo]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:38.629679+00:00"
+    },
+    {
+      "code": "fon",
+      "displayName": "Fon [fon]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:40.830074+00:00"
+    },
+    {
+      "code": "fr-CA",
+      "displayName": "Français canadien [fr-CA]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:41.289011+00:00"
+    },
+    {
+      "code": "fur",
+      "displayName": "Friul [fur]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:43.099284+00:00"
+    },
+    {
+      "code": "fy",
+      "displayName": "Frysk [fy]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:42.753111+00:00"
+    },
+    {
+      "code": "ga",
+      "displayName": "Gaeilge [ga]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:56.879966+00:00"
+    },
+    {
+      "code": "gaa",
+      "displayName": "Ga [gaa]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:44.855336+00:00"
+    },
+    {
+      "code": "gd",
+      "displayName": "Gàidhlig na h-Alba [gd]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:41.352629+00:00"
+    },
+    {
+      "code": "gl",
+      "displayName": "galego [gl]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:44.952727+00:00"
+    },
+    {
+      "code": "gom",
+      "displayName": "कोंकणी [gom]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:05.294924+00:00"
+    },
+    {
+      "code": "gu",
+      "displayName": "ગુજરાતી [gu]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:47.595451+00:00"
+    },
+    {
+      "code": "gv",
+      "displayName": "Manninagh [gv]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:19.103360+00:00"
+    },
+    {
+      "code": "ha",
+      "displayName": "Hausa [ha]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:48.986577+00:00"
+    },
+    {
+      "code": "haw",
+      "displayName": "Hawaii [haw]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:50.041675+00:00"
+    },
+    {
+      "code": "he",
+      "displayName": "עברית [he]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:50.449385+00:00"
+    },
+    {
+      "code": "hi",
+      "displayName": "हिंदी [hi]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:51.131752+00:00"
+    },
+    {
+      "code": "hil",
+      "displayName": "Hiligaynon [hil]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:50.495032+00:00"
+    },
+    {
+      "code": "hmn",
+      "displayName": "Hmoob [hmn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:52.105593+00:00"
+    },
+    {
+      "code": "hr",
+      "displayName": "hrvatski [hr]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:31.814970+00:00"
+    },
+    {
+      "code": "hrx",
+      "displayName": "Hunsrik [hrx]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:52.735353+00:00"
+    },
+    {
+      "code": "ht",
+      "displayName": "Kreyòl ayisyen [ht]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:48.319990+00:00"
+    },
+    {
+      "code": "hu",
+      "displayName": "magyar [hu]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:52.628178+00:00"
+    },
+    {
+      "code": "hy",
+      "displayName": "հայկ [hy]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:13.614164+00:00"
+    },
+    {
+      "code": "iba",
+      "displayName": "Jaku Iban [iba]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:53.427916+00:00"
+    },
+    {
+      "code": "id",
+      "displayName": "bahasa Indonesia [id]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:55.612363+00:00"
+    },
+    {
+      "code": "ig",
+      "displayName": "Igbo [ig]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:54.559217+00:00"
+    },
+    {
+      "code": "ilo",
+      "displayName": "Iloko [ilo]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:54.757904+00:00"
+    },
+    {
+      "code": "is",
+      "displayName": "íslenskur [is]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:54.175650+00:00"
+    },
+    {
+      "code": "iu",
+      "displayName": "ᐃᓄᒃᑐᑦ (ᖃᓕᐅᔮᖅᐸᐃᑦ) [iu]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:56.580374+00:00"
+    },
+    {
+      "code": "iu-Latn",
+      "displayName": "Inuktuq (laatin) [iu-Latn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:56.348021+00:00"
+    },
+    {
+      "code": "jv",
+      "displayName": "basa jawa [jv]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:57.848767+00:00"
+    },
+    {
+      "code": "ka",
+      "displayName": "ქართული [ka]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:46.700745+00:00"
+    },
+    {
+      "code": "kac",
+      "displayName": "Jingpo [kac]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:58.830392+00:00"
+    },
+    {
+      "code": "kek",
+      "displayName": "Qʼeqchiʼ [kek]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:36.164544+00:00"
+    },
+    {
+      "code": "kg",
+      "displayName": "Kikongo [kg]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:03.117377+00:00"
+    },
+    {
+      "code": "kha",
+      "displayName": "Khasi [kha]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:01.102400+00:00"
+    },
+    {
+      "code": "kk",
+      "displayName": "қазақ [kk]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:00.915073+00:00"
+    },
+    {
+      "code": "kl",
+      "displayName": "Kalaallisut [kl]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:55:58.897164+00:00"
+    },
+    {
+      "code": "km",
+      "displayName": "ខ្មែរ [km]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:02.113586+00:00"
+    },
+    {
+      "code": "kn",
+      "displayName": "ಕನ್ನಡ [kn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:59.375085+00:00"
+    },
+    {
+      "code": "kr",
+      "displayName": "Kanuri [kr]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:00.013580+00:00"
+    },
+    {
+      "code": "kri",
+      "displayName": "Krio na wan [kri]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:05.436907+00:00"
+    },
+    {
+      "code": "ktu",
+      "displayName": "Kituba [ktu]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:04.126902+00:00"
+    },
+    {
+      "code": "ku",
+      "displayName": "Kurdî (Kurmancî) [ku]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:06.417733+00:00"
+    },
+    {
+      "code": "kv",
+      "displayName": "Коми [kv]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:05.157318+00:00"
+    },
+    {
+      "code": "ky",
+      "displayName": "Кыргыз [ky]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:07.214527+00:00"
+    },
+    {
+      "code": "lb",
+      "displayName": "Lëtzebuergesch [lb]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:12.392587+00:00"
+    },
+    {
+      "code": "lg",
+      "displayName": "Ganda (Oluganda) . [lg]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:45.269308+00:00"
+    },
+    {
+      "code": "li",
+      "displayName": "Limburgaans [li]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:09.911739+00:00"
+    },
+    {
+      "code": "lij",
+      "displayName": "Ligure [lij]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:09.347362+00:00"
+    },
+    {
+      "code": "lmo",
+      "displayName": "Lombardo [lmo]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:11.552246+00:00"
+    },
+    {
+      "code": "ln",
+      "displayName": "Lingala [ln]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:10.266946+00:00"
+    },
+    {
+      "code": "lo",
+      "displayName": "ພາສາລາວ [lo]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:07.832547+00:00"
+    },
+    {
+      "code": "lt",
+      "displayName": "lietuvių [lt]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:11.189570+00:00"
+    },
+    {
+      "code": "ltg",
+      "displayName": "Latgalīšu . [ltg]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:08.161029+00:00"
+    },
+    {
+      "code": "lua",
+      "displayName": "Tshiluba [lua]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:58.276223+00:00"
+    },
+    {
+      "code": "luo",
+      "displayName": "Luo [luo]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:11.998028+00:00"
+    },
+    {
+      "code": "lus",
+      "displayName": "Mizo [lus]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:23.463324+00:00"
+    },
+    {
+      "code": "lv",
+      "displayName": "latviski [lv]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:09.106778+00:00"
+    },
+    {
+      "code": "mad",
+      "displayName": "bhâsa madhurâ [mad]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:15.284756+00:00"
+    },
+    {
+      "code": "mai",
+      "displayName": "मैथिली [mai]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:15.286259+00:00"
+    },
+    {
+      "code": "mak",
+      "displayName": "Makassar [mak]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:15.419936+00:00"
+    },
+    {
+      "code": "mam",
+      "displayName": "Mam [mam]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:19.004527+00:00"
+    },
+    {
+      "code": "mfe",
+      "displayName": "Kreol Morisien [mfe]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:21.311382+00:00"
+    },
+    {
+      "code": "mg",
+      "displayName": "Malagasy [mg]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:15.457219+00:00"
+    },
+    {
+      "code": "mh",
+      "displayName": "Marshallese [mh]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:21.148765+00:00"
+    },
+    {
+      "code": "mi",
+      "displayName": "Maori [mi]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:19.650818+00:00"
+    },
+    {
+      "code": "min",
+      "displayName": "Minang [min]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:23.050802+00:00"
+    },
+    {
+      "code": "mk",
+      "displayName": "македонски [mk]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:13.401328+00:00"
+    },
+    {
+      "code": "ml",
+      "displayName": "മലയാളം [ml]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:17.636566+00:00"
+    },
+    {
+      "code": "mn",
+      "displayName": "Монгол [mn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:23.918520+00:00"
+    },
+    {
+      "code": "mni-Mtei",
+      "displayName": "ꯃꯦꯏꯇꯦꯏꯂꯣꯟ (ꯃꯅꯤꯄꯨꯔꯤ) ꯴. [mni-Mtei]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:22.587601+00:00"
+    },
+    {
+      "code": "mr",
+      "displayName": "मराठी [mr]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:19.904213+00:00"
+    },
+    {
+      "code": "ms",
+      "displayName": "Melayu [ms]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:16.616547+00:00"
+    },
+    {
+      "code": "ms-Arab",
+      "displayName": "ملايو (جاوي) [ms-Arab]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:17.464588+00:00"
+    },
+    {
+      "code": "mt",
+      "displayName": "Malti [mt]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:17.726312+00:00"
+    },
+    {
+      "code": "mwr",
+      "displayName": "मारवाड़ी [mwr]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:21.307878+00:00"
+    },
+    {
+      "code": "my",
+      "displayName": "မြန်မာ (ဗမာ)၊ [my]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:24.854686+00:00"
+    },
+    {
+      "code": "ndc-ZW",
+      "displayName": "Ndau [ndc-ZW]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:26.742215+00:00"
+    },
+    {
+      "code": "ne",
+      "displayName": "नेपाली [ne]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:27.886651+00:00"
+    },
+    {
+      "code": "new",
+      "displayName": "नेपालभाषा (नेवारी) ३. [new]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:27.523419+00:00"
+    },
+    {
+      "code": "nhe",
+      "displayName": "Nahuatl (Huasteca Oriental) [nhe]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:25.762529+00:00"
+    },
+    {
+      "code": "no",
+      "displayName": "norsk [no]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:29.290430+00:00"
+    },
+    {
+      "code": "nr",
+      "displayName": "IsiNdebele (Sewula) [nr]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:27.024667+00:00"
+    },
+    {
+      "code": "nso",
+      "displayName": "Sesotho sa Leboa (Sepedi) . [nso]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:28.702002+00:00"
+    },
+    {
+      "code": "nus",
+      "displayName": "Nuer [nus]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:29.560207+00:00"
+    },
+    {
+      "code": "ny",
+      "displayName": "Chichewa (Nyanja) [ny]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:28.104218+00:00"
+    },
+    {
+      "code": "oc",
+      "displayName": "occitan [oc]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:29.739362+00:00"
+    },
+    {
+      "code": "om",
+      "displayName": "Oromoo [om]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:31.630635+00:00"
+    },
+    {
+      "code": "or",
+      "displayName": "ଓଡିଆ (ଓଡିଆ) [or]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:31.492036+00:00"
+    },
+    {
+      "code": "os",
+      "displayName": "Осетин [os]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:31.682664+00:00"
+    },
+    {
+      "code": "pa",
+      "displayName": "ਪੰਜਾਬੀ [pa]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:35.167701+00:00"
+    },
+    {
+      "code": "pa-Arab",
+      "displayName": "پنجابی (شاہ مکھی) [pa-Arab]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:35.637993+00:00"
+    },
+    {
+      "code": "pag",
+      "displayName": "Pangasinan [pag]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:31.873437+00:00"
+    },
+    {
+      "code": "pam",
+      "displayName": "Kapampangan [pam]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:00.876433+00:00"
+    },
+    {
+      "code": "pap",
+      "displayName": "Papiamentu [pap]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:33.750494+00:00"
+    },
+    {
+      "code": "pl",
+      "displayName": "Polski [pl]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:34.009880+00:00"
+    },
+    {
+      "code": "ps",
+      "displayName": "پښتو [ps]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:33.774688+00:00"
+    },
+    {
+      "code": "rn",
+      "displayName": "Rundi [rn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:37.680117+00:00"
+    },
+    {
+      "code": "ro",
+      "displayName": "română [ro]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:36.640119+00:00"
+    },
+    {
+      "code": "rom",
+      "displayName": "Romani [rom]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:36.169210+00:00"
+    },
+    {
+      "code": "rw",
+      "displayName": "Kinyarwanda [rw]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:03.121733+00:00"
+    },
+    {
+      "code": "sa",
+      "displayName": "संस्कृतम् [sa]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:39.819578+00:00"
+    },
+    {
+      "code": "sah",
+      "displayName": "якут [sah]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:57:10.108463+00:00"
+    },
+    {
+      "code": "sat",
+      "displayName": "ᱥᱟᱱᱛᱟᱲᱤ (ᱚᱞ ᱪᱤᱠᱤ) [sat]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:40.608986+00:00"
+    },
+    {
+      "code": "sat-Latn",
+      "displayName": "Santali (laṭin) [sat-Latn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:40.553413+00:00"
+    },
+    {
+      "code": "scn",
+      "displayName": "Sicilianu [scn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:44.712695+00:00"
+    },
+    {
+      "code": "sd",
+      "displayName": "سنڌي [sd]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:45.619911+00:00"
+    },
+    {
+      "code": "se",
+      "displayName": "Sámi (Nuorta) [se]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:38.415781+00:00"
+    },
+    {
+      "code": "sg",
+      "displayName": "Sango [sg]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:38.763565+00:00"
+    },
+    {
+      "code": "shn",
+      "displayName": "ရှမ်း [shn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:43.442252+00:00"
+    },
+    {
+      "code": "si",
+      "displayName": "සිංහල (සිංහල) [si]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:46.039002+00:00"
+    },
+    {
+      "code": "sk",
+      "displayName": "slovenský [sk]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:46.771042+00:00"
+    },
+    {
+      "code": "sl",
+      "displayName": "slovenski [sl]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:47.080368+00:00"
+    },
+    {
+      "code": "sm",
+      "displayName": "Samoa [sm]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:38.462187+00:00"
+    },
+    {
+      "code": "sn",
+      "displayName": "Shona [sn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:44.607764+00:00"
+    },
+    {
+      "code": "so",
+      "displayName": "Soomaali [so]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:47.356477+00:00"
+    },
+    {
+      "code": "sq",
+      "displayName": "shqiptare [sq]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:55:11.531239+00:00"
+    },
+    {
+      "code": "sr",
+      "displayName": "српски [sr]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:42.386716+00:00"
+    },
+    {
+      "code": "ss",
+      "displayName": "SiSwati [ss]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:49.663582+00:00"
+    },
+    {
+      "code": "st",
+      "displayName": "Sesotho [st]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:42.589566+00:00"
+    },
+    {
+      "code": "su",
+      "displayName": "basa Sunda [su]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:47.844810+00:00"
+    },
+    {
+      "code": "sus",
+      "displayName": "Susu [sus]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:48.856065+00:00"
+    },
+    {
+      "code": "sv",
+      "displayName": "svenska [sv]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:50.545070+00:00"
+    },
+    {
+      "code": "sw",
+      "displayName": "kiswahili [sw]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:49.296701+00:00"
+    },
+    {
+      "code": "szl",
+      "displayName": "Sylezyjsko [szl]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:44.884427+00:00"
+    },
+    {
+      "code": "ta",
+      "displayName": "தமிழ் [ta]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:53.060773+00:00"
+    },
+    {
+      "code": "tcy",
+      "displayName": "ತುಳು [tcy]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:59.849008+00:00"
+    },
+    {
+      "code": "te",
+      "displayName": "తెలుగు [te]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:54.042559+00:00"
+    },
+    {
+      "code": "tet",
+      "displayName": "Tetum [tet]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:54.844903+00:00"
+    },
+    {
+      "code": "tg",
+      "displayName": "тоҷикӣ [tg]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:51.768187+00:00"
+    },
+    {
+      "code": "th",
+      "displayName": "ไทย [th]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:55.099199+00:00"
+    },
+    {
+      "code": "ti",
+      "displayName": "ትግርኛ [ti]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:56.169724+00:00"
+    },
+    {
+      "code": "tiv",
+      "displayName": "Tiv [tiv]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:56.868300+00:00"
+    },
+    {
+      "code": "tk",
+      "displayName": "Türkmenler [tk]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:01.611735+00:00"
+    },
+    {
+      "code": "tn",
+      "displayName": "Motswana [tn]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:59.451847+00:00"
+    },
+    {
+      "code": "to",
+      "displayName": "Tonga [to]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:57.710637+00:00"
+    },
+    {
+      "code": "tpi",
+      "displayName": "Tok Pisin [tpi]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:57.358875+00:00"
+    },
+    {
+      "code": "tr",
+      "displayName": "Türkçe [tr]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:01.413290+00:00"
+    },
+    {
+      "code": "trp",
+      "displayName": "Kokborok [trp]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:04.288674+00:00"
+    },
+    {
+      "code": "ts",
+      "displayName": "Vatsonga [ts]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:59.048592+00:00"
+    },
+    {
+      "code": "tt",
+      "displayName": "Татар [tt]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:56:54.041012+00:00"
+    },
+    {
+      "code": "tum",
+      "displayName": "Chitumbuka [tum]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:57:00.529961+00:00"
+    },
+    {
+      "code": "ty",
+      "displayName": "Tahiti [ty]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:56:51.004827+00:00"
+    },
+    {
+      "code": "tyv",
+      "displayName": "Тыва [tyv]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:57:02.027602+00:00"
+    },
+    {
+      "code": "udm",
+      "displayName": "удмурт [udm]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:57:03.596279+00:00"
+    },
+    {
+      "code": "ug",
+      "displayName": "ئۇيغۇر [ug]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:05.754636+00:00"
+    },
+    {
+      "code": "uk",
+      "displayName": "українська [uk]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:03.883376+00:00"
+    },
+    {
+      "code": "ur",
+      "displayName": "اردو [ur]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:04.210779+00:00"
+    },
+    {
+      "code": "uz",
+      "displayName": "o'zbek [uz]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:05.814438+00:00"
+    },
+    {
+      "code": "ve",
+      "displayName": "Venda [ve]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:57:05.819739+00:00"
+    },
+    {
+      "code": "vec",
+      "displayName": "Veneto [vec]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:57:06.071269+00:00"
+    },
+    {
+      "code": "vi",
+      "displayName": "Tiếng Việt [vi]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:07.941555+00:00"
+    },
+    {
+      "code": "war",
+      "displayName": "Waray [war]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:57:08.010091+00:00"
+    },
+    {
+      "code": "wo",
+      "displayName": "Wolof [wo]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:57:08.283334+00:00"
+    },
+    {
+      "code": "xh",
+      "displayName": "IsiXhosa [xh]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:10.088435+00:00"
+    },
+    {
+      "code": "yi",
+      "displayName": "יידיש [yi]",
+      "direction": "rtl",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:10.164445+00:00"
+    },
+    {
+      "code": "yo",
+      "displayName": "Yoruba [yo]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:10.656838+00:00"
+    },
+    {
+      "code": "yua",
+      "displayName": "maaya yucatec [yua]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:12.294693+00:00"
+    },
+    {
+      "code": "zap",
+      "displayName": "Zapoteca [zap]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://translate.google.com/",
+      "retrievedAt": "2026-10-16T22:57:12.298461+00:00"
+    },
+    {
+      "code": "zu",
+      "displayName": "Zulu [zu]",
+      "direction": "ltr",
+      "provenance": "complete-key machine translation; technical integrity only",
+      "source": "https://docs.cloud.google.com/translate/docs/languages",
+      "retrievedAt": "2026-10-16T22:57:12.373426+00:00"
+    }
+  ],
+  "notPublished": [
+    {
+      "code": "jam",
+      "status": "requires-specialist-review",
+      "reason": "Public machine translation responses retained source-language sentences or phrases. These cannot be distinguished from valid Jamaican Patois without specialist review."
+    }
+  ]
+}

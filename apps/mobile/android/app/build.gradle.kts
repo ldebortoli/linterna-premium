@@ -152,9 +152,18 @@ dependencies {
 }
 
 val coverageClasses = fileTree(layout.buildDirectory.dir("tmp/kotlin-classes/demoDebug")) {
-    include("**/domain/**")
+    include("**/domain/**", "**/model/**", "**/ports/**", "**/localization/**")
+    // Android SharedPreferences adapter requires device tests, outside the pure JVM suite.
+    exclude("**/PreferencesLanguageStore*")
+    // Kotlin-generated compatibility bridges contain no maintained application logic.
+    exclude("**/*\$DefaultImpls*")
 }
-val coverageSources = files("src/main/java/com/linternapremium/app/domain")
+val coverageSources = files(
+    "src/main/java/com/linternapremium/app/domain",
+    "src/main/java/com/linternapremium/app/model",
+    "src/main/java/com/linternapremium/app/ports",
+    "src/main/java/com/linternapremium/app/localization",
+)
 val coverageData = fileTree(layout.buildDirectory) {
     include("jacoco/testDemoDebugUnitTest.exec")
     include("outputs/unit_test_code_coverage/demoDebugUnitTest/testDemoDebugUnitTest.exec")
@@ -178,7 +187,7 @@ tasks.register<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
     sourceDirectories.setFrom(coverageSources)
     executionData.setFrom(coverageData)
     violationRules {
-        listOf("INSTRUCTION", "BRANCH", "LINE", "METHOD").forEach { metric ->
+        listOf("INSTRUCTION", "BRANCH", "LINE", "METHOD", "COMPLEXITY", "CLASS").forEach { metric ->
             rule {
                 limit {
                     counter = metric

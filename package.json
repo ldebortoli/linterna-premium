@@ -1,12 +1,12 @@
 {
   "name": "linterna-premium-workspace",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "private": true,
   "description": "Herramientas de desarrollo para la app Android Linterna PREMIUM.",
   "scripts": {
     "audio:prepare": "node tools/prepare-premium-audio.mjs",
     "audio:verify": "node tools/prepare-premium-audio.mjs --verify",
-    "test": "node tools/verify-project.mjs && npm --prefix apps/mobile run test",
+    "test": "node --test tools/language-inventory.test.mjs && node tools/verify-project.mjs && npm --prefix apps/mobile run test",
     "test:android": "npm --prefix apps/mobile run test:android",
     "coverage": "npm --prefix apps/mobile run coverage",
     "lint": "npm --prefix apps/mobile run lint",

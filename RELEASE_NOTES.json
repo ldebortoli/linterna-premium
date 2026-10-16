@@ -12,6 +12,19 @@
         "Mantener selector persistente de idiomas, apagado plebeyo gratuito, detección del flash externo, nueve tragamonedas y restablecimiento Premium exclusivo de la demo.",
         "La firma y variante QA no habilitan cobros reales ni publicación en Google Play. La escucha y el flash físico se deben confirmar en el teléfono."
       ]
+    },
+    {
+      "version": "0.4.9",
+      "build": "17",
+      "changes": [
+        "Ampliar el selector de 21 a 250 opciones de idioma con 229 catálogos automáticos íntegros; conservar guaraní, quechua y todas las variantes anteriores.",
+        "Incluir lenguas nacionales y comunitarias de distintas regiones, con inventario de fuentes, hashes y candidatos bloqueados por fragmentos sin traducir. No afirmar revisión nativa.",
+        "Aplicar dirección de lectura RTL al idioma elegido y conservar elección persistente, diseño, audio y flujo Premium/plebeyo.",
+        "Validar todas las claves y ampliar el alcance de cobertura a la localización pura, con umbral 100%.",
+        "APK interna demoRelease firmada con la identidad QA estable. No habilita pagos reales ni publicación en Google Play; la validación física de audio/flash permanece pendiente.",
+        "Incluye el comportamiento acumulado: el flash persiste al cambiar de app o cerrar la actividad y al abrir/cancelar la confirmación; el apagado plebeyo es inmediato y Premium garantiza el apagado al terminar su secuencia. Android puede apagar el recurso por sus propias restricciones.",
+        "Limitación de QA: la matriz visual/accesible Android no se pudo completar: API36 presentó ANR de System UI, y el AVD API33 también se bloqueó en System UI antes de abrir las apps. Pruebas JVM, integridad de catálogos, cobertura y lint sí aprobados; falta retest en un dispositivo o emulador funcional."
+      ]
     }
   ]
 }

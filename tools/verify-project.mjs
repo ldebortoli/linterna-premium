@@ -31,7 +31,9 @@ if (errors.length === 0) {
   const mainActivity = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/MainActivity.kt");
   const androidTorch = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/platform/AndroidTorchPort.kt");
   const screen = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/ui/LinternaPremiumScreen.kt");
-  const localization = read("apps/mobile/android/app/src/main/java/com/linternapremium/app/localization/LinternaLocalization.kt");
+  const localization =
+    read("apps/mobile/android/app/src/main/java/com/linternapremium/app/localization/LinternaLocalization.kt") +
+    read("apps/mobile/android/app/src/main/java/com/linternapremium/app/localization/AppLanguage.kt");
   const gradle = read("apps/mobile/android/app/build.gradle.kts");
   const mobilePackage = JSON.parse(read("apps/mobile/package.json"));
   const appConfig = JSON.parse(read("apps/mobile/app.json"));

@@ -8,6 +8,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -101,23 +104,27 @@ class MainActivity : ComponentActivity(), BillingEvents {
         }
 
         setContent {
-            LinternaPremiumTheme {
-                LinternaPremiumScreen(
-                    state = uiState,
-                    text = currentText,
-                    selectedLanguage = selectedLanguage,
-                    adsReady = adsReady,
-                    adUnitId = BuildConfig.ADMOB_BANNER_ID,
-                    isDemo = BuildConfig.DEMO_BILLING,
-                    onTurnOn = ::requestTorch,
-                    onPremium = ::pressPremium,
-                    onNormalOff = ::turnOffNormally,
-                    onConfirmPurchase = ::confirmPremiumPurchase,
-                    onDismissPurchase = { uiState = engine.dismissPurchase() },
-                    onDismissOffer = { uiState = engine.dismissPremiumOffer() },
-                    onResetDemoPremium = ::resetDemoPremium,
-                    onLanguageSelected = ::selectLanguage,
-                )
+            CompositionLocalProvider(
+                LocalLayoutDirection provides if (selectedLanguage.isRightToLeft) LayoutDirection.Rtl else LayoutDirection.Ltr,
+            ) {
+                LinternaPremiumTheme {
+                    LinternaPremiumScreen(
+                        state = uiState,
+                        text = currentText,
+                        selectedLanguage = selectedLanguage,
+                        adsReady = adsReady,
+                        adUnitId = BuildConfig.ADMOB_BANNER_ID,
+                        isDemo = BuildConfig.DEMO_BILLING,
+                        onTurnOn = ::requestTorch,
+                        onPremium = ::pressPremium,
+                        onNormalOff = ::turnOffNormally,
+                        onConfirmPurchase = ::confirmPremiumPurchase,
+                        onDismissPurchase = { uiState = engine.dismissPurchase() },
+                        onDismissOffer = { uiState = engine.dismissPremiumOffer() },
+                        onResetDemoPremium = ::resetDemoPremium,
+                        onLanguageSelected = ::selectLanguage,
+                    )
+                }
             }
         }
 

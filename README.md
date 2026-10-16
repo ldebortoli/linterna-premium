@@ -14,11 +14,7 @@ Una linterna Android con un chiste transparente: el apagado normal siempre es gr
 - La fiesta dura 15 segundos y encadena siete festejos reales completos, con solapes y repeticiones sin silencios, sobre las fanfarrias originales;
   el flash se apaga durante los primeros tres. Ver [preparación y licencias del audio](docs/AUDIO_LICENSES.md).
 - La variante demo permite restablecer la edicion plebeya para repetir las pruebas de compra y anuncios; esta accion no existe en Play.
-- Selector persistente en la pantalla principal con los 18 idiomas de Galerazo
-  Bot —incluidas las variantes regionales de español, portugués y chino,
-  latín, catalán, euskera, guaraní y quechua/Runa Simi— más mandarín, cantonés
-  y coreano. El menú se abre debajo de su botón, tiene alto limitado y scroll;
-  toda la interfaz, los avisos, Billing y la accesibilidad usan el idioma elegido.
+- Selector persistente con 250 opciones: las 21 anteriores (incluidos guaraní y quechua) y 229 catálogos automáticos nuevos. Mantiene menú acotado, scroll y dirección RTL por selección. Ver [inventario, fuentes y límites](docs/IDIOMAS.md); no se afirma revisión nativa.
 - Compra simulada, sin dinero ni tarjeta, en la variante `demo`. Si un
   emulador no ofrece flash, esa misma variante simula el encendido para permitir
   revisar toda la interfaz; un teléfono con flash siempre usa el LED real.

@@ -1,5 +1,7 @@
 # TODO
 
+- [P1] [BLOCKED: AVD API36 y API33 arrancan con ANR de com.android.systemui; API36 devuelve Activity Status: timeout, mCurrentFocus=null y UiTestAutomationBridge null root. Sin dispositivo físico conectado ni harness Android operativo; no repetir sin reparación o pedido explícito de retest.] Completar matriz visual/accesibilidad/RTL/insets/teclado de las 250 opciones; 0/10 casos representativos aprobados por app.
+
 - [P1] Validar el altavoz, volumen multimedia/ruteo e interrupciones de audio en un teléfono con APK 0.4.8 cuando el usuario pida el próximo Build App; la carga estática y los siete clips ya están corregidos/preparados, pero no se generó una nueva APK para esta entrega.
 - [P1] Configurar en Play Console el producto `premium_blackout_pack`, firmar una version y probar el pago con un tester licenciado.
 - [P1] Crear AdMob, registrar la app y reemplazar los identificadores de anuncios de produccion mediante propiedades locales seguras.
@@ -9,7 +11,9 @@
 
 # IN PROGRESS
 
-- Sin tareas activas.
+- [P1] Ampliación global de idiomas 2026-10-16: inventario con fuentes, catálogos completos sin fallback, preservación de 21 opciones; validar, incrementar versión/build una vez, commit/push y APK demoRelease a Codex Logs con notas y recibos.
+
+
 
 # DONE
 

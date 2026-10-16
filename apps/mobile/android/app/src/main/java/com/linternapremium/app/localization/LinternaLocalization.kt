@@ -1,59 +1,5 @@
 package com.linternapremium.app.localization
 
-import android.content.Context
-import androidx.core.content.edit
-import java.util.Locale
-
-enum class AppLanguage(val code: String, val nativeLabel: String) {
-    SPANISH_ARGENTINA("es-AR", "Español (Argentina)"),
-    SPANISH_SPAIN("es-ES", "Español (España)"),
-    ENGLISH("en", "English"),
-    RUSSIAN("ru", "Русский"),
-    LATIN("la", "Latine"),
-    JAPANESE("ja", "日本語"),
-    ITALIAN("it", "Italiano"),
-    FRENCH("fr", "Français"),
-    GERMAN("de", "Deutsch"),
-    DUTCH("nl", "Nederlands"),
-    CHINESE_SIMPLIFIED("zh-Hans", "中文（简体）"),
-    CHINESE_TRADITIONAL("zh-Hant", "中文（繁體）"),
-    PORTUGUESE_BRAZIL("pt-BR", "Português (Brasil)"),
-    PORTUGUESE_PORTUGAL("pt-PT", "Português (Portugal)"),
-    CATALAN("ca", "Català"),
-    BASQUE("eu", "Euskara"),
-    GUARANI("gn", "Avañe'ẽ"),
-    QUECHUA("quz", "Runa Simi"),
-    MANDARIN("cmn-Hans", "普通话"),
-    CANTONESE("yue-Hant", "粵語"),
-    KOREAN("ko", "한국어");
-
-    companion object {
-        fun fromCode(code: String?): AppLanguage {
-            val normalized = code
-                ?.replace('_', '-')
-                ?.lowercase(Locale.ROOT)
-                .orEmpty()
-            entries.firstOrNull { it.code.lowercase(Locale.ROOT) == normalized }?.let { return it }
-            return when {
-                normalized == "es-es" -> SPANISH_SPAIN
-                normalized.startsWith("es") -> SPANISH_ARGENTINA
-                normalized == "pt-pt" -> PORTUGUESE_PORTUGAL
-                normalized.startsWith("pt") -> PORTUGUESE_BRAZIL
-                normalized.startsWith("yue") -> CANTONESE
-                normalized.startsWith("cmn") -> MANDARIN
-                normalized.startsWith("zh-hant") || normalized.startsWith("zh-tw") ||
-                    normalized.startsWith("zh-hk") || normalized.startsWith("zh-mo") ->
-                    CHINESE_TRADITIONAL
-                normalized.startsWith("zh") -> CHINESE_SIMPLIFIED
-                normalized == "qu" || normalized.startsWith("qu-") -> QUECHUA
-                else -> entries.firstOrNull {
-                    it.code.substringBefore('-').lowercase(Locale.ROOT) == normalized.substringBefore('-')
-                } ?: SPANISH_ARGENTINA
-            }
-        }
-    }
-}
-
 enum class TextKey {
     LANGUAGES,
     APP_LANGUAGE,
@@ -119,10 +65,10 @@ object LinternaTextCatalog {
     val supportedLanguages: List<AppLanguage> = AppLanguage.entries
 
     fun forLanguage(language: AppLanguage): LinternaText =
-        LinternaText(language, catalogs.getValue(language))
+        LinternaText(language, allCatalogs.getValue(language))
 
     fun missingKeys(language: AppLanguage): Set<TextKey> =
-        TextKey.entries.toSet() - catalogs.getValue(language).keys
+        TextKey.entries.toSet() - allCatalogs.getValue(language).keys
 
     private val catalogs: Map<AppLanguage, Map<TextKey, String>> = mapOf(
         AppLanguage.SPANISH_ARGENTINA to catalog(
@@ -845,27 +791,8 @@ object LinternaTextCatalog {
         )
     }
 
-    private fun catalog(vararg values: String): Map<TextKey, String> {
-        require(values.size == TextKey.entries.size) {
-            "Expected ${TextKey.entries.size} translations, received ${values.size}."
-        }
-        return TextKey.entries.zip(values).toMap()
-    }
-}
+    private val allCatalogs by lazy { catalogs + extendedCatalogs() }
 
-class PreferencesLanguageStore(context: Context) {
-    private val preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
-
-    fun current(): AppLanguage = AppLanguage.fromCode(
-        preferences.getString(KEY_LANGUAGE, null) ?: Locale.getDefault().toLanguageTag(),
-    )
-
-    fun save(language: AppLanguage) {
-        preferences.edit { putString(KEY_LANGUAGE, language.code) }
-    }
-
-    private companion object {
-        const val PREFERENCES_NAME = "app_language"
-        const val KEY_LANGUAGE = "selected_language"
-    }
+    private fun catalog(vararg values: String): Map<TextKey, String> =
+        translationCatalog(TextKey.entries, *values)
 }

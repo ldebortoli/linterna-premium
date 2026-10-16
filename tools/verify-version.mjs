@@ -13,6 +13,11 @@ const rootPackage = JSON.parse(fs.readFileSync(path.join(root, "package.json"), 
 const mobilePackage = JSON.parse(fs.readFileSync(path.join(root, "apps/mobile/package.json"), "utf8"));
 const appConfig = JSON.parse(fs.readFileSync(path.join(root, "apps/mobile/app.json"), "utf8"));
 
+const lockfiles = ["package-lock.json", "apps/mobile/package-lock.json"].map((relativePath) => ({
+  path: relativePath,
+  value: JSON.parse(fs.readFileSync(path.join(root, relativePath), "utf8")),
+}));
+
 const expectedName = versionProperties.versionName;
 const expectedCode = Number(versionProperties.versionCode);
 const errors = [];
@@ -23,6 +28,12 @@ if (rootPackage.version !== expectedName) errors.push("package.json no coincide 
 if (mobilePackage.version !== expectedName) errors.push("apps/mobile/package.json no coincide con version.properties");
 if (appConfig.app.version !== expectedName) errors.push("apps/mobile/app.json no coincide con version.properties");
 if (appConfig.app.android.versionCode !== expectedCode) errors.push("android.versionCode no coincide con version.properties");
+
+for (const lockfile of lockfiles) {
+  if (lockfile.value.version !== expectedName || lockfile.value.packages[""].version !== expectedName) {
+    errors.push(`${lockfile.path} no coincide con version.properties`);
+  }
+}
 
 if (errors.length > 0) {
   console.error(errors.map((error) => `- ${error}`).join("\n"));

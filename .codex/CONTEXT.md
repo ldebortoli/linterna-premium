@@ -12,7 +12,8 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Android: `minSdk 24`, `compileSdk 36`, Java 17 como bytecode objetivo.
 - Integraciones: Google Play Billing para el producto no consumible `premium_blackout_pack`; Google Mobile Ads con identificadores de prueba solo en builds de desarrollo.
 - Privacidad: no hay cuentas, backend propio ni captura directa de tarjetas. Google Play procesa el pago.
-- Idiomas: selector persistente con las 18 opciones reales de Galerazo Bot (`es-AR`, `es-ES`, `en`, `ru`, `la`, `ja`, `it`, `fr`, `de`, `nl`, `zh-Hans`, `zh-Hant`, `pt-BR`, `pt-PT`, `ca`, `eu`, `gn`, `quz`) más mandarín, cantonés y coreano; el catálogo cubre interfaz, errores, Billing, anuncios de prueba y accesibilidad.
+- Versión actual: 0.4.9 / versionCode 17.
+- Idiomas: 250 opciones persistentes, incluidas las 21 previas sin cambios y 229 catálogos de traducción automática completa por claves; 15 escrituras RTL. Inventario portable y limitaciones en docs/LANGUAGE_INVENTORY.json y docs/IDIOMAS.md. Sin revisión nativa afirmada; jam no publicado por fragmentos fuente.
 - Dashboard: perfil Android nativo `Linterna PREMIUM` registrado en Apps Dashboard; distribuye `demoRelease` no depurable con la identidad QA estable compartida con Tivio/A la Altura y reserva `playRelease` para publicación.
 - Telegram: los mensajes de artefactos generados por Apps Dashboard mencionan sólo al propietario `@galerazo34` y nunca a Nico.
 
@@ -59,3 +60,5 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - RELEASE_NOTES.json en la raíz conserva cambios revisados por versión/build y prefijo de artefactos. Apps Dashboard central publica esas notas después de confirmar cada archivo, como respuesta al APK y continuaciones en cadena cuando superan el límite de Telegram; incluye versiones no anunciadas para esa app/chat/plataforma.
 - Codex Bot verifica identidad, destino, permisos, archivo y cada respuesta. Credenciales cifradas; recibos y progreso locales fuera de Git; reintentos continúan partes pendientes sin repetir el APK. Sólo avanzar la versión anunciada al confirmar la cadena completa. El transporte no garantiza exactamente una vez si se pierde la respuesta HTTP después de la aceptación remota.
 - Preparar una entrada por cada nueva iteración distribuible y mantener el historial. Esta documentación no cambia el comportamiento ni versión del producto móvil; el cambio de publicador se entrega en Apps Dashboard 0.2.16.
+
+- Validación desde ampliación 2026-10-16: 52 pruebas JVM Android sin omitidas; 100% de seis métricas JaCoCo en dominio/modelos/contratos/localización pura, con exclusiones explícitas del adaptador Android SharedPreferences y puentes Kotlin generados. Lint correcto. Catálogos y procedencia/hashes se controlan también desde npm test.
