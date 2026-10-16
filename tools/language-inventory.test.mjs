@@ -67,3 +67,13 @@ test("every new offline catalog matches its recorded keys, source and translatio
     assert.deepEqual(candidate.unchangedSourceKeys, []);
   }
 });
+
+test("release notes use unique descending builds and start with the installed app version", () => {
+  const notes = JSON.parse(fs.readFileSync(path.join(root, "RELEASE_NOTES.json"), "utf8"));
+  const config = JSON.parse(fs.readFileSync(path.join(root, "apps/mobile/app.json"), "utf8")).app;
+  const builds = notes.releases.map(({ build }) => Number(build));
+  assert.deepEqual(builds, [...new Set(builds)].sort((a, b) => b - a));
+  assert.equal(notes.releases[0].version, config.version);
+  assert.equal(builds[0], config.android.versionCode);
+  for (const { changes } of notes.releases) assert.ok(changes.length && changes.every((line) => line.trim()));
+});
