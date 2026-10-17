@@ -54,3 +54,5 @@
 - [2026-08-28] Integrar el proyecto como perfil Android nativo en Apps Dashboard.
 - [2026-08-28] Crear y publicar el repositorio privado `ldebortoli/linterna-premium` con autor local noreply.
 - [2026-08-28] Hacer público `ldebortoli/linterna-premium` sobre `main`, habilitar Secret Scanning y Push Protection y agregar CI rápido sin build de APK.
+
+- Publicación verificada: código/QA `a86c9474d0be` en `origin/main`; proyecto compañero `0b93283`. Push confirmado, working tree limpio antes de este recibo de memoria; no se consultó ni esperó CI remota.
