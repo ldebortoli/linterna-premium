@@ -5,7 +5,11 @@ ROOT = Path(__file__).resolve().parents[2]
 SLUG = json.loads((ROOT / "apps/mobile/app.json").read_text(encoding="utf-8"))["app"]["slug"].removesuffix("-premium")
 assert SLUG in ("linterna", "gemidos"), "This harness only targets the two PREMIUM apps"
 SERIAL = os.environ.get("PREMIUM_QA_SERIAL", "emulator-5556")
-assert re.fullmatch(r"emulator-\d+", SERIAL), "Physical devices are outside this test harness"
+if not re.fullmatch(r"emulator-\d+", SERIAL):
+    raise ValueError("Physical devices are outside this test harness")
+AVD = os.environ.get("PREMIUM_QA_AVD", "Premium_QA_API36")
+if AVD not in ("Premium_QA_API36", "AppAlimentos_Pixel_API36"):
+    raise ValueError("Only the two explicitly authorized PREMIUM AVDs are allowed")
 RUN = os.environ.get("PREMIUM_QA_RUN", "android-ui")
 assert re.fullmatch(r"[A-Za-z0-9_-]+", RUN), "Use a report folder name, not a path"
 BASE = ROOT / "reports/android-qa/harness"
@@ -13,7 +17,10 @@ BASE.mkdir(parents=True, exist_ok=True)
 PROJECTS = {SLUG: ROOT}
 
 def verify_emulator():
-    assert adb("emu", "avd", "name").splitlines()[0] == "Premium_QA_API36", "Only the isolated PREMIUM QA AVD is allowed"
+    actual = adb("emu", "avd", "name").splitlines()[0]
+    if actual != AVD:
+        raise RuntimeError("The emulator on this port does not match the explicitly selected AVD")
+    return actual
 
 def adb(*args,timeout=45):
  r=subprocess.run(['adb','-s',SERIAL,*map(str,args)],capture_output=True,timeout=timeout)
@@ -32,14 +39,18 @@ def screenshot(path):
  assert r.stdout[:8]==b'\x89PNG\r\n\x1a\n';Path(path).write_bytes(r.stdout)
  return struct.unpack('>II',r.stdout[16:24])
 def save(slug,name):
+ avd=verify_emulator()
  out=PROJECTS[slug]/'reports'/RUN;out.mkdir(parents=True,exist_ok=True)
  d=probe();d['screen']=screenshot(out/(name+'.png'))
+ d['emulator']={'avd':avd,'serial':SERIAL}
  (out/(name+'.json')).write_text(json.dumps(d,ensure_ascii=False,indent=2),encoding='utf-8')
  (out/(name+'-window.txt')).write_text(shell('dumpsys','window'),encoding='utf-8')
  return d
 def tap(n):
  x1,y1,x2,y2=n['bounds'];shell('input','tap',(x1+x2)//2,(y1+y2)//2)
-def pkg(slug):return f'com.{slug}premium.app.demo.debug'
+def pkg(slug):
+ if slug != SLUG:raise ValueError("Only this project's demo debug test package is allowed")
+ return f'com.{slug}premium.app.demo.debug'
 def start(slug):
  r=shell('am','start','-W','-n',pkg(slug)+f'/com.{slug}premium.app.MainActivity',timeout=60)
  assert 'Status: ok' in r,r

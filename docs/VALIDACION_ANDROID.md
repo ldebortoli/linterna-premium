@@ -2,6 +2,10 @@
 
 Fecha: 2026-10-16 (Argentina). Estado: APROBADO en el alcance emulado declarado. El recibo final portable está en `ANDROID_QA_RECEIPT.json`; capturas PNG, árboles de accesibilidad y dumps de insets quedan en `reports/android-qa-20261016-final/` (ignorados por Git).
 
+## Actualización17/10 · original pendiente
+
+El aprobado de este informe corresponde únicamente al AVD AOSP Premium_QA_API36 del16/10. La reparación y validación posterior del original Google Play siguen sin comprobar: se preparó Emulator37.2.12 con respaldo y guards, y el usuario indicó continuar sin iniciar el AVD. Estado, evidencia y continuación en [AVD_GOOGLE_PLAY_REPAIR.md](AVD_GOOGLE_PLAY_REPAIR.md). No se reutiliza este recibo como aprobación del original.
+
 ## Reparación del entorno
 
 El perfil Google Play API36 presentaba ANR antes de abrir las apps: `executing service ...SystemUIService/KeyguardService`, con límite de 20 s. Aumentar RAM, cambiar GPU y compilar System UI AOT no resolvió de forma fiable su arranque frío. No atribuir ese fallo al producto.

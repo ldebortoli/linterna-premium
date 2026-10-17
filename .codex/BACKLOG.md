@@ -1,6 +1,6 @@
 # TODO
 
-- [P1] [PROGRAMADO: 2026-10-17 11:00 America/Argentina/Buenos_Aires; ejecución única reparar-avd-google-play-original en este chat] Reparar el AVD Google Play original AppAlimentos_Pixel_API36; pedido explícito nuevo reemplaza dejarlo apartado como solución final. Preservar perfil/datos con respaldo; buscar corrección compatible y comprobar arranques fríos/System UI. Después de repararlo, repetir en ese mismo AVD original la validación visual, accesibilidad, RTL e insets de Linterna PREMIUM y Gemidos PREMIUM:11 perfiles/33 capturas y15 RTL por app, TalkBack/teclado, persistencia y flujos; guardar nueva evidencia del AVD original y no reutilizar la aprobación AOSP. No iniciar diagnóstico antes de las11. Los bloqueos de mecanismos previos siguen documentados y no se repiten a ciegas.
+- [P1] [BLOCKED: el usuario indicó continuar sólo sin iniciar el AVD; host con menos de 2 GiB libres (hasta unos 400 MiB), frente a preflight de 5 GiB.] Reparar AppAlimentos_Pixel_API36 Google Play original y repetir allí QA completo de ambas apps (11 perfiles/33 capturas y15 RTL por app, TalkBack, teclado, persistencia, flujos e insets). Preparación offline hecha17/10: respaldo completo y userdata verificado, Emulator37.2.12, Quick Boot desactivado y guards/tests preparados. No se ha comprobado reparación ni ejecutado QA del original. Siguiente paso: retomar con recursos y autorización de arranque; comprobar dos arranques fríos y luego repetir todo el inventario. Ver docs/AVD_GOOGLE_PLAY_REPAIR.md. No sustituir el original por AOSP ni programar nuevos reintentos.
 
 - [P2] [BLOCKED: los recursos públicos consultados conservan frases del idioma fuente; hace falta una fuente completa distinta o revisión especializada para distinguir copia de criollo jamaicano válido.] Evaluar `jam`, fuera del selector de esta entrega.
 
@@ -16,6 +16,8 @@
 
 
 # DONE
+
+- [2026-10-17] Preparación sin AVD del retest Google Play: respaldo completo y SHA-256 userdata/config previa, Emulator37.2.12 instalado, identidad/imagen/datos preservados y Quick Boot desactivado. Guards del harness y8 tests offline por repo (normal/-O), npm test correcto. Reparación, arranques fríos y QA del original continúan BLOCKED arriba; no es aprobación Android ni cambia versión/APK. Informe docs/AVD_GOOGLE_PLAY_REPAIR.md.
 
 - [2026-10-16] Completar QA visual, accesibilidad, RTL e insets en 0.4.10/18:11 perfiles/33 capturas por app, geometría44dp/insets sin errores,15/15 RTL, menú hasta Zulu, selección real en/zu persistente, Tab/Enter/Escape y TalkBack16 real con foco/activación/roles. Escenas compactas200% vertical/horizontal aprobadas; corregidos contraste de barras, etiquetas recortadas, compra desplazable y celebración segura con un anuncio polite. Gemidos: apagado fijo accesible, volumen5 restaurado y carrera Premium→plebeyo reproducida antes y corregida (581ms). AVD AOSP aislado con timeout finito3 y dos arranques fríos;0 eventos ANR/crash en QA. 52 JVM+3 Node, seis métricas JaCoCo100 del núcleo puro, lint/build, revisión y checkout de índice LF/autocrlf=true. Informe/recibo en docs/VALIDACION_ANDROID.md y docs/ANDROID_QA_RECEIPT.json. Publicación source-only origin/main de esta entrega; CI no monitoreada, sin nuevos envíos APK. Teléfono y revisión lingüística nativa conservan sus límites.
 
