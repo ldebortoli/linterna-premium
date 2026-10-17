@@ -1,6 +1,6 @@
 # TODO
 
-- [P2] [BLOCKED: imagen Google Play API36 user ro.debuggable=0, sin consola/root; KeyguardService vuelve a ANR20002ms. Hace falta una corrección aplicable del SDK/imagen para retestar.] Mantener AppAlimentos_Pixel_API36 fuera de QA PREMIUM; usar Premium_QA_API36 y su launcher probado. No repetir snapshots, -prop ro.* ni -shell en esa imagen sin evidencia nueva.
+- [P1] [PROGRAMADO: 2026-10-17 11:00 America/Argentina/Buenos_Aires; ejecución única reparar-avd-google-play-original en este chat] Reparar el AVD Google Play original AppAlimentos_Pixel_API36; pedido explícito nuevo reemplaza dejarlo apartado como solución final. Preservar perfil/datos con respaldo; buscar corrección compatible y comprobar arranques fríos, System UI, accesibilidad y apertura de ambas apps. No iniciar diagnóstico antes de las11. Los bloqueos de mecanismos previos siguen documentados y no se repiten a ciegas.
 
 - [P2] [BLOCKED: los recursos públicos consultados conservan frases del idioma fuente; hace falta una fuente completa distinta o revisión especializada para distinguir copia de criollo jamaicano válido.] Evaluar `jam`, fuera del selector de esta entrega.
 
