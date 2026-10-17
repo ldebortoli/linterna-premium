@@ -1,4 +1,4 @@
-# Idiomas · 0.4.9/17
+# Idiomas · 0.4.10/18
 
 El catálogo pasa de 21 a 250 opciones: conserva las 21 opciones, códigos y traducciones anteriores (incluidos `gn` y `quz`) y añade 229 catálogos de traducción automática. Cada uno contiene las 51 claves de esta app, sin descarga ni sustitución por otro idioma durante el uso.
 

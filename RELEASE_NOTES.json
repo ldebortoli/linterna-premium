@@ -3,6 +3,18 @@
   "appId": "linterna-premium",
   "releases": [
     {
+      "version": "0.4.10",
+      "build": "18",
+      "changes": [
+        "Corregir el contraste de las barras del sistema para el tema oscuro, también cuando Android está configurado en modo claro.",
+        "Hacer desplazable toda la confirmación Premium: información de compra y acciones accesibles con texto grande y en paisaje, sin superposiciones.",
+        "Exponer al lector de pantalla el estado seleccionado de cada idioma y conservar la elección persistente.",
+        "Permitir que los botones crezcan con texto grande, sin recortar etiquetas largas.",
+        "Mantener la celebración dentro de los insets del sistema y anunciar una sola felicitación accesible, ocultando símbolos decorativos al lector.",
+        "Alcance de la validación Android y del entorno de emulación documentado en docs/VALIDACION_ANDROID.md. Revisión lingüística nativa, audio y hardware físicos y publicación comercial mantienen sus requisitos previos."
+      ]
+    },
+    {
       "version": "0.4.9",
       "build": "17",
       "changes": [

@@ -71,3 +71,7 @@ No ejecutes ni publiques una variante `play` hasta completar [la configuracion d
 - `ui/`: interfaz Compose y banner.
 
 Las decisiones y el estado de continuidad viven en `.codex/`.
+
+## Validación Android optativa
+
+La matriz visual, accesible, RTL e insets y los comandos del emulador aislado están en [VALIDACION_ANDROID.md](docs/VALIDACION_ANDROID.md). No se ejecutan automáticamente en CI ni utilizan teléfonos conectados.

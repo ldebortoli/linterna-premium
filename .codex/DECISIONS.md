@@ -240,3 +240,29 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - RELEASE_NOTES debe ordenar builds únicos de mayor a menor, conservar historial y comenzar con la versión/build de app.json. El primer intento rechazado no publicó archivos; una prueba local reproduce el orden incorrecto y ahora forma parte de npm test. Corregir sólo notas/tests no exige nueva versión ni recompilar; compartir los APK existentes y verificar recibos.
 - El lote de idioma consta de250 opciones, no certifica traducción nativa ni exhaustividad de Internet. jam sigue bloqueado. Las pruebas puras100% no sustituyen UI/lector/insets ni hardware.
 - API36 y API33 locales fallan en System UI antes de poder ejecutar la matriz. Mantener ese harness deshabilitado hasta evidencia de reparación o pedido explícito de retest; no atribuir el ANR a la app ni contar casos como aprobados. Fallback compatible usado: JVM/catálogos, lint, metadatos/dex/firma y recibos del pipeline. Windows SetIsBorderRequired/0x80004002 sigue sin reintentarse.
+
+## 2026-10-16 · Reparación y retest solicitados
+
+- Pedido explícito autoriza retomar el harness Android bloqueado. Diagnosticar System UI y validar ambas apps con ADB/instrumentación, preservando perfiles y datos con respaldos. No reintentar captura nativa Windows incompatible. Sin nuevos envíos Telegram autorizados por este pedido.
+
+
+## 2026-10-16 · Hallazgos de UI reproducidos
+
+- La captura con texto 200% y paisaje demuestra confirmación Premium sin precio/ayuda visibles y acciones superpuestas en ambas apps. Sustituir el layout fijo de AlertDialog por Dialog con toda la confirmación y acciones en un único flujo desplazable; conservar textos y cancelación.
+- El selector marca visualmente el idioma pero AccessibilityNodeInfo.selected es false. Exponer selected por opción; conservar nombre, idioma y preferencia. Barras del sistema siempre claras sobre el tema oscuro. Gemidos identifica el apagado gratuito como botón accesible.
+- Snapshot restore confirmado incompatible en este entorno: ADB permanece offline tras restaurar premium-systemui-ready; no repetir sin evidencia de reparación. -prop rechaza propiedades ro.* (sólo qemu.*), por lo que el multiplicador no se aplicó. Datos y respaldos de AVD preservados. Recuperación puntual de System UI comprobada tras arranque; no equivale a corregir el fallo de arranque en frío.
+
+## 2026-10-16 · QA final en ejecución
+
+- Corregidas alturas rígidas: textos de acciones completos con alemán/español al 200%. Gemidos mueve apagado gratuito a barra explícita dentro de safeDrawing; visible durante sonido y celebración, con rol Button y error inmediatamente encima. Cancelar también la coroutine Premium al apagar para evitar que termine sobre el nuevo estado.
+- Celebraciones recortadas al contenido seguro del Scaffold; una región live polite anuncia el mensaje completo y oculta símbolos decorativos al lector. Priorizar felicitación visual sobre rodillos en vistas compactas.
+- APK candidatos compilados, lint y gates puros100% aprobados. Matriz final:11 perfiles/33 capturas por app y auditoría de geometría sin errores; incluye controles fijos. Escenas compactas200% Linterna pasan ambas orientaciones. Gemidos/RTL/teclado/TalkBack siguen en ejecución, sin contarlos completos. Test de volumen ahora fija y comprueba baseline5 en el AVD aislado, no presupone estado de un proceso de test forzado.
+
+## 2026-10-16 · Cierre del QA Android
+
+- Usar AOSP API36 default/x86_64 rev2 en Premium_QA_API36, sólo emulador y paquetes demo.debug. Launcher con preflight de memoria/compiladores; stop/framework/ro.hw_timeout_multiplier=3/start verificado, tiempos finitos y animator1. Dos arranques fríos funcionan; no equivale a certificar rendimiento de producción. No se cierra ninguna app del usuario.
+- Perfil Google Play original sigue ANR KeyguardService20002ms: ro.debuggable0 y sin servicio console impiden aplicar la configuración root probada. La ruta documentada -shell tampoco está disponible en esa imagen; deshabilitada sin nuevos reintentos hasta evidencia concreta de reparación. Restaurar config respaldado, conservar datos/default_boot y eliminar sólo snapshot diagnóstico/helper propios. Windows nativo y restauración de snapshots siguen deshabilitados.
+- Once perfiles por app/33 capturas pasan geometría runtime, objetivos44dp y revisión visual de acciones finales; quince RTL por app, en/zu por callbacks reales, último menú, persistencia y teclado aprobados. Escenas compactas200% en ambas orientaciones pasan; una región polite y figuras decorativas ocultas. TalkBack16 real conserva servicios (DONT_SUPPRESS), foco, acciones y rol Button virtual; no afirmar voz/pronunciación ni cobertura lingüística nativa.
+- Ajustar tests al contrato real: SharedPreferences.apply persiste de forma asíncrona, checked representa selected del menú y Compose puede exponer Button en un hijo virtual no clicable. Verificar rol alrededor de la etiqueta y actuación en su padre, sin cambiar código sano para satisfacer una suposición del harness.
+- Gemidos: reproducir carrera de tarea Premium al apagar en menos de1,5s; cancelar premiumSilenceJob antes de apagar. Regresión falla en APK anterior y pasa con nuevo APK (581ms), cuenta regresiva conservada y volumen5 restaurado. Sin cambiar audios, catálogos,15s de fiesta ni dependencias.
+- QA manual optativo fuera de CI; suites puras100% y lint/build locales correctos. Recibos portables públicos y evidencias crudas locales ignoradas. Una sola subida patch/build por producto y entrega; sin APK Telegram nuevo ni monitoreo CI. Ambos AVD detenidos, accesibilidad/volumen/insets de QA restaurados.

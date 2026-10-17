@@ -29,7 +29,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
@@ -48,6 +47,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -58,14 +58,19 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import com.linternapremium.app.model.ErrorTarget
 import com.linternapremium.app.model.LinternaState
 import com.linternapremium.app.localization.AppLanguage
@@ -176,56 +181,57 @@ fun LinternaPremiumScreen(
                 }
             },
         ) { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 24.dp, vertical = 20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                AppHeader(isPremiumOwned = state.isPremiumOwned, text = text)
-                LanguageSelector(
-                    text = text,
-                    selectedLanguage = selectedLanguage,
-                    onLanguageSelected = onLanguageSelected,
-                )
-                Spacer(Modifier.height(18.dp))
-                FlashlightHero(isOn = state.isTorchOn, premiumGlow = premiumGlow, text = text)
-                Spacer(Modifier.height(24.dp))
+            Box(Modifier.fillMaxSize().padding(innerPadding)) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .padding(horizontal = 24.dp, vertical = 20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    AppHeader(isPremiumOwned = state.isPremiumOwned, text = text)
+                    LanguageSelector(
+                        text = text,
+                        selectedLanguage = selectedLanguage,
+                        onLanguageSelected = onLanguageSelected,
+                    )
+                    Spacer(Modifier.height(18.dp))
+                    FlashlightHero(isOn = state.isTorchOn, premiumGlow = premiumGlow, text = text)
+                    Spacer(Modifier.height(24.dp))
 
-                AnimatedContent(
-                    targetState = state.isTorchOn || state.showPremiumOffer,
-                    label = "acciones-linterna",
-                ) { showOffOptions ->
-                    if (showOffOptions) {
-                        OffOptions(
-                            state = state,
-                            text = text,
-                            onPremium = onPremium,
-                            onNormalOff = onNormalOff,
-                            onDismissOffer = onDismissOffer,
-                        )
-                    } else {
-                        TurnOnPanel(
-                            state = state,
-                            text = text,
-                            isDemo = isDemo,
-                            onTurnOn = onTurnOn,
-                            onResetDemoPremium = onResetDemoPremium,
-                        )
+                    AnimatedContent(
+                        targetState = state.isTorchOn || state.showPremiumOffer,
+                        label = "acciones-linterna",
+                    ) { showOffOptions ->
+                        if (showOffOptions) {
+                            OffOptions(
+                                state = state,
+                                text = text,
+                                onPremium = onPremium,
+                                onNormalOff = onNormalOff,
+                                onDismissOffer = onDismissOffer,
+                            )
+                        } else {
+                            TurnOnPanel(
+                                state = state,
+                                text = text,
+                                isDemo = isDemo,
+                                onTurnOn = onTurnOn,
+                                onResetDemoPremium = onResetDemoPremium,
+                            )
+                        }
                     }
+                    Spacer(Modifier.height(20.dp))
                 }
-                Spacer(Modifier.height(20.dp))
-            }
-        }
 
-        if (celebrationVisible) {
-            PremiumFireworks(
-                progress = celebration.value,
-                text = text,
-                modifier = Modifier.matchParentSize(),
-            )
+                if (celebrationVisible) {
+                    PremiumFireworks(
+                        progress = celebration.value,
+                        text = text,
+                        modifier = Modifier.matchParentSize().clipToBounds(),
+                    )
+                }
+            }
         }
     }
 
@@ -313,6 +319,7 @@ private fun LanguageSelector(
             ) {
                 LinternaTextCatalog.supportedLanguages.forEach { language ->
                     DropdownMenuItem(
+                        modifier = Modifier.semantics { selected = language == selectedLanguage },
                         text = {
                             Text(
                                 text = if (language == selectedLanguage) {
@@ -410,7 +417,7 @@ private fun TurnOnPanel(
             onClick = onTurnOn,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(58.dp),
+                .heightIn(min = 58.dp),
             shape = RoundedCornerShape(18.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
@@ -504,7 +511,7 @@ private fun PremiumButton(owned: Boolean, enabled: Boolean, text: LinternaText, 
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .height(82.dp)
+            .heightIn(min = 82.dp)
             .clip(RoundedCornerShape(22.dp))
             .clickable(enabled = enabled, onClick = onClick)
             .semantics {
@@ -553,7 +560,10 @@ private fun PremiumButton(owned: Boolean, enabled: Boolean, text: LinternaText, 
 private fun PremiumFireworks(progress: Float, text: LinternaText, modifier: Modifier = Modifier) {
     val effectProgress = repeatingCelebrationProgressAt(progress)
     Box(
-        modifier = modifier.semantics { contentDescription = text[TextKey.FIREWORKS_A11Y] },
+        modifier = modifier.clearAndSetSemantics {
+            contentDescription = "${text[TextKey.FIREWORKS_A11Y]}. ${text[TextKey.PREMIUM_CELEBRATION_CONGRATS]}"
+            liveRegion = LiveRegionMode.Polite
+        },
     ) {
         Canvas(Modifier.matchParentSize()) {
             val continuousProgress = progress * PremiumCelebrationCycles
@@ -572,12 +582,6 @@ private fun PremiumFireworks(progress: Float, text: LinternaText, modifier: Modi
             drawFirework(effectProgress, 0.64f, 0.18f, 0.76f, FireworkColors[4])
             drawFirework(effectProgress, 0.70f, 0.82f, 0.78f, FireworkColors[3])
         }
-        PremiumCelebrationMessage(
-            message = text[TextKey.PREMIUM_CELEBRATION_CONGRATS],
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .padding(horizontal = 28.dp, vertical = 48.dp),
-        )
         PremiumSlotMachine(
             progress = effectProgress,
             modifier = Modifier
@@ -640,6 +644,12 @@ private fun PremiumFireworks(progress: Float, text: LinternaText, modifier: Modi
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 28.dp)
                 .clearAndSetSemantics { },
+        )
+        PremiumCelebrationMessage(
+            message = text[TextKey.PREMIUM_CELEBRATION_CONGRATS],
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(horizontal = 28.dp, vertical = 48.dp),
         )
     }
 }
@@ -1096,45 +1106,46 @@ private fun PremiumPurchaseDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(text[TextKey.PREMIUM_OFF]) },
-        text = {
-            Column {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+            shape = RoundedCornerShape(28.dp),
+            color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        ) {
+            // Scroll the whole confirmation so large text cannot squeeze out disclosures or actions.
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState()).padding(24.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Text(
+                    text = text[TextKey.PREMIUM_OFF],
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.semantics { heading() },
+                )
                 Text(
                     text = if (isDemo) text[TextKey.LOCAL_TEST] else priceLabel ?: text[TextKey.PRICE_GOOGLE_PLAY],
+                    style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                 )
                 Text(
                     text = text[TextKey.ONE_TIME_NO_SUBSCRIPTION],
-                    modifier = Modifier.padding(top = 4.dp),
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Text(
-                    text = if (isDemo) {
-                        text[TextKey.DEMO_PURCHASE_HELP]
-                    } else {
-                        text[TextKey.PLAY_PURCHASE_HELP]
-                    },
-                    modifier = Modifier.padding(top = 16.dp),
+                    text = if (isDemo) text[TextKey.DEMO_PURCHASE_HELP] else text[TextKey.PLAY_PURCHASE_HELP],
+                    style = MaterialTheme.typography.bodyMedium,
                 )
-                errorMessage?.let {
-                    Spacer(Modifier.height(16.dp))
-                    ActionError(it)
+                errorMessage?.let { ActionError(it) }
+                Button(onClick = onConfirm, modifier = Modifier.fillMaxWidth()) {
+                    Text(if (isDemo) text[TextKey.SIMULATE_PURCHASE] else text[TextKey.CONTINUE_PLAY])
+                }
+                TextButton(onClick = onDismiss, modifier = Modifier.fillMaxWidth()) {
+                    Text(text[TextKey.NOT_NOW])
                 }
             }
-        },
-        confirmButton = {
-            Button(onClick = onConfirm) {
-                Text(if (isDemo) text[TextKey.SIMULATE_PURCHASE] else text[TextKey.CONTINUE_PLAY])
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text(text[TextKey.NOT_NOW])
-            }
-        },
-    )
+        }
+    }
 }
 
 @Composable

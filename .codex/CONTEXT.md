@@ -12,7 +12,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Android: `minSdk 24`, `compileSdk 36`, Java 17 como bytecode objetivo.
 - Integraciones: Google Play Billing para el producto no consumible `premium_blackout_pack`; Google Mobile Ads con identificadores de prueba solo en builds de desarrollo.
 - Privacidad: no hay cuentas, backend propio ni captura directa de tarjetas. Google Play procesa el pago.
-- Versión actual: 0.4.9 / versionCode 17.
+- Versión actual: 0.4.10 / versionCode 18; QA Android completado en el alcance emulado, sin nueva distribución.
 - Idiomas: 250 opciones persistentes, incluidas las 21 previas sin cambios y 229 catálogos de traducción automática completa por claves; 15 escrituras RTL. Inventario portable y limitaciones en docs/LANGUAGE_INVENTORY.json y docs/IDIOMAS.md. Sin revisión nativa afirmada; jam no publicado por fragmentos fuente.
 - Dashboard: perfil Android nativo `Linterna PREMIUM` registrado en Apps Dashboard; distribuye `demoRelease` no depurable con la identidad QA estable compartida con Tivio/A la Altura y reserva `playRelease` para publicación.
 - Telegram: los mensajes de artefactos generados por Apps Dashboard mencionan sólo al propietario `@galerazo34` y nunca a Nico.
@@ -63,4 +63,6 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 
 - Validación desde ampliación 2026-10-16: 52 pruebas JVM Android sin omitidas; 100% de seis métricas JaCoCo en dominio/modelos/contratos/localización pura, con exclusiones explícitas del adaptador Android SharedPreferences y puentes Kotlin generados. Lint correcto. Catálogos y procedencia/hashes se controlan también desde npm test.
 
-- Última distribución confirmada en Codex Logs: 0.4.9/17 APK765→notas766. Fuente y audios separados, firma QA estable; UI local bloqueada en ambos AVD por System UI (ver backlog), sin revisión nativa afirmada.
+- Última distribución confirmada en Codex Logs: 0.4.9/17 APK765→notas766. Fuente y audios separados, firma QA estable; la validación Android actual está documentada en docs/VALIDACION_ANDROID.md; sin revisión nativa afirmada.
+
+- QA reproducible: tools/android-qa en AVD aislado Premium_QA_API36 (AOSP API36 rev2,3072MB,2vCPU,SwiftShader), root y ro.hw_timeout_multiplier=3 finito, arranque sin snapshots. Compilar primero y emular después.11 perfiles/33 capturas,15 RTL y TalkBack/teclado por app; cobertura pura100% no equivale a cobertura UI. El AVD Google Play original sigue bloqueado y apartado, configuración restaurada/datos intactos; ambos AVD detenidos al cierre.

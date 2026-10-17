@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "app": "linterna-premium",
+  "version": "0.4.10",
+  "build": 18,
+  "apkVariant": "demoDebug",
+  "apkSha256": "3597ba4d3db92ce79fb2a7fb0c1b128bd4da8c2a4ada2a4f801c706494d2627c",
+  "status": "passed-in-declared-emulator-scope",
+  "emulator": {
+    "avd": "Premium_QA_API36",
+    "api": 36,
+    "image": "default/x86_64 rev2",
+    "timeoutMultiplier": 3,
+    "coldBootsVerified": 2,
+    "snapshots": false
+  },
+  "matrixCases": 11,
+  "matrixCaptures": 33,
+  "visualReview": "Final action capture in every case plus representative headers, menus, scripts, purchase and celebration. No native language certification.",
+  "geometry": {
+    "status": "passed",
+    "captures": 33,
+    "errors": []
+  },
+  "rtl": [
+    {
+      "code": "ar",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "bal",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "bm-Nkoo",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "ckb",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "dv",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "fa",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "fa-AF",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "he",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "ms-Arab",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "pa-Arab",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "ps",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "sd",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "ug",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "ur",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    },
+    {
+      "code": "yi",
+      "direction": "rtl",
+      "persisted": true,
+      "status": "passed"
+    }
+  ],
+  "scenes": [
+    {
+      "status": "passed",
+      "rotation": 0,
+      "checks": {
+        "normalOffAndRestart": true,
+        "purchaseCanBeCancelled": true,
+        "onePoliteCelebrationInsideInsets": true,
+        "simulatedEntitlementPersists": true
+      }
+    },
+    {
+      "status": "passed",
+      "rotation": 1,
+      "checks": {
+        "normalOffAndRestart": true,
+        "purchaseCanBeCancelled": true,
+        "onePoliteCelebrationInsideInsets": true,
+        "simulatedEntitlementPersists": true
+      }
+    }
+  ],
+  "interaction": {
+    "status": "passed",
+    "keyboardTabEnterEscape": true,
+    "firstAndLastMenuEntriesReachable": true,
+    "realSelectionPersistsAfterRestart": [
+      "en",
+      "zu"
+    ],
+    "selectedLanguageAccessibleState": true
+  },
+  "accessibility": {
+    "status": "passed",
+    "realTalkBackEnabled": true,
+    "platformFocusAndClick": true,
+    "languageCallbackAndSelectedState": true,
+    "freeStopRoleAndActivation": true,
+    "voiceQualityEvaluated": false
+  },
+  "contrast": {
+    "status": "passed",
+    "scope": "opaque theme text pairs; excludes SDK ad creative, animation and disabled controls",
+    "pairs": [
+      {
+        "foreground": "onPrimary",
+        "background": "primary",
+        "ratio": 10.86,
+        "threshold": 4.5
+      },
+      {
+        "foreground": "onPrimaryContainer",
+        "background": "primaryContainer",
+        "ratio": 10.16,
+        "threshold": 4.5
+      },
+      {
+        "foreground": "onBackground",
+        "background": "background",
+        "ratio": 17.52,
+        "threshold": 4.5
+      },
+      {
+        "foreground": "onSurface",
+        "background": "surface",
+        "ratio": 15.9,
+        "threshold": 4.5
+      },
+      {
+        "foreground": "onSurfaceVariant",
+        "background": "surfaceVariant",
+        "ratio": 8.29,
+        "threshold": 4.5
+      }
+    ]
+  },
+  "health": {
+    "status": "passed",
+    "anrOrCrashEvents": "",
+    "coldBootsVerified": 2,
+    "finiteTimeoutMultiplier": 3
+  },
+  "jvmTests": {
+    "tests": 52,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0
+  },
+  "jacocoPureCore": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 59017,
+      "percent": 100
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 155,
+      "percent": 100
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 13339,
+      "percent": 100
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 179,
+      "percent": 100
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 99,
+      "percent": 100
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 33,
+      "percent": 100
+    }
+  },
+  "nodeTests": 3,
+  "lint": "passed",
+  "localBuild": "passed",
+  "physicalHardwareValidated": false,
+  "voiceQualityValidated": false,
+  "newTelegramDelivery": false,
+  "apkVersionName": "0.4.10-demo",
+  "originalGooglePlayProfile": {
+    "status": "blocked",
+    "reason": "SystemUI KeyguardService ANR waited 20002ms; user image ro.debuggable=0 has no console/root path for the verified VM timeout configuration",
+    "qaReplacement": "Premium_QA_API36",
+    "originalConfigRestored": true,
+    "userDataWiped": false,
+    "diagnosticSnapshotDeleted": true
+  },
+  "cleanup": {
+    "qaEmulatorStopped": true,
+    "originalEmulatorStopped": true,
+    "talkBackSettingsRestored": true,
+    "qaMusicVolume": 5,
+    "qaSizeAndDensityReset": true,
+    "qaFontScale": 1,
+    "qaRotation": "free",
+    "qaNavigation": "gestural",
+    "cutoutOverlay": "disabled"
+  },
+  "artifactTestScope": {
+    "matrixAndCompactScenes": "Captured before the final coroutine-cancellation-only correction; final UI layout sources are unchanged apart from indentation.",
+    "finalApkIntegration": "TalkBack focus/activation for both apps; Gemidos rapid Premium/free-stop regression after rebuild.",
+    "finalBuildQuality": "JVM tests, coverage, lint and assembly after the correction."
+  }
+}

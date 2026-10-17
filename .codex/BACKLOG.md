@@ -1,10 +1,11 @@
 # TODO
 
+- [P2] [BLOCKED: imagen Google Play API36 user ro.debuggable=0, sin consola/root; KeyguardService vuelve a ANR20002ms. Hace falta una corrección aplicable del SDK/imagen para retestar.] Mantener AppAlimentos_Pixel_API36 fuera de QA PREMIUM; usar Premium_QA_API36 y su launcher probado. No repetir snapshots, -prop ro.* ni -shell en esa imagen sin evidencia nueva.
+
 - [P2] [BLOCKED: los recursos públicos consultados conservan frases del idioma fuente; hace falta una fuente completa distinta o revisión especializada para distinguir copia de criollo jamaicano válido.] Evaluar `jam`, fuera del selector de esta entrega.
 
-- [P1] [BLOCKED: AVD API36 y API33 arrancan con ANR de com.android.systemui; API36 devuelve Activity Status: timeout, mCurrentFocus=null y UiTestAutomationBridge null root. Sin dispositivo físico conectado ni harness Android operativo; no repetir sin reparación o pedido explícito de retest.] Completar matriz visual/accesibilidad/RTL/insets/teclado de las 250 opciones; 0/10 casos representativos aprobados por app.
 
-- [P1] [BLOCKED: no hay teléfono Android conectado y los AVD fallan en System UI.] Validar altavoz, volumen multimedia/ruteo e interrupciones con APK 0.4.9/build17; clips y carga estática verificados, escucha física pendiente.
+- [P1] [BLOCKED: no hay teléfono Android real conectado; audio físico/ruteo no se certifican en el emulador.] Validar altavoz, volumen multimedia/ruteo e interrupciones con una APK de la versión vigente; clips y carga estática verificados, escucha física pendiente.
 - [P1] Configurar en Play Console el producto `premium_blackout_pack`, firmar una version y probar el pago con un tester licenciado.
 - [P1] Crear AdMob, registrar la app y reemplazar los identificadores de anuncios de produccion mediante propiedades locales seguras.
 - [P1] Publicar politica de privacidad y completar las declaraciones de Data safety, anuncios y contenido en Google Play.
@@ -13,12 +14,10 @@
 
 # IN PROGRESS
 
-- Sin tareas ejecutables en curso; el retest UI permanece BLOCKED.
-
-
-
 
 # DONE
+
+- [2026-10-16] Completar QA visual, accesibilidad, RTL e insets en 0.4.10/18:11 perfiles/33 capturas por app, geometría44dp/insets sin errores,15/15 RTL, menú hasta Zulu, selección real en/zu persistente, Tab/Enter/Escape y TalkBack16 real con foco/activación/roles. Escenas compactas200% vertical/horizontal aprobadas; corregidos contraste de barras, etiquetas recortadas, compra desplazable y celebración segura con un anuncio polite. Gemidos: apagado fijo accesible, volumen5 restaurado y carrera Premium→plebeyo reproducida antes y corregida (581ms). AVD AOSP aislado con timeout finito3 y dos arranques fríos;0 eventos ANR/crash en QA. 52 JVM+3 Node, seis métricas JaCoCo100 del núcleo puro, lint/build, revisión y checkout de índice LF/autocrlf=true. Informe/recibo en docs/VALIDACION_ANDROID.md y docs/ANDROID_QA_RECEIPT.json. Publicación source-only origin/main de esta entrega; CI no monitoreada, sin nuevos envíos APK. Teléfono y revisión lingüística nativa conservan sus límites.
 
 - [2026-10-16] Implementar y distribuir el lote de 250 opciones (21 preservadas +229 nuevas), incluidos gn/quz, con catálogos locales completos por claves, inventario portable/fuentes/hashes, validación y RTL por selección. 0.4.9/build17; 52/52 JVM sin omitidas, seis métricas100 del núcleo puro ampliado, lint, build demoRelease no depurable y firma QA estable fac61745… verificados. Node comprueba catálogos, RTL, versiones/locks y orden de notas (reproducción fallida→guard→pasa); índice autocrlf=true/LF correcto. Código 452f609a89ff, corrección documental de notas edde25f, publicados en origin/main. Codex Bot confirmó en Codex Logs APK765→notas766, estado anunciado 0.4.9/17, Unicode íntegro, sin duplicar archivo. No hay validación UI aprobada: retest visual/accesibilidad/RTL/insets/teclado permanece BLOCKED arriba. Sin Play ni CI remoto monitoreado.
 

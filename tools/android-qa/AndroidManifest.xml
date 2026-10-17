@@ -1,0 +1,1 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="qa.premium"><uses-sdk android:minSdkVersion="24" android:targetSdkVersion="36"/><application android:label="Premium QA Probe" android:debuggable="true"/><instrumentation android:name="qa.premium.Probe" android:targetPackage="qa.premium"/></manifest>
