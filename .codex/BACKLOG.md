@@ -1,21 +1,27 @@
 # TODO
 
+- [P2] [BLOCKED: los recursos públicos consultados conservan frases del idioma fuente; hace falta una fuente completa distinta o revisión especializada para distinguir copia de criollo jamaicano válido.] Evaluar `jam`, fuera del selector de esta entrega.
+
 - [P1] [BLOCKED: AVD API36 y API33 arrancan con ANR de com.android.systemui; API36 devuelve Activity Status: timeout, mCurrentFocus=null y UiTestAutomationBridge null root. Sin dispositivo físico conectado ni harness Android operativo; no repetir sin reparación o pedido explícito de retest.] Completar matriz visual/accesibilidad/RTL/insets/teclado de las 250 opciones; 0/10 casos representativos aprobados por app.
 
-- [P1] Validar el altavoz, volumen multimedia/ruteo e interrupciones de audio en un teléfono con APK 0.4.8 cuando el usuario pida el próximo Build App; la carga estática y los siete clips ya están corregidos/preparados, pero no se generó una nueva APK para esta entrega.
+- [P1] [BLOCKED: no hay teléfono Android conectado y los AVD fallan en System UI.] Validar altavoz, volumen multimedia/ruteo e interrupciones con APK 0.4.9/build17; clips y carga estática verificados, escucha física pendiente.
 - [P1] Configurar en Play Console el producto `premium_blackout_pack`, firmar una version y probar el pago con un tester licenciado.
 - [P1] Crear AdMob, registrar la app y reemplazar los identificadores de anuncios de produccion mediante propiedades locales seguras.
 - [P1] Publicar politica de privacidad y completar las declaraciones de Data safety, anuncios y contenido en Google Play.
-- [P1] Probar la intensidad física y los ciclos de encendido/apagado en al menos un teléfono Android real con flash.
+- [P1] [BLOCKED: no hay teléfono Android con flash conectado.] Probar la intensidad física y los ciclos de encendido/apagado en al menos un teléfono Android real con flash.
 - [P2] Evaluar validacion de compras en backend antes del lanzamiento publico si el modelo comercial o el riesgo de fraude lo justifican.
 
 # IN PROGRESS
 
-- [P1] Ampliación global de idiomas 2026-10-16: inventario con fuentes, catálogos completos sin fallback, preservación de 21 opciones; validar, incrementar versión/build una vez, commit/push y APK demoRelease a Codex Logs con notas y recibos.
+- Sin tareas ejecutables en curso; el retest UI permanece BLOCKED.
+
 
 
 
 # DONE
+
+- [2026-10-16] Implementar y distribuir el lote de 250 opciones (21 preservadas +229 nuevas), incluidos gn/quz, con catálogos locales completos por claves, inventario portable/fuentes/hashes, validación y RTL por selección. 0.4.9/build17; 52/52 JVM sin omitidas, seis métricas100 del núcleo puro ampliado, lint, build demoRelease no depurable y firma QA estable fac61745… verificados. Node comprueba catálogos, RTL, versiones/locks y orden de notas (reproducción fallida→guard→pasa); índice autocrlf=true/LF correcto. Código 452f609a89ff, corrección documental de notas edde25f, publicados en origin/main. Codex Bot confirmó en Codex Logs APK765→notas766, estado anunciado 0.4.9/17, Unicode íntegro, sin duplicar archivo. No hay validación UI aprobada: retest visual/accesibilidad/RTL/insets/teclado permanece BLOCKED arriba. Sin Play ni CI remoto monitoreado.
+
 
 - [2026-10-03] Documentar RELEASE_NOTES.json por versión/build y conectar las cinco apps al publicador central Apps Dashboard 0.2.16 (625de98): archivo confirmado, texto respondiendo al APK y continuación en cadena, cortes Unicode <=4096, acumulación por app/chat/target y progreso persistido para reanudar sin duplicar APK/partes confirmadas. Regla global guardada. Nuevas notas reales verificadas por Codex Bot/admin: Tivio0.21.3/30 APK60→texto63, A la Altura0.9.4/25 APK61→texto64, En la misma0.1.5/6 APK62→texto65; sin nuevos APKs. 228/228 Dashboard,100% líneas/ramas/funciones; Tivio574/574, Altura175/175, En la misma233/233+PostGIS,100% cuatro métricas en sus alcances, gates intactos. Linterna/Gemidos: notas de futuros envíos y npm test de contratos/versiones, sin mensajes nuevos ni cambiar producto. Formatter de índice LF/autocrlf=true y shortcut/DOM/AppUserModelID/cierre correctos, helpers/Bot API/QA DB cerrados. No hay tickets nuevos: perfil Altura #1 comentado5971788617 y closed/completed con tablero Done; #2 y retests Tivio#174–#177 siguen bloqueados. Cola sin pendientes nuevos ejecutables; Git source-only publicado, CI no monitoreada.
 

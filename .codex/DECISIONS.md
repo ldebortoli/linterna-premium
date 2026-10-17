@@ -234,3 +234,9 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Aplicar LocalLayoutDirection al idioma seleccionado, sin depender del idioma del teléfono; preservar UI, audio, variantes y preferencias. Una sola subida de patch/build por entrega. Dashboard original, firma demoRelease y Codex Logs autorizados; no Play, no webs ni CI remoto monitoreado.
 
 - Medición ampliada final: dominio, modelos, contratos y localización pura, seis métricas JaCoCo al 100% (instrucciones, ramas, líneas, métodos, complejidad y clases). Sólo se excluyen SharedPreferences dependiente de Android y `$DefaultImpls` generado por Kotlin. Pruebas de límites del sintetizador verifican recorte defensivo antes/después del búfer; sin modificar audio ni quitar guardas.
+
+## 2026-10-16 · Notas de APK y límite del harness Android
+
+- RELEASE_NOTES debe ordenar builds únicos de mayor a menor, conservar historial y comenzar con la versión/build de app.json. El primer intento rechazado no publicó archivos; una prueba local reproduce el orden incorrecto y ahora forma parte de npm test. Corregir sólo notas/tests no exige nueva versión ni recompilar; compartir los APK existentes y verificar recibos.
+- El lote de idioma consta de250 opciones, no certifica traducción nativa ni exhaustividad de Internet. jam sigue bloqueado. Las pruebas puras100% no sustituyen UI/lector/insets ni hardware.
+- API36 y API33 locales fallan en System UI antes de poder ejecutar la matriz. Mantener ese harness deshabilitado hasta evidencia de reparación o pedido explícito de retest; no atribuir el ANR a la app ni contar casos como aprobados. Fallback compatible usado: JVM/catálogos, lint, metadatos/dex/firma y recibos del pipeline. Windows SetIsBorderRequired/0x80004002 sigue sin reintentarse.

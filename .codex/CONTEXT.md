@@ -36,7 +36,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - El wrapper Linux `apps/mobile/android/gradlew` se versiona como ejecutable (`100755`) para que GitHub Actions pueda iniciar Gradle.
 - `.gitattributes` fija LF para texto, conserva CRLF en scripts `.bat` y marca formatos binarios para que los checkouts de Windows y Linux sean deterministas.
 - `.gitignore` excluye `.kotlin/` además de los directorios de Gradle/build para no versionar cachés locales del compilador.
-- Baseline verificado: 45 pruebas locales (44 puras más una integración con clips licenciados preparados), 100% de instrucciones/ramas/líneas/métodos del dominio y Android Lint sin observaciones. La integración de clips se omite explícitamente en CI público sin assets; no se descargan audios durante CI.
+- Baseline verificado: 52 pruebas JVM Android locales sin omitidas y 100% de seis métricas JaCoCo del núcleo puro (dominio, modelos, contratos y localización); lint correcto. La integración de clips licenciados se omite en CI sin assets, sin descargarlos.
 
 ## Convenciones
 
@@ -62,3 +62,5 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Preparar una entrada por cada nueva iteración distribuible y mantener el historial. Esta documentación no cambia el comportamiento ni versión del producto móvil; el cambio de publicador se entrega en Apps Dashboard 0.2.16.
 
 - Validación desde ampliación 2026-10-16: 52 pruebas JVM Android sin omitidas; 100% de seis métricas JaCoCo en dominio/modelos/contratos/localización pura, con exclusiones explícitas del adaptador Android SharedPreferences y puentes Kotlin generados. Lint correcto. Catálogos y procedencia/hashes se controlan también desde npm test.
+
+- Última distribución confirmada en Codex Logs: 0.4.9/17 APK765→notas766. Fuente y audios separados, firma QA estable; UI local bloqueada en ambos AVD por System UI (ver backlog), sin revisión nativa afirmada.
