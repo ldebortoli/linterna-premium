@@ -305,3 +305,9 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 
 - El AAR lifecycle-runtime-compose-android2.10.0 declara minCompileSdk35 y AGP8.6, no36/8.9.1 como se transcribió en el bloque anterior. Es compatible con compile36/AGP8.13.2. Gradle verificó la resolución completa tras rechazar2.11 por SDK37. Mantener Activity1.13/Core1.18/Splash1.2/Fragment1.9.1/Lifecycle2.10/Ads25.5, Kotlin/Compose/Billing/UMP intactos.
 - Revisión de corrección, simplicidad, arquitectura, seguridad y rendimiento: cambios limitados a dependencias y metadatos, sin nuevos permisos ni lógica de cobro.52JVM y seis gates JaCoCo1.00, lint y APK demoDebug pasan; no atribuir esto a QA visual/física o servicios reales. Secret Scanning y Push Protection verificados habilitados19/10.
+
+## 2026-10-19 · Entrega automática privada solicitada
+
+- Lucas amplía expresamente a Linterna Premium el circuito visible de builds y APK+notas con la herramienta existente, exclusivamente Codex Logs (-1004440313456). Sustituye la exclusión anterior de envío para esta operación y destino; sin nuevos cron, AVD, tiendas ni otros destinatarios.
+- Reutilizar la versión 0.4.11/19 ya validada/publicada: el cambio de Dashboard y la operación no modifican el producto móvil. Generar demoRelease no depurable con firma QA estable, nunca reutilizar demoDebug. Codex Bot exacto, permisos, hash/commit y notas acumuladas desde último anuncio verificados por el publicador existente; entrega independiente/reanudable sin repetir el APK confirmado.
+- Publicar memoria antes de solicitar para conservar checkout limpio y SHA fijo. Después del recibo de aceptación terminar sin leer logs/porcentajes ni sondear compilación; la próxima revisión consulta una vez el resultado. No confundir queued/running con APK entregado.

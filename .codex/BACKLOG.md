@@ -14,6 +14,8 @@
 
 # IN PROGRESS
 
+- [2026-10-19] IN PROGRESS: generar APK demoRelease 0.4.11/19 con firma QA estable mediante la cola central visible de Apps Dashboard0.2.19 y entregarlo con notas acumuladas sólo a Codex Logs (-1004440313456), por pedido explícito de Lucas. Fuentes y pruebas locales validadas; solicitar tras publicar esta memoria y terminar al recibir aceptación, sin supervisar el worker. No declarar envío/APK terminado hasta recibo terminal confirmado.
+
 
 
 # DONE
