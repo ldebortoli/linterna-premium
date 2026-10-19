@@ -3,6 +3,15 @@
   "appId": "linterna-premium",
   "releases": [
     {
+      "version": "0.4.11",
+      "build": "19",
+      "changes": [
+        "Actualizar Activity1.13.0, Core1.18.0, Splashscreen1.2.0, Fragment1.9.1, Lifecycle2.10.0 y Google Mobile Ads25.5.0 a versiones estables compatibles con Android24 y compileSdk36.",
+        "Conservar Kotlin, AGP, Compose, Billing y UMP; no elevar los requisitos de Android para instalar dependencias que exigen SDK37.",
+        "Mantener los flujos y contenido existentes. Las pruebas locales de esta entrega no sustituyen la validación física ni la QA pendiente del emulador Google Play original; no habilita pagos, anuncios productivos ni distribución en tiendas."
+      ]
+    },
+    {
       "version": "0.4.10",
       "build": "18",
       "changes": [

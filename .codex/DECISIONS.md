@@ -289,3 +289,19 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Mantener recibo AOSP16/10 como histórico; original0/11 perfiles,0/33 capturas,0/15 RTL por app y0/2 boots en esta ejecución. Informar límites exactos en docs/AVD_GOOGLE_PLAY_REPAIR.md, no aprobar por preparación offline. JVM/JaCoCo/lint/build no repetidos por RAM; baseline anterior no se presenta como nuevo.
 
 - Reconciliación posterior17/10 13:55: se observó instancia original -read-only/puerto5582 creada13:41; no consta lanzamiento en historial de esta tarea y propietario no confirmado. Dejar intacta por exclusión de procesos ajenos; no usar para QA ni afirmar ambos AVD detenidos. Esta observación corrige el estado supuesto anterior, sin aprobar reparación.
+
+## 2026-10-19 · Librerías Android compatibles
+
+- Pedido explícito de Lucas desde En la misma: actualizar librerías en todas las apps donde sea compatible. Entrega 0.4.11/19 con seis familias estables, conservando minSdk24/compileSdk36, AGP8.13.2, Kotlin2.3.21 y Compose2026.06.01. Billing9.1.0 y UMP4.0.0 ya coinciden con últimos estables del registro Google.
+- Inspección oficial de AAR/POM: Activity1.13/Core1.18 requieren compile36/AGP8.9.1; Splash1.2 compile35/AGP8.6; Fragment1.9.1/Lifecycle2.11 compile34/AGP8.1.1. Ads25.5 sube minSdk a24, ya existente en ambas apps. Core1.19.1 y Compose2026.08/09 requieren compile37/AGP9.1: no forzar migración de toolchain. Registro Maven no publica BOM2026.07; Junio01 es el último compatible inspeccionado.
+- Changelogs oficiales: https://developer.android.com/jetpack/androidx/releases/activity ; https://developer.android.com/jetpack/androidx/releases/core ; https://developer.android.com/jetpack/androidx/releases/fragment ; https://developer.android.com/jetpack/androidx/releases/lifecycle ; https://developers.google.com/admob/android/rel-notes . Validar Node/JVM/JaCoCo100%/lint/build antes de publicar; no AVD, servicios pagos, Telegram o tiendas.
+
+## 2026-10-19 · Límite transitivo de Lifecycle
+
+- Sustituye sólo la selección Lifecycle2.11.0 del bloque anterior: aunque runtime-android declara compile34, su alineación de grupo fuerza lifecycle-runtime-compose-android2.11.0, que requiere compile37/AGP9.1. Gradle checkDemoDebugAarMetadata lo rechazó antes de compilar. Seleccionar Lifecycle2.10.0, cuyo AAR Compose requiere compile36/AGP8.9.1, y repetir sólo tras esta corrección concreta. No elevar SDK/AGP ni desactivar el guard de metadatos. Las otras cinco familias conservan versiones candidatas.
+
+
+## Aclaración de metadatos y validación · 2026-10-19
+
+- El AAR lifecycle-runtime-compose-android2.10.0 declara minCompileSdk35 y AGP8.6, no36/8.9.1 como se transcribió en el bloque anterior. Es compatible con compile36/AGP8.13.2. Gradle verificó la resolución completa tras rechazar2.11 por SDK37. Mantener Activity1.13/Core1.18/Splash1.2/Fragment1.9.1/Lifecycle2.10/Ads25.5, Kotlin/Compose/Billing/UMP intactos.
+- Revisión de corrección, simplicidad, arquitectura, seguridad y rendimiento: cambios limitados a dependencias y metadatos, sin nuevos permisos ni lógica de cobro.52JVM y seis gates JaCoCo1.00, lint y APK demoDebug pasan; no atribuir esto a QA visual/física o servicios reales. Secret Scanning y Push Protection verificados habilitados19/10.

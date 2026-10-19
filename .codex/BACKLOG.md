@@ -15,7 +15,10 @@
 # IN PROGRESS
 
 
+
 # DONE
+
+- [2026-10-19] DONE: actualización compatible de seis familias Android, entrega0.4.11/build19. npm test3/3 y contratos/versiones;52JVM, JaCoCo100% en instrucciones/ramas/líneas/complejidad/métodos/clases del alcance puro, lintDemoDebug y assembleDemoDebug correctos. Dependencias y límites documentados en DECISIONS; publicación scoped de esta entrega. Sin AVD ni distribución.
 
 - [2026-10-17] Preparación sin AVD del retest Google Play: respaldo completo y SHA-256 userdata/config previa, Emulator37.2.12 instalado, identidad/imagen/datos preservados y Quick Boot desactivado. Guards del harness y8 tests offline por repo (normal/-O), npm test correcto. Reparación, arranques fríos y QA del original continúan BLOCKED arriba; no es aprobación Android ni cambia versión/APK. Informe docs/AVD_GOOGLE_PLAY_REPAIR.md.
 

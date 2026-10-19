@@ -12,7 +12,7 @@ Aplicacion Android humoristica de linterna. Enciende el flash fisico con la maxi
 - Android: `minSdk 24`, `compileSdk 36`, Java 17 como bytecode objetivo.
 - Integraciones: Google Play Billing para el producto no consumible `premium_blackout_pack`; Google Mobile Ads con identificadores de prueba solo en builds de desarrollo.
 - Privacidad: no hay cuentas, backend propio ni captura directa de tarjetas. Google Play procesa el pago.
-- Versión actual: 0.4.10 / versionCode 18; QA Android completado en el alcance emulado, sin nueva distribución.
+- Versión actual: 0.4.11 / versionCode 19; seis familias Android actualizadas y validadas localmente el19/10. QA emulada previa corresponde a0.4.10; sin nueva distribución.
 - Idiomas: 250 opciones persistentes, incluidas las 21 previas sin cambios y 229 catálogos de traducción automática completa por claves; 15 escrituras RTL. Inventario portable y limitaciones en docs/LANGUAGE_INVENTORY.json y docs/IDIOMAS.md. Sin revisión nativa afirmada; jam no publicado por fragmentos fuente.
 - Dashboard: perfil Android nativo `Linterna PREMIUM` registrado en Apps Dashboard; distribuye `demoRelease` no depurable con la identidad QA estable compartida con Tivio/A la Altura y reserva `playRelease` para publicación.
 - Telegram: los mensajes de artefactos generados por Apps Dashboard mencionan sólo al propietario `@galerazo34` y nunca a Nico.
